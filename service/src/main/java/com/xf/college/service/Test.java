@@ -1,4 +1,4 @@
-package com.xf.college.api.service;
+package com.xf.college.service;
 
 /**
  * Created by xufeng on 2017/3/7.
