@@ -42,11 +42,11 @@
         
  
 	<!-- 自动扫描 注解-->
-    <context:component-scan base-package="com.xf.ecollege">
-    	<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-    </context:component-scan>  
-                        
-                        
+    <context:component-scan base-package="com.xf.college">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+
     <!-- 引入配置文件 -->  
     <bean id="propertyConfigurer"  
         class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">  
@@ -76,13 +76,13 @@
      <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">  
         <property name="dataSource" ref="dataSource" />  
         <!-- 自动扫描mapping.xml文件 -->
-        <property name="configLocation" value="classpath:configs/mybatis.xml"></property>
-         <!--<property name="mapperLocations" value="classpath:mapping/*.xml"></property>-->
+      <!--  <property name="configLocation" value="classpath:configs/mybatis.xml"></property>-->
+         <property name="mapperLocations" value="classpath:mapper/*.xml"></property>
     </bean> 
   
    	<!-- DAO接口所在包名，Spring会自动查找其下的类 -->  
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">  
-        <property name="basePackage" value="com.job.dao" />  
+        <property name="basePackage" value="com.xf.college.dao" />
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>  
     </bean> 
   
