@@ -13,6 +13,7 @@
         <module>service</module>
         <module>model</module>
         <module>common</module>
+        <module>dao</module>
     </modules>
     <!-- 定义spring版本 -->
     <properties>
