@@ -23,3 +23,10 @@ hs_err_pid*
 /**/.idea
 *.iml
 out/
+
+# front build
+/api/src/main/webapp/static
+
+/front/node_modules
+/front/npm-debug.log
+/front/client/dist
