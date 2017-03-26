@@ -135,3 +135,16 @@ export default {
 
 export { userInitPromise }
 **/
+const getters = {
+    user() {
+        return {
+            name:'xufeng'
+        }
+    }
+}
+
+let u = {
+    name:'xufeng'
+}
+
+export default { getters,u }
