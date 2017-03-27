@@ -9,6 +9,9 @@ import java.util.Date;
 public class UseRecord {
     private int id;
     private int state;
+    private String equipmentId;  //使用物品的编号
     private Date beginTime;
     private Date endTime;
+
+
 }

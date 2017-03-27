@@ -8,7 +8,7 @@ import java.util.Date;
 public class CommonEquipment {
     private String id;  //
     private String name;
-    private String type;
+    private String typeId;
     private Date beginTime;
     private int valid;
     private int usedCount;  //使用次数
@@ -39,12 +39,12 @@ public class CommonEquipment {
         this.name = name;
     }
 
-    public String getType() {
-        return type;
+    public String getTypeId() {
+        return typeId;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setTypeId(String typeId) {
+        this.typeId = typeId;
     }
 
     public Date getBeginTime() {

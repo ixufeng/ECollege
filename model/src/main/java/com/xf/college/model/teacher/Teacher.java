@@ -9,7 +9,7 @@ public class Teacher {
     private String id;
     private String name;
     private String password;
-    private String avatar; //头像
+    private String avatars; //头像
     private String sex;
     private String identity;
     private String phone;
@@ -39,12 +39,27 @@ public class Teacher {
         this.password = password;
     }
 
-    public String getAvatar() {
-        return avatar;
+    public String[] getAvatars() {
+        if(this.avatars!=null) {
+            return this.avatars.split(",");
+        }
+        return new String[0];
     }
 
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
+    public void setAvatars(String avatar) {
+        this.avatars = avatar;
+    }
+
+    /**
+     * 添加头像
+     * @param avatar
+     */
+    public void addAvatars(String avatar) {
+        if (this.avatars!=null) {
+            this.avatars +="," + avatar;
+            return;
+        }
+        this.avatars = avatar;
     }
 
     public String getSex() {

@@ -12,7 +12,15 @@ public class ClassHistory {
     private String classNumber;
     private Date beginTime;
     private Date endTime;
+    private Date createTime;
 
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
     public int getId() {
         return id;
     }

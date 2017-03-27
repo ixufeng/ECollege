@@ -13,22 +13,6 @@
   		insert into demo (name)
   			values(#{name})
   	</insert>
-  	
-<!--  	&lt;!&ndash;根据用户id返回聊天记录 &ndash;&gt;
-  	<select id="getChatListByUserId" parameterType="int" resultMap="chat">
-  		select * from chat where user_recieveId=#{userId}
-  	</select>
-  	
-  	&lt;!&ndash; 通过聊天编号修改状态 &ndash;&gt;
-  	<update id="update">
-  		update chat set status=#{status} where chat_id=#{chatId}
-  	</update>
-  	
-  	&lt;!&ndash; 通过聊天编号删除聊天记录 &ndash;&gt;
-  	<delete id="delete">
-  		delete from chat where chat_id in
-  		<foreach collection="list" item="chatId" open="(" close=")" separator=",">
-  			#{chatId} 
-  		</foreach>
-  	</delete>-->
+
+
 </mapper>
