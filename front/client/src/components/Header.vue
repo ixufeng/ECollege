@@ -5,7 +5,7 @@
       <div class="nav">
         <el-dropdown trigger="click">
           <span class="el-dropdown-link">
-            {{'xufeng'}}&nbsp;<i class="el-icon-caret-bottom el-icon-right"></i>
+            {{user.name}}&nbsp;<i class="el-icon-caret-bottom el-icon-right"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item @click.native="showConfig">用户设置</el-dropdown-item>
@@ -67,6 +67,7 @@
 </template>
 <script>
 import { merge } from 'lodash'
+import { mapGetters, mapActions } from 'vuex'
 export default {
   data () {
     return {
@@ -143,8 +144,14 @@ export default {
 
     }
   },
+  computed:{
+     ...mapGetters([
+         'user'
+     ])
+
+  },
   created () {
-    //this.cancelConfig()
+      console.log(this.$store.state.name)
   }
 }
 </script>

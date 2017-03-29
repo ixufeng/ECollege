@@ -1,7 +1,7 @@
 <template>
   <div class="login-wrapper" v-show="!loggedIn">
     <div class="bg"></div>
-    <h1>xxx 后台管理系统</h1>
+    <h1>学院信息系统</h1>
     <el-form ref="form" :model="form" :rules="rules"
       @submit.native.prevent="onSubmit">
       <el-form-item prop="username">
