@@ -23,12 +23,14 @@ public class RedisManagerImpl implements RedisManager {
 
     @Autowired
     private TeacherDao teacherDao;
+
     @Autowired
     private StudentDao studentDao;
 
     private ScheduledExecutorService teacherExecutorService = Executors.newSingleThreadScheduledExecutor();
 
     private ScheduledExecutorService studentExecutorService = Executors.newSingleThreadScheduledExecutor();
+
 
     @Override
     public List<Teacher> getAllTeacherFromDB() {
@@ -54,6 +56,7 @@ public class RedisManagerImpl implements RedisManager {
 
 
     private void  freshMap() {
+
         teacherExecutorService.scheduleAtFixedRate(()->getAllTeacherFromDB(),0L,300L, TimeUnit.SECONDS);
         studentExecutorService.scheduleAtFixedRate(()->getAllStudentFromDB(),0L,300L,TimeUnit.SECONDS);
     }

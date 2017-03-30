@@ -9,17 +9,18 @@
 		<result property="limit" column="T_LIMIT"/>
 		<result property="identity" column="T_IDENTITY"/>
 		<result property="password" column="T_PASSWORD"/>
-		<result property="avatars" column="T_AVATAR"/>
+		<result property="avatars"  column="T_AVATOR"/>
 		<result property="birthday" column="T_BIRTHDAY"/>
 	</resultMap>
 
 	<insert id="add" parameterType="com.xf.college.model.teacher.Teacher">
 		INSERT INTO TEACHER VALUES(#{id},#{name},#{sex},#{limit},#{identity},#{password},#{avatars},#{birthday})
 	</insert>
+
 	<select id="select" resultMap="teacher">
 		SELECT * from TEACHER WHERE  T_ID=#{id}
 	</select>
-	<select id="selectAll">
+	<select id="selectAll" resultMap="teacher">
 		SELECT * from TEACHER
 	</select>
 	<select id="selectByName" resultMap="teacher">
