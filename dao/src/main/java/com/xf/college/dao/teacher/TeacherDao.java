@@ -14,6 +14,6 @@ public interface TeacherDao {
     void update(Teacher teacher);
     Teacher select(String id);
     List<Teacher> selectAll();
-    List<Teacher> selectByName();
+    List<Teacher> selectByName(String name);
 
 }

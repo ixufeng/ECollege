@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 4.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xf.college.dao.student.StudentDao">
+    <resultMap id="student" type="com.xf.college.model.student.Student">
+        <id column="S_ID" property="id"></id>
+        <result column="S_NAME" property="name"></result>
+        <result column="S_PASSWORD" property="password"></result>
+        <result column="S_AVATARS" property="avatars"></result>
+        <result column="S_PROFESSION" property="profession"></result>
+        <result column="S_ADMISSIONTIME" property="admissionTime"></result>
+    </resultMap>
+
+    <insert id="add" parameterType="com.xf.college.model.student.Student">
+        INSERT INTO STUDENT VALUES(#{id},#{name},#{password},#{avatars},#{profession},#{admissionTime})
+    </insert>
+
+    <select id="select" resultMap="student">
+        SELECT * FROM STUDENT WHERE S_ID=#{id}
+    </select>
+
+    <select id="selectAll">
+        SELECT * FROM STUDENT
+    </select>
+
+    <select id="selectByName" resultMap="student">
+        SELECT * FROM STUDENT WHERE S_NAME=#{name}
+    </select>
+
+    <update id="update" parameterType="com.xf.college.model.student.Student">
+        UPDATE STUDENT SET S_ID=#{id},S_NAME=#{name},S_PASSWORD=#{passowrd},S_AVATARS=#{avatars},S_PROFESSION=#{profession},S_ADMISSIONTIME=#{admissionTime}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM STUDENT WHERE S_ID=#{id}
+    </delete>
+</mapper>

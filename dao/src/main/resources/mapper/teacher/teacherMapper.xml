@@ -4,7 +4,7 @@
 <mapper namespace="com.xf.college.dao.teacher.TeacherDao">
 	<resultMap type="com.xf.college.model.teacher.Teacher" id="teacher">
 		<id property="id" column="T_ID"/>
-		<result property="name" column="_NAME"/>
+		<result property="name" column="T_NAME"/>
 		<result property="sex" column="T_SEX"/>
 		<result property="limit" column="T_LIMIT"/>
 		<result property="identity" column="T_IDENTITY"/>
