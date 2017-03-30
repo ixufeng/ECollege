@@ -1,5 +1,6 @@
 package com.xf.college.model.teacher;
 
+
 import java.util.Date;
 
 /**
@@ -93,4 +94,5 @@ public class Teacher {
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
+
 }

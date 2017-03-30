@@ -8,8 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by xufeng on 2017/3/27.
@@ -21,7 +22,8 @@ public class RedisManagerImpl implements RedisManager {
 
     @Autowired
     private TeacherDao teacherDao;
-    private ExecutorService singleThreadExecutor = Executors.newSingleThreadScheduledExecutor();
+
+    private ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
 
     @Override
     public List<Teacher> getAllTeacherFromDB() {
@@ -40,13 +42,15 @@ public class RedisManagerImpl implements RedisManager {
     }
 
     private void  freshMap() {
-        //singleThreadExecutor.awaitTermination()
+
+        executorService.scheduleAtFixedRate(()->getAllTeacherFromDB(),0L,300L, TimeUnit.SECONDS);
+
     }
 
     /**
      * 初始化入口
      */
     public void init() {
-
+        freshMap();
     }
 }

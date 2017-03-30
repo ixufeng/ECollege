@@ -1,5 +1,6 @@
 package com.xf.college.model.student;
 
+
 import java.util.Date;
 
 /**
@@ -12,7 +13,7 @@ public class Student {
     private String password;
     private String avatars;
     private String profession;
-    private final  Date admissionTime;
+    private final Date admissionTime;
 
 
     public Student(String id, String name, String profession, Date admissionTime) {
@@ -48,6 +49,7 @@ public class Student {
     public void setName(String name) {
         this.name = name;
     }
+
 
     public String getPassword() {
         return password;
