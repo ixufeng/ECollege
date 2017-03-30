@@ -39,11 +39,14 @@ public class Teacher {
         this.password = password;
     }
 
-    public String[] getAvatars() {
+    public String[] getAvatars1() {
         if(this.avatars!=null) {
             return this.avatars.split(",");
         }
         return new String[0];
+    }
+    public String getAvatars() {
+        return this.avatars;
     }
 
     public void setAvatars(String avatar) {

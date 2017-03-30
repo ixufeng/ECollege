@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 4.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xf.college.dao.teacher.TeacherDao">
+	<resultMap type="com.xf.college.model.teacher.Teacher" id="teacher">
+		<id property="id" column="T_ID"/>
+		<result property="name" column="T_NAME"/>
+		<result property="sex" column="T_SEX"/>
+		<result property="limit" column="T_LIMIT"/>
+		<result property="identity" column="T_IDENTITY"/>
+		<result property="password" column="T_PASSWORD"/>
+		<result property="avatars" column="T_AVATAR"/>
+		<result property="birthday" column="T_BIRTHDAY"/>
+	</resultMap>
+
+	<insert id="add" parameterType="com.xf.college.model.teacher.Teacher">
+		INSERT INTO TEACHER VALUES(#{id},#{name},#{sex},#{limit},#{identity},#{password},#{avatars},#{birthday})
+	</insert>
+	<select id="select" resultMap="teacher">
+		SELECT * from TEACHER WHERE  T_ID=#{id}
+	</select>
+	<select id="selectAll">
+		SELECT * from TEACHER
+	</select>
+	<select id="selectByName" resultMap="teacher">
+		SELECT * from TEACHER WHERE  T_NAME = #{name}
+	</select>
+
+	<update id="update" parameterType="com.xf.college.model.teacher.Teacher">
+		UPDATE TEACHER SET T_ID=#{id},T_NAME=#{name},T_SEX=#{sex},	T_LIMIT=#{limit},T_IDENTITY=#{identity},T_PASSWORD=#{password},T_AVATARS=#{avatars},T_BIRTHDAY=#{birthday}
+	</update>
+
+	<delete id="delete">
+		DELETE FROM TEACHER WHERE T_ID=#{id}
+	</delete>
+
+</mapper>

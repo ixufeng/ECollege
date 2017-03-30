@@ -13,6 +13,4 @@
   		insert into demo (name)
   			values(#{name})
   	</insert>
-
-
 </mapper>
