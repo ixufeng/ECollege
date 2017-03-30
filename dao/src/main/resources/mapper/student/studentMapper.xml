@@ -9,7 +9,7 @@
         <result column="S_PASSWORD" property="password"></result>
         <result column="S_AVATARS" property="avatars"></result>
         <result column="S_PROFESSION" property="profession"></result>
-        <result column="S_ADMISSIONTIME" property="admissionTime"></result>
+        <result column="S_ADMINSSION_TIME" property="admissionTime"></result>
     </resultMap>
 
     <insert id="add" parameterType="com.xf.college.model.student.Student">
@@ -29,7 +29,7 @@
     </select>
 
     <update id="update" parameterType="com.xf.college.model.student.Student">
-        UPDATE STUDENT SET S_ID=#{id},S_NAME=#{name},S_PASSWORD=#{passowrd},S_AVATARS=#{avatars},S_PROFESSION=#{profession},S_ADMISSIONTIME=#{admissionTime}
+        UPDATE STUDENT SET S_ID=#{id},S_NAME=#{name},S_PASSWORD=#{passowrd},S_AVATARS=#{avatars},S_PROFESSION=#{profession},S_ADMINSSION_TIME=#{admissionTime}
     </update>
 
     <delete id="delete">
