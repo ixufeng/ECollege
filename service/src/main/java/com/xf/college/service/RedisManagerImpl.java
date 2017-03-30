@@ -1,5 +1,6 @@
 package com.xf.college.service;
 
+import com.xf.college.dao.student.StudentDao;
 import com.xf.college.dao.teacher.TeacherDao;
 import com.xf.college.model.student.Student;
 import com.xf.college.model.teacher.Teacher;
@@ -23,7 +24,13 @@ public class RedisManagerImpl implements RedisManager {
     @Autowired
     private TeacherDao teacherDao;
 
-    private ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+    @Autowired
+    private StudentDao studentDao;
+
+    private ScheduledExecutorService teacherExecutorService = Executors.newSingleThreadScheduledExecutor();
+
+    private ScheduledExecutorService studentExecutorService = Executors.newSingleThreadScheduledExecutor();
+
 
     @Override
     public List<Teacher> getAllTeacherFromDB() {
@@ -38,13 +45,20 @@ public class RedisManagerImpl implements RedisManager {
 
     @Override
     public List<Student> getAllStudentFromDB() {
-        return null;
+        List<Student> list = studentDao.selectAll();
+        list.stream().forEach(student -> {
+            if (student!=null) {
+                studentMap.put(student.getId(),student);
+            }
+        });
+        return list;
     }
+
 
     private void  freshMap() {
 
-        executorService.scheduleAtFixedRate(()->getAllTeacherFromDB(),0L,300L, TimeUnit.SECONDS);
-
+        teacherExecutorService.scheduleAtFixedRate(()->getAllTeacherFromDB(),0L,300L, TimeUnit.SECONDS);
+        studentExecutorService.scheduleAtFixedRate(()->getAllStudentFromDB(),0L,300L,TimeUnit.SECONDS);
     }
 
     /**

@@ -46,6 +46,9 @@ public class Teacher {
         }
         return new String[0];
     }
+    public String getAvatars() {
+        return this.avatars;
+    }
 
     public String getAvatars() {
         return this.avatars;
