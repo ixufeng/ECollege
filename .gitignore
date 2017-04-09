@@ -26,6 +26,7 @@ out/
 
 # front build
 /api/src/main/webapp/static
+/api/target
 
 /front/node_modules
 /front/npm-debug.log
