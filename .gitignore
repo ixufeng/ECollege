@@ -30,3 +30,4 @@ out/
 /front/node_modules
 /front/npm-debug.log
 /front/client/dist
+/front/client/static
