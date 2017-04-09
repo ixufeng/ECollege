@@ -54,8 +54,8 @@ var development = {
 }
 var production = {
   frontend: {
-    index: path.resolve(__dirname, './client/dist/index.html'),
-    assetsRoot: path.resolve(__dirname, './client/dist'),
+    index: path.resolve(__dirname, '../api/src/main/webapp/index.html'),
+    assetsRoot: path.resolve(__dirname, '../api/src/main/webapp'),
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     cssSourceMap: true,
@@ -81,7 +81,7 @@ var production = {
     },
 
     // frontend folder
-    frontend: path.resolve(__dirname, './client/dist')
+    frontend: path.resolve(__dirname, '../api/src/main/webapp')
   })
 }
 
