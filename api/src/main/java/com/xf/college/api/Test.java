@@ -1,7 +1,7 @@
 package com.xf.college.api;
 
 import com.xf.college.dao.Demo.DemoDao;
-import com.xf.college.model.Demo;
+import com.xf.college.model.Demo.Demo;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

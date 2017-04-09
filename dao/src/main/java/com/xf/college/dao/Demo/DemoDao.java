@@ -1,7 +1,7 @@
 package com.xf.college.dao.Demo;
 
 import com.xf.college.dao.BaseDao;
-import com.xf.college.model.Demo;
+import com.xf.college.model.Demo.Demo;
 
 /**
  * Created by xufeng on 2017/3/15.

@@ -6,7 +6,7 @@ import java.util.Date;
  * Created by xufeng on 2017/3/25.
  * used to record
  */
-public class UseRecord {
+public class UseEquipmentRecord {
     private int id;
     private int state;
     private String userId;
@@ -14,11 +14,11 @@ public class UseRecord {
     private Date beginTime;
     private Date endTime;
 
-    public UseRecord() {
+    public UseEquipmentRecord() {
     }
 
 
-    public UseRecord(int state, String userId, String equipmentId, Date beginTime, Date endTime) {
+    public UseEquipmentRecord(int state, String userId, String equipmentId, Date beginTime, Date endTime) {
         this.state = state;
         this.userId = userId;
         this.equipmentId = equipmentId;

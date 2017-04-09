@@ -16,30 +16,30 @@
 
     <insert id="add" parameterType="com.xf.college.model.laboratory.CommonEquipment">
         INSERT INTO
-          COMMON_EQUIPMENT
+          common_equipment
         VALUES
           (#{id},#{name},#{typeId},#{valid},#{usedCount},#{des},#{remark},#{imgs},#{beginTime})
     </insert>
 
     <select id="select" resultMap="commonEquipment">
-        SELECT * FROM COMMON_EQUIPMENT WHERE E_ID=#{id}
+        SELECT * FROM common_equipment WHERE E_ID=#{id}
     </select>
     <select id="selectAll">
-        SELECT * FROM COMMON_EQUIPMENT
+        SELECT * FROM common_equipment
     </select>
     <select id="selectByName" resultMap="commonEquipment">
-        SELECT * FROM COMMON_EQUIPMENT WHERE E_NAME=#{name}
+        SELECT * FROM common_equipment WHERE E_NAME=#{name}
     </select>
 
     <update id="update" parameterType="com.xf.college.model.laboratory.CommonEquipment">
         UPDATE
-          COMMON_EQUIPMENT
+          common_equipment
         SET
-          E_ID=#{id},E_NAME=#{name},E_TYPE_ID=#{typeId},E_VALID=#{valid},E_USED_COUNT=#{usedCount}
-          ,E_DES=#{des},E_REMARK=#{remark},E_IMGS=#{imgs},E_BEGIN_TIME=#{beginTime}
+          E_NAME=#{name},E_TYPE_ID=#{typeId},E_VALID=#{valid},E_USED_COUNT=#{usedCount}
+          ,E_DES=#{des},E_REMARK=#{remark},E_IMGS=#{imgs},E_BEGIN_TIME=#{beginTime} WHERE E_ID = #{id}
     </update>
 
     <delete id="delete">
-        DELETE FROM TEACHER WHERE E_ID=#{id}
+        DELETE FROM common_equipment WHERE E_ID=#{id}
     </delete>
 </mapper>

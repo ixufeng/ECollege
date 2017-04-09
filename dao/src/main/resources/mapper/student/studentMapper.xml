@@ -13,26 +13,26 @@
     </resultMap>
 
     <insert id="add" parameterType="com.xf.college.model.student.Student">
-        INSERT INTO STUDENT VALUES(#{id},#{name},#{password},#{avatars},#{profession},#{admissionTime})
+        INSERT INTO student VALUES(#{id},#{name},#{password},#{avatars},#{profession},#{admissionTime})
     </insert>
 
     <select id="select" resultMap="student">
-        SELECT * FROM STUDENT WHERE S_ID=#{id}
+        SELECT * FROM student WHERE S_ID=#{id}
     </select>
 
     <select id="selectAll" resultMap="student">
-        SELECT * FROM STUDENT
+        SELECT * FROM student
     </select>
 
     <select id="selectByName" resultMap="student">
-        SELECT * FROM STUDENT WHERE S_NAME=#{name}
+        SELECT * FROM student WHERE S_NAME=#{name}
     </select>
 
     <update id="update" parameterType="com.xf.college.model.student.Student">
-        UPDATE STUDENT SET S_ID=#{id},S_NAME=#{name},S_PASSWORD=#{passowrd},S_AVATARS=#{avatars},S_PROFESSION=#{profession},S_ADMINSSION_TIME=#{admissionTime}
+        UPDATE student SET S_ID=#{id},S_NAME=#{name},S_PASSWORD=#{passowrd},S_AVATARS=#{avatars},S_PROFESSION=#{profession},S_ADMINSSION_TIME=#{admissionTime}
     </update>
 
     <delete id="delete">
-        DELETE FROM STUDENT WHERE S_ID=#{id}
+        DELETE FROM student WHERE S_ID=#{id}
     </delete>
 </mapper>

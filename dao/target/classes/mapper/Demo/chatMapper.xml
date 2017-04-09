@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 4.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xf.college.dao.Demo.DemoDao">
-	<resultMap type="com.xf.college.model.Demo" id="demo">
+	<resultMap type="com.xf.college.model.Demo.Demo" id="demo">
 		<id property="id" column="id"/>
 		<result property="name" column="name"/>
 	</resultMap>
   	<!-- 根据聊天记录对象插入表 -->
-  	<insert id="add" parameterType="com.xf.college.model.Demo">
+  	<insert id="add" parameterType="com.xf.college.model.Demo.Demo">
   		insert into demo (name)
   			values(#{name})
   	</insert>
