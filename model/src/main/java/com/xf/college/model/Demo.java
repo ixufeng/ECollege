@@ -4,14 +4,15 @@ package com.xf.college.model;
  * Created by xufeng on 2017/3/15.
  */
 public class Demo {
-    public Demo() {
 
+    private String name;
+    private int id;
+
+    public Demo() {
     }
     public Demo(String name){
         this.name = name;
     }
-    private String name;
-    private int id;
 
     public int getId() {
         return id;

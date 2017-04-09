@@ -1,6 +1,7 @@
 package com.xf.college.api;
 
 import com.xf.college.dao.Demo.DemoDao;
+import com.xf.college.model.Demo;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -13,8 +14,8 @@ public class Test {
 
    public void init() {
        System.out.println("初始化！！");
-      /* Demo demo = new Demo("test");
-       demoDao.insert(demo);*/
+       Demo demo = new Demo("testts");
+       demoDao.add(demo);
 
    }
 }

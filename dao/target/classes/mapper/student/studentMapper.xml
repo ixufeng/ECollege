@@ -20,7 +20,6 @@
         SELECT * FROM STUDENT WHERE S_ID=#{id}
     </select>
 
-
     <select id="selectAll" resultMap="student">
         SELECT * FROM STUDENT
     </select>
@@ -30,7 +29,6 @@
     </select>
 
     <update id="update" parameterType="com.xf.college.model.student.Student">
-
         UPDATE STUDENT SET S_ID=#{id},S_NAME=#{name},S_PASSWORD=#{passowrd},S_AVATARS=#{avatars},S_PROFESSION=#{profession},S_ADMINSSION_TIME=#{admissionTime}
     </update>
 

@@ -6,11 +6,10 @@
 		<id property="id" column="id"/>
 		<result property="name" column="name"/>
 	</resultMap>
-
-
   	<!-- 根据聊天记录对象插入表 -->
-  	<insert id="insert" parameterType="com.xf.college.model.Demo">
+  	<insert id="add" parameterType="com.xf.college.model.Demo">
   		insert into demo (name)
   			values(#{name})
   	</insert>
+
 </mapper>

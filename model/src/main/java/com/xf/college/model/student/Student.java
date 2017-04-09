@@ -13,6 +13,9 @@ public class Student {
     private String password;
     private String avatars;
     private String profession;
+    private Date birthday;
+    private String phone;
+    private String identify;
     private final Date admissionTime;
 
 
@@ -21,6 +24,30 @@ public class Student {
         this.name = name;
         this.profession = profession;
         this.admissionTime = admissionTime;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getIdentify() {
+        return identify;
+    }
+
+    public void setIdentify(String identify) {
+        this.identify = identify;
     }
 
     public Student(String id, String name, Date admissionTime) {
@@ -62,9 +89,23 @@ public class Student {
     public String getAvatars() {
         return avatars;
     }
+    public String[] getAvatars1() {
+        if (avatars==null) {
+            return new String[0];
+        }
+        return avatars.split(",");
+    }
 
     public void setAvatars(String avatars) {
         this.avatars = avatars;
+    }
+    public void addAvatars(String avatar) {
+        if (avatar==null) return;
+        if (this.avatars==null) {
+            this.avatars = avatar;
+            return;
+        }
+        this.avatars += "," +avatar;
     }
 
     public String getProfession() {
