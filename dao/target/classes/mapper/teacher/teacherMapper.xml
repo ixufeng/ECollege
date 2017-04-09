@@ -14,25 +14,25 @@
 	</resultMap>
 
 	<insert id="add" parameterType="com.xf.college.model.teacher.Teacher">
-		INSERT INTO TEACHER VALUES(#{id},#{name},#{sex},#{limit},#{identity},#{password},#{avatars},#{birthday})
+		INSERT INTO teacher VALUES(#{id},#{name},#{sex},#{limit},#{identity},#{password},#{avatars},#{birthday})
 	</insert>
 
 	<select id="select" resultMap="teacher">
-		SELECT * from TEACHER WHERE  T_ID=#{id}
+		SELECT * from heacher WHERE  T_ID=#{id}
 	</select>
 	<select id="selectAll" resultMap="teacher">
-		SELECT * from TEACHER
+		SELECT * from teacher
 	</select>
 	<select id="selectByName" resultMap="teacher">
-		SELECT * from TEACHER WHERE  T_NAME = #{name}
+		SELECT * from teacher WHERE  T_NAME = #{name}
 	</select>
 
 	<update id="update" parameterType="com.xf.college.model.teacher.Teacher">
-		UPDATE TEACHER SET T_ID=#{id},T_NAME=#{name},T_SEX=#{sex},	T_LIMIT=#{limit},T_IDENTITY=#{identity},T_PASSWORD=#{password},T_AVATARS=#{avatars},T_BIRTHDAY=#{birthday}
+		UPDATE teacher SET T_ID=#{id},T_NAME=#{name},T_SEX=#{sex},	T_LIMIT=#{limit},T_IDENTITY=#{identity},T_PASSWORD=#{password},T_AVATARS=#{avatars},T_BIRTHDAY=#{birthday}
 	</update>
 
 	<delete id="delete">
-		DELETE FROM TEACHER WHERE T_ID=#{id}
+		DELETE FROM teacher WHERE T_ID=#{id}
 	</delete>
 
 </mapper>
