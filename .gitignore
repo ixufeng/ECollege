@@ -23,7 +23,7 @@ hs_err_pid*
 /**/.idea
 *.iml
 out/
-
+/*/target
 # front build
 /api/src/main/webapp/static
 /api/target
