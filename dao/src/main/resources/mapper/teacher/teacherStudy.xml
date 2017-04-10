@@ -2,5 +2,37 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 4.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xf.college.dao.teacher.TeacherStudyDao">
+    <resultMap type="com.xf.college.model.teacher.TeacherStudy" id="teacherStudy">
+        <id property="id" column="T_STUDY_ID"/>
+        <result property="teacherId" column="T_TEACHER_ID"/>
+        <result property="studyName" column="T_STUDY_NAME"/>
+        <result property="studyIntro" column="T_STUDY_INTRO"/>
+        <result property="studyType" column="T_STUDY_TYPE"/>
+        <result property="studyLink" column="T_STUDY_LINK"/>
+        <result property="studyImg"  column="T_STUDY_IMG"/>
+        <result property="beginTime" column="T_STUDY_BEGIN"/>
+    </resultMap>
 
+    <insert id="add" parameterType="com.xf.college.model.teacher.TeacherStudy">
+        INSERT INTO teacher_study VALUES(#{id},#{teacherId},#{studyName},#{studyIntro},#{studyType},#{studyLink},#{studyImg},#{beginTime})
+    </insert>
+
+    <select id="select" resultMap="teacherStudy">
+        SELECT * from teacher_study WHERE  T_STUDY_ID=#{id}
+    </select>
+    <select id="selectAll" resultMap="teacherStudy">
+        SELECT * from teacher_study
+    </select>
+    <select id="selectByName" resultMap="teacherStudy">
+        SELECT * from teacher_study WHERE  T_STUDY_NAME = #{studyName}
+    </select>
+
+    <update id="update" parameterType="com.xf.college.model.teacher.TeacherStudy">
+        UPDATE teacher_study SET T_STUDY_ID=#{id},T_TEACHER_ID=#{teacherId},T_STUDY_NAME=#{studyName},
+        T_STUDY_INTRO=#{studyIntro},T_STUDY_TYPE=#{studyType},T_STUDY_LINK=#{studyLink},T_STUDY_IMG=#{studyImg},T_STUDY_BEGIN=#{beginTime}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM teacher_study WHERE T_STUDY_ID=#{id}
+    </delete>
 </mapper>
