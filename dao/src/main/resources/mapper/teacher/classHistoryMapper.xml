@@ -2,9 +2,38 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 4.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xf.college.dao.teacher.ClassHistoryDao">
-	<resultMap type="com.xf.college.model.teacher.ClassHistory" id="teacher">
-		<id column=""></id>
+	<resultMap type="com.xf.college.model.teacher.ClassHistory" id="classHistory">
+		<id property="id" column="T_ID"/>
+		<result property="teacherId" column="T_TEACHER_ID"/>
+		<result property="courseId" column="T_COURSE_ID"/>
+		<result property="classNumber" column="T_CLASS_NUMBER"/>
+		<result property="beginTime" column="T_BEGIN_TIME"/>
+		<result property="endTime" column="T_END_TIME"/>
+		<result property="createTime"  column="T_CREATE_TIME"/>
 	</resultMap>
+
+	<insert id="add" parameterType="com.xf.college.model.teacher.ClassHistory">
+		INSERT INTO teacher_class_history VALUES(#{teacherId},#{id},#{courseId},#{createTime},#{beginTime},#{endTime},#{classNumber})
+	</insert>
+
+	<select id="select" resultMap="classHistory">
+		SELECT * from teacher_class_history WHERE  T_ID=#{id}
+	</select>
+	<select id="selectAll" resultMap="classHistory">
+		SELECT * from teacher_class_history
+	</select>
+	<select id="selectByName" resultMap="classHistory">
+		SELECT * from teacher_class_history WHERE  T_CLASS_NUMBER = #{classNumber}
+	</select>
+
+	<update id="update" parameterType="com.xf.college.model.teacher.ClassHistory">
+		UPDATE teacher_class_history SET T_ID=#{id},T_TEACHER_ID=#{teacherId},T_COURSE_ID=#{courseId},
+			T_CLASS_NUMBER=#{classNumber},T_BEGIN_TIME=#{beginTime},T_END_TIME=#{endTime},T_CREATE_TIME=#{createTime}
+	</update>
+
+	<delete id="delete">
+		DELETE FROM teacher_class_history WHERE T_ID=#{id}
+	</delete>
 
 
 </mapper>

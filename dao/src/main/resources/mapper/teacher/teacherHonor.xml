@@ -2,6 +2,35 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 4.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xf.college.dao.teacher.TeacherHonorDao">
+    <resultMap type="com.xf.college.model.teacher.TeacherHonor" id="teacherHonor">
+        <id property="id" column="H_ID"/>
+        <result property="teacherId" column="H_TEACHER_ID"/>
+        <result property="honorType" column="H_HONOR_TYPE"/>
+        <result property="achieveTime" column="H_ACHIEVE_TIME"/>
+        <result property="des" column="H_DES"/>
+    </resultMap>
 
+    <insert id="add" parameterType="com.xf.college.model.teacher.TeacherHonor">
+        INSERT INTO teacher_honor VALUES(#{id},#{teacherId},#{honorType},#{achieveTime},#{des})
+    </insert>
+
+    <select id="select" resultMap="teacherHonor">
+        SELECT * from teacher_honor WHERE  H_ID=#{id}
+    </select>
+    <select id="selectAll" resultMap="teacherHonor">
+        SELECT * from teacher_honor
+    </select>
+    <select id="selectByName" resultMap="teacherHonor">
+        SELECT * from teacher_honor WHERE  H_DES = #{des}
+    </select>
+
+    <update id="update" parameterType="com.xf.college.model.teacher.Teacher">
+        UPDATE teacher_honor SET H_ID=#{id},H_TEACHER_ID=#{teacherId},H_HONOR_TYPE=#{honorType},
+        H_ACHIEVE_TIME=#{achieveTime},H_DES=#{des}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM teacher_honor WHERE H_ID=#{id}
+    </delete>
 
 </mapper>
