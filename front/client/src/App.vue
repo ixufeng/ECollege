@@ -1,10 +1,7 @@
 <template>
   <div id="app-main">
-    <x-menu></x-menu>
     <div class="app-wrapper">
-      <x-header></x-header>
-      <div class="app-container" :class="{active: true}">
-        <!-- <router-loading></router-loading> -->
+      <div class="app-container" :class="{active: false}">
         <router-view></router-view>
       </div>
       <n-progress parent=".app-wrapper"></n-progress>
@@ -15,9 +12,11 @@
 import Vue from 'vue'
 import XHeader from './components/Header'
 import XMenu from './components/Menu'
-// import RouterLoading from './components/RouterLoading'
 import NProgress from './components/NProgress'
 import ContentModule from './components/ContentModule'
+import EFooter from './components/Footer'
+
+Vue.component('EFooter',EFooter)
 Vue.component('ContentModule', ContentModule)
 export default {
 

@@ -1,16 +1,15 @@
 <template>
   <content-module name="dashboard">
-    Dashboard
-    <el-button type="info" @click.native="sendMessage">Send hello</el-button>
+    <e-footer></e-footer>
   </content-module>
 </template>
 <script>
 export default {
-  methods: {
-    sendMessage () {
+
+
+    methods: {
 
     }
-  }
 
 }
 </script>
