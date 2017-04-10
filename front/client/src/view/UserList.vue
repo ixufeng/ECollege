@@ -10,7 +10,7 @@ import DataTable from 'components/DataTable'
 export default {
   data () {
     return {
-     
+
     }
   },
   components: {
