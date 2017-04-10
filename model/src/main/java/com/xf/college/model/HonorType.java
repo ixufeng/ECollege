@@ -1,4 +1,4 @@
-package com.xf.college.model.teacher;
+package com.xf.college.model;
 
 /**
  * Created by xufeng on 2017/3/27.

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 4.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xf.college.dao.laboratory.UserRecordDao">
+    <resultMap id="useRecord" type="com.xf.college.model.laboratory.UseEquipmentRecord">
+        <id column="U_ID" property="id"></id>
+        <result column="U_STATE" property="state"></result>
+        <result column="USER_ID" property="userId"></result>
+        <result column="EQUIPMENT_ID" property="equipmentId"></result>
+        <result column="BEGIN_TIME" property="beginTime"></result>
+        <result column="END_TIME" property="engTime"></result>
+    </resultMap>
+
+
+    <insert id="add" parameterType="com.xf.college.model.laboratory.UseEquipmentRecord">
+       INSERT INTO use_equipment_record (U_STATE, USER_ID, EQUIPMENT_ID, BEGIN_TIME, END_TIME) VALUES (#{state},#{userId},#{equipmentId},#{beginTime},#{endTime})
+    </insert>
+
+    <select id="select" resultMap="useRecord">
+        SELECT * FROM use_equipment_record WHERE U_ID=#{id}
+    </select>
+    <select id="selectAll" resultMap="useRecord">
+        SELECT * FROM use_equipment_record
+    </select>
+
+    <update id="update" parameterType="com.xf.college.model.laboratory.UseEquipmentRecord">
+       UPDATE use_equipment_record SET
+          U_STATE=#{state},BEGIN_TIME=#{beginTime},END_TIME=#{endTime}
+              WHERE  U_ID=#{id}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM use_equipment_record WHERE U_ID=#{id}
+    </delete>
+
+</mapper>

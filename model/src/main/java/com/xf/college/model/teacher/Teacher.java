@@ -50,9 +50,6 @@ public class Teacher {
         return this.avatars;
     }
 
-    public String getAvatars() {
-        return this.avatars;
-    }
 
     public void setAvatars(String avatar) {
         this.avatars = avatar;

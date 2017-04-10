@@ -19,6 +19,14 @@ public class CommonEquipment {
     public String getImgs() {
         return imgs;
     }
+    public String[] getImgs1() {
+        return imgs==null?new String[0]:imgs.split(",");
+    }
+    public void addImg(String img) {
+        if (img==null) return;
+        if (this.imgs==null) this.imgs = img;
+        else this.imgs += "," + img;
+    }
     public void setImgs(String imgs) {
         this.imgs = imgs;
     }
