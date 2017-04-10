@@ -10,12 +10,8 @@
 </template>
 <script>
 import Vue from 'vue'
-import BootstrapVue from 'bootstrap-vue'
-Vue.use(BootstrapVue)
-
 import XHeader from './components/Header'
 import XMenu from './components/Menu'
-// import RouterLoading from './components/RouterLoading'
 import NProgress from './components/NProgress'
 import ContentModule from './components/ContentModule'
 import EFooter from './components/Footer'
@@ -32,10 +28,6 @@ export default {
 }
 </script>
 <style lang="stylus">
-@import "../../node_modules/bootstrap/dist/css/bootstrap.css"
-@import "../../node_modules/bootstrap-vue/dist/bootstrap-vue.css"
-
-
 @import "assets/css/variable"
 @import "assets/css/animate"
 @import "assets/fonts/iconfont.css"
