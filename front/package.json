@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "body-parser": "^1.15.2",
+    "bootstrap": "^3.3.7",
     "composable-middleware": "^0.3.0",
     "compression": "^1.6.2",
     "cookie-parser": "^1.4.3",
