@@ -1,6 +1,7 @@
 <template>
   <div id="app-main">
     <div class="app-wrapper">
+      <e-header></e-header>
       <div class="app-container" :class="{active: false}">
         <router-view></router-view>
       </div>
@@ -31,10 +32,12 @@ export default {
 }
 </script>
 <style lang="stylus">
-@import "assets/css/variable"
-@import "assets/css/animate"
-@import "assets/fonts/iconfont.css"
-@import "assets/css/flex"
+@import "assets/css/variable.styl";
+@import "assets/css/animate.styl";
+@import "assets/fonts/iconfont.css";
+@import "assets/css/flex.styl";
+@import "//at.alicdn.com/t/font_czxhzytwhnxqd7vi.css";
+
 ::-webkit-scrollbar
   width 4px
   height 4px
@@ -64,12 +67,13 @@ a
 #app-main
   display flex
   width 100%
-  height 100vh
+  height 100%
   .app-wrapper
     flex 1
     display flex
     flex-flow column
     overflow-x hidden
+    min-width 1000px;
     .app-container
       position relative
       flex 1
