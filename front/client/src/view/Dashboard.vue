@@ -1,6 +1,7 @@
 <template>
   <content-module name="dashboard">
-    <e-footer></e-footer>
+      <e-header></e-header>
+      <e-footer></e-footer>
   </content-module>
 </template>
 <script>

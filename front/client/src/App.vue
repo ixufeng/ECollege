@@ -16,8 +16,11 @@ import NProgress from './components/NProgress'
 import ContentModule from './components/ContentModule'
 import EFooter from './components/Footer'
 
+import EHeader from './components/Header1.vue'
+
 Vue.component('EFooter',EFooter)
 Vue.component('ContentModule', ContentModule)
+Vue.component('EHeader',EHeader)
 export default {
 
   components: {
@@ -73,7 +76,7 @@ a
       display flex
       justify-content center
       margin 0
-      padding 1rem
+      padding 0rem
       background-color #fff
       overflow auto
       &.active
