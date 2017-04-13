@@ -23,16 +23,7 @@ const routes = [{
   component: (resolve) => {
     require(['../view/index.vue'], resolve)
   }
-}, {
-  path: '/teacher',
-  component: (resolve) => {
-    require(['../view/teacher/Teacher.vue'], resolve)
-  },
-  children: [...teacher, {
-    path: '/',
-    redirect: '/index'
-  }]
-}, {
+},...teacher,{
   path: '*',
   component: {
     render (h) {
