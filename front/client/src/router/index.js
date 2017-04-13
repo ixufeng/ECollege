@@ -6,6 +6,8 @@ import VueRouter from 'vue-router'
 import store from '../store'
 import { userInitPromise } from '../store/modules/user'
 import otherModuleRoutes from './module'
+import teacher from './teacher'
+
 Vue.use(VueRouter)
 
 const routes = [{
@@ -16,13 +18,19 @@ const routes = [{
   meta: {
     skipAuth: true
   }
-}, {
-  path: '/',
+},{
+  path:'/index',
   component: (resolve) => {
-    require(['../view/CommonView.vue'], resolve)
+    require(['../view/index.vue'], resolve)
+  }
+}, {
+  path: '/teacher',
+  component: (resolve) => {
+    require(['../view/teacher/Teacher.vue'], resolve)
   },
-  children: [...otherModuleRoutes, {
-    path: '/', redirect: '/dashboard'
+  children: [...teacher, {
+    path: '/',
+    redirect: '/index'
   }]
 }, {
   path: '*',
