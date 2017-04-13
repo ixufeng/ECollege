@@ -1,16 +1,25 @@
+/**
+ * Created by xufeng on 2017/4/12.
+ */
 export default [{
-  path: '/index',
+  path:'/teacher/data',
   component: (resolve) => {
-    require(['../view/index.vue'], resolve)
+    require(['../view/teacher/Teacher.data.vue'],resolve)
   }
-}, {
-  path: '/users',
-  component: (resolve) => {
-    require(['../view/UserList.vue'], resolve)
+},{
+  path:'/class',
+  component: ( resolve ) => {
+    require(['../view/teacher/Teacher.class.vue'],resolve)
   }
-}, {
-  path: '/things',
+},{
+  path:'/study',
   component: (resolve) => {
-    require(['../view/ThingList.vue'], resolve)
+    require(['../view/teacher/Teacher.study.vue'],resolve) //老师科研页面
+  }
+},{
+  path:'/honor',
+  component: (resolve) => {
+    require(['../view/teacher/Teacher.honor.vue'],resolve)  //老师荣誉墙页面
   }
 }]
+
