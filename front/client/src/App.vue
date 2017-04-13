@@ -5,27 +5,27 @@
       <div class="app-container" :class="{active: false}">
         <router-view></router-view>
       </div>
+      <e-footer></e-footer>
       <n-progress parent=".app-wrapper"></n-progress>
     </div>
   </div>
 </template>
 <script>
 import Vue from 'vue'
-import XHeader from './components/Header'
 import XMenu from './components/Menu'
 import NProgress from './components/NProgress'
 import ContentModule from './components/ContentModule'
 import EFooter from './components/Footer'
+import EAvatar from './components/Avatar'
 
 import EHeader from './components/Header1.vue'
 
 Vue.component('EFooter',EFooter)
 Vue.component('ContentModule', ContentModule)
 Vue.component('EHeader',EHeader)
+Vue.component('EAvatar',EAvatar)
 export default {
-
   components: {
-    XHeader,
     XMenu,
     NProgress
   }

@@ -1,7 +1,7 @@
 export default [{
-  path: '/dashboard',
+  path: '/index',
   component: (resolve) => {
-    require(['../view/Dashboard.vue'], resolve)
+    require(['../view/index.vue'], resolve)
   }
 }, {
   path: '/users',
