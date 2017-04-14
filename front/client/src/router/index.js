@@ -25,7 +25,7 @@ const routes = [{
   }
 },...teacher,{
   path: '*',
-  component: {
+    component: {
     render (h) {
       return h('div', { staticClass: 'flex flex-main-center', attrs: { style: 'width:100%;font-size:32px' }}, 'Page not found')
     }
