@@ -79,4 +79,11 @@
         </bean>
         <bean class="com.xf.college.api.Test" init-method="init"></bean>
 
+    <bean id="propertyConfigurer"
+                 class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <property name="location">
+        <value>classpath:college.config.properties</value>
+    </property>
+    <property name="fileEncoding" value="utf-8" />
+</bean>
 </beans>

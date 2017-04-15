@@ -18,7 +18,7 @@
 	</insert>
 
 	<select id="select" resultMap="teacher">
-		SELECT * from heacher WHERE  T_ID=#{id}
+		SELECT * from teacher WHERE  T_ID=#{id}
 	</select>
 	<select id="selectAll" resultMap="teacher">
 		SELECT * from teacher

@@ -5,6 +5,7 @@ import com.xf.college.dao.teacher.TeacherDao;
 import com.xf.college.model.student.Student;
 import com.xf.college.model.teacher.Teacher;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by xufeng on 2017/3/27.
  */
+@Service
 public class RedisManagerImpl implements RedisManager {
 
     private Map<String,Teacher> teacherMap = new HashMap<>();
