@@ -39,7 +39,7 @@ public class AuthController extends BaseController{
     public APIResult<String> unLogin(
             @RequestParam("redirect") String redirect
     ) {
-        
+
         return asSuccess(redirect);
     }
 }
