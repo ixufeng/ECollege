@@ -14,7 +14,7 @@ import java.util.Objects;
 @Service
 public class AuthService {
 
-   // @Value("${e_teacher_key_num}")
+    //@Value("${e_teacher_key_num}")
     private final int teacherKeyNum = 8;
 
     //@Value("${e_student_key_num}")

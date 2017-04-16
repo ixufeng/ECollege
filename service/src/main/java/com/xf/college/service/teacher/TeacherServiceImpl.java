@@ -1,6 +1,8 @@
 package com.xf.college.service.teacher;
 
+import com.xf.college.common.Auth;
 import com.xf.college.dao.teacher.TeacherDao;
+import com.xf.college.model.apiwrapper.APIResult;
 import com.xf.college.model.teacher.Teacher;
 import com.xf.college.service.RedisManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,4 +45,5 @@ public class TeacherServiceImpl implements TeacherService {
         }
         return teacherDao.selectByName(name);
     }
+
 }

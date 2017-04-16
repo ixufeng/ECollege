@@ -22,7 +22,8 @@
           return {
               form: {
                   name:'',
-                  password:''
+                  password:'',
+                  checkWord:''
               }
           }
       }

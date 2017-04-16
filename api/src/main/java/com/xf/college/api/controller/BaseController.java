@@ -1,5 +1,6 @@
 package com.xf.college.api.controller;
 
+import com.xf.college.common.Auth;
 import com.xf.college.common.utils.StringUtil;
 import com.xf.college.model.apiwrapper.*;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -14,6 +15,7 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * 基础的控制器，里面放公用方法
@@ -54,6 +56,17 @@ public class BaseController {
 		list.setCount(count);
 		return new APIListResult<>(APIResultCode.SUCCESS.getValue(), "SUCCESS", list);
 	}
+
+	protected APIResult handleNoAuth(Integer auth) {
+
+        if (Objects.equals(auth, Auth.BLACK)) {
+            return asUnAuthError("权限被限制，请联系管理员！");
+        }
+        if (Objects.equals(auth,Auth.NO_AUTH)) {
+            return asUnLogin("请先登陆");
+        }
+        return asUnAuthError("没有权限！");
+    }
 
     protected PageParameter getPageParameter(ServletRequest request){
         PageParameter pageParam = new PageParameter();

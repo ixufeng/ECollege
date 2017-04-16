@@ -30,7 +30,7 @@ public class AuthController extends BaseController{
         result.setRedirect(redirect);
 
         if (result.isLogin()) {
-            session.setAttribute(userName,result.getObject());
+            session.setAttribute("user",result.getObject());
             return asSuccess(result);
         }else {
             return asUnLogin(result.getMessage());

@@ -31,7 +31,14 @@ ajaxUtils.post = (url,params,result) => {
 }
 
 let _initParams = (url,params) => {
-
+  url = url + "?"
+  if (!params) {
+    return url
+  }
+  for (let item in params) {
+    url = url + item + "=" + params[item] + "&"
+  }
+  return url
 }
 
 export  default  ajaxUtils

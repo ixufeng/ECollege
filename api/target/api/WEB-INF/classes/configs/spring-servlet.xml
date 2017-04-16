@@ -22,9 +22,12 @@
 
 	<!-- 自动扫描 注解-->
     <context:component-scan base-package="com.xf.college.api.controller">
-    	
+
+
     </context:component-scan>
 
+    <!--扫描所有service包-->
+    <context:component-scan base-package="com.xf.college.service"/>
 
 	<!-- 添加json支持 -->
        <mvc:annotation-driven >      
@@ -79,11 +82,9 @@
         </bean>
         <bean class="com.xf.college.api.Test" init-method="init"></bean>
 
-    <bean id="propertyConfigurer"
-                 class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-    <property name="location">
-        <value>classpath:college.config.properties</value>
-    </property>
-    <property name="fileEncoding" value="utf-8" />
-</bean>
+    <bean id="timeBasedAccessInterceptor" class="com.xf.college.api.interceptor.AuthorityInterceptor">
+
+    </bean>
+
+
 </beans>

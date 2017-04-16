@@ -12,5 +12,4 @@ public interface TeacherService {
     Teacher select(String teacherId);
     List<Teacher> selectAll();
     List<Teacher> findByName(String name);
-
 }
