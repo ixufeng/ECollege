@@ -15,6 +15,14 @@ public class Teacher {
     private String identity;
     private String phone;
     private Date birthday;
+    private int limit;
+
+    public int getLimit() {
+        return limit;
+    }
+    public void setLimit(int limit) {
+        this.limit = limit;
+    }
 
     public String getId() {
         return id;

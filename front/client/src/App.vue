@@ -8,6 +8,11 @@
       <e-footer></e-footer>
       <n-progress parent=".app-wrapper"></n-progress>
     </div>
+    <el-dialog title="提示" v-model="dialogVisible" size="tiny">
+      <span>这是一段信息</span>
+
+      </span>
+    </el-dialog>
   </div>
 </template>
 <script>
@@ -17,14 +22,19 @@ import NProgress from './components/NProgress'
 import ContentModule from './components/ContentModule'
 import EFooter from './components/Footer'
 import EAvatar from './components/Avatar'
-
 import EHeader from './components/Header1.vue'
+import store from './store/index.js'
 
 Vue.component('EFooter',EFooter)
 Vue.component('ContentModule', ContentModule)
 Vue.component('EHeader',EHeader)
 Vue.component('EAvatar',EAvatar)
 export default {
+  computed: {
+      login: ()=> {
+          return store.getters.showLogin
+      }
+  },
   components: {
     XMenu,
     NProgress
@@ -77,6 +87,7 @@ a
     .app-container
       position relative
       flex 1
+      min-height 600px
       display flex
       justify-content center
       margin 0

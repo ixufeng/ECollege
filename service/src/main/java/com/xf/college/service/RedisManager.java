@@ -13,4 +13,7 @@ public interface RedisManager {
     List<Teacher> getAllTeacherFromDB();
     List<Student> getAllStudentFromDB();
 
+    Teacher getTeacher(String key);
+    Student getStudent(String key);
+
 }
