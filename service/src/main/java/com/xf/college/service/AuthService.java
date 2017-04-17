@@ -60,7 +60,7 @@ public class AuthService {
         if (Objects.equals(teacher.getPassword(),password)) {
             result.setLogin(true);
             result.setMessage("登陆成功");
-            result.setObject(teacher);
+            result.setUser(teacher);
             return result;
         }
         return result;

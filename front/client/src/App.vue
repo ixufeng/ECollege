@@ -8,10 +8,19 @@
       <e-footer></e-footer>
       <n-progress parent=".app-wrapper"></n-progress>
     </div>
-    <el-dialog title="提示" v-model="dialogVisible" size="tiny">
-      <span>这是一段信息</span>
-
-      </span>
+    <el-dialog :close-on-click-modal="false" :show-close="false" title="提示" v-model="login" size="tiny">
+        <el-form :model="form">
+          <el-form-item label="用户名">
+            <el-input v-model="form.userName" auto-complete="off"></el-input>
+          </el-form-item>
+          <el-form-item label="密码">
+            <el-input v-model="form.password" type="password" auto-complete="off"></el-input>
+          </el-form-item>
+        </el-form>
+        <div slot="footer">
+          <el-button type="info">返回</el-button>
+          <el-button @click="loginIn" type="success">登陆</el-button>
+        </div>
     </el-dialog>
   </div>
 </template>
@@ -24,15 +33,41 @@ import EFooter from './components/Footer'
 import EAvatar from './components/Avatar'
 import EHeader from './components/Header1.vue'
 import store from './store/index.js'
-
+import ajaxUtils from './http/ajaxUtils'
+import {setSessionUser} from './storage/index'
 Vue.component('EFooter',EFooter)
 Vue.component('ContentModule', ContentModule)
 Vue.component('EHeader',EHeader)
 Vue.component('EAvatar',EAvatar)
+
+
 export default {
+  data() {
+    return {
+        form: {
+            userName:'',
+            password:''
+        }
+    }
+  },
   computed: {
       login: ()=> {
           return store.getters.showLogin
+      }
+  },
+  methods:{
+      loginIn() {
+
+        let params = {userName:this.form.userName,password:this.form.password}
+        ajaxUtils.post("/api/login",params,(result)=>{
+            if (result!=-1 && result.code==200) {
+                console.log(result)
+                setSessionUser(result.result.user)
+                store.commit("SHOW_LOGIN",false)
+            } else{
+                console.log("身份认证失败")
+            }
+        })
       }
   },
   components: {

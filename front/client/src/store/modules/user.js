@@ -1,42 +1,22 @@
-const state = {
-  login: false,
-  user:{
 
-  }
+const state = {
+  showLogin:false
 }
 
 const mutations = {
-  LOGIN (state, user) {
-   state.login = true
-    state.user = user
-  },
-  UN_LOGIN (state) {
-    state.login = false
-    state.user = null;
-  }
-}
-
-const actions = {
-  changeRouteLoading ({ commit }, status) {
-    commit('CHANGE', status)
+  SHOW_LOGIN(state,flag) {
+      state.showLogin = !!flag
   }
 }
 
 const getters = {
- isLogin(state) {
-   return state.login
- },
- getUser(state) {
-   if (state.login) {
-     return null
-   }
-   return state.user
- }
+  showLogin(state) {
+    return state.showLogin
+  }
 }
 
 export default {
   state,
   mutations,
-  actions,
   getters
 }

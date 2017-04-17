@@ -1,5 +1,5 @@
 <template>
-    <div style="width: 100%;">
+    <div v-if="!showLogin" style="width: 100%;">
         <e-avatar></e-avatar>
         <el-row style="padding-bottom: 20px;">
             <el-col :span="16" :offset="3" style="height: 500px;padding-top: 20px;">
@@ -49,10 +49,13 @@
     </div>
 </template>
 <script>
+    import store from '../../store/index'
+    import {getSessionUser,setSessionUser} from '../../storage/index'
+    import userUtils from '../../common/utils/UserUtils'
     export default{
         data() {
             return {
-              teacherData:[{label:"姓名",value:'徐峰'},{label:'性别',value:'男'}],
+              teacherData:[],
               form:{
                 name:"徐峰",
                 region:''
@@ -64,6 +67,34 @@
       methods:{
             modifyData() {
                 this.dialogVisible = true;
+            },
+            initData () {
+                let teacher = userUtils.isTeacher()
+                if (!teacher) {
+                    store.commit("SHOW_LOGIN",true)
+                    return
+                }
+                for (let item in teacher) {
+                   /* if (item=="name") {
+                        this.teacherData.push({label:"姓名",value:teacher[item]})
+                    }  else if(item=="id") {
+                        this.teacherData.push({label:"工号",value:teacher[item]})
+                    } else if (item=="email") {
+                        this.teacherData.push({label:"邮箱",value:teacher[item]})
+                    } else if (item==)*/
+                   this.teacherData.push({
+                       label:item,
+                        value:teacher[item]
+                   })
+                }
+            }
+      },
+      mounted() {
+        this.initData()
+      },
+      computed: {
+            showLogin: ()=>{
+                return store.getters.showLogin
             }
       }
     }

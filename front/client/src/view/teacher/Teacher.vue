@@ -1,12 +1,14 @@
 <template>
-    <div style="width: 100%;">
-        <e-avatar></e-avatar>
+    <div  v-if="isLogin" style="width: 100%;">
+      <e-avatar></e-avatar>
         <el-row style="width: 100%;">
           <el-col class="teacher-item" :offset="4" :span="8">
             <el-row>
                 <el-col :span="6">
                   <el-badge :value="7">
-                    <i class="iconfont icon-jiaoshi-copy teacher-item-icon"></i>
+                    <a href="/teacher/data">
+                      <i class="iconfont icon-jiaoshi-copy teacher-item-icon"></i>
+                    </a>
                   </el-badge>
                   <h2>个人资料</h2>
                 </el-col>
@@ -66,13 +68,32 @@
     </div>
 </template>
 <script>
+  import ajaxUtils from '../../http/ajaxUtils'
+  import {getSessionUser,setSessionUser} from '../../storage/index'
+  import store from '../../store/index'
+  import userUtils from '../../common/utils/UserUtils'
   export default {
       methods: {
-
+          initTeacherPage() {
+              let teacher = userUtils.isTeacher()
+              if (!teacher) {
+                  store.commit("SHOW_LOGIN",true)
+                  return
+              }
+            ajaxUtils.post("/api/teacher/info/" + teacher.id,null,result=> {
+                console.log(result)
+            })
+          }
       },
       mounted() {
-          console.log(this.$route)
+          this.initTeacherPage()
+      },
+      computed: {
+           isLogin : ()=>{
+               return !store.getters.showLogin
+           }
       }
+
 
   }
 </script>

@@ -17,14 +17,15 @@ ajaxUtils.send = (url,params,callback) => {
     }
   })
 }
-ajaxUtils.post = (url,params,result) => {
+ajaxUtils.post = (url,params,callback) => {
   $.ajax({
     url:url,
     type:'POST',
+    data:params,
     success: (result)=> {
       callback(result)
     },
-    error: ()=> {
+    error: (result)=> {
       callback(-1,result)
     }
   })

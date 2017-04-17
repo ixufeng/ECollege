@@ -18,8 +18,6 @@
       </el-col>
     </el-row>
   </div>
-
-
 </template>
 <script>
   export default {
@@ -28,7 +26,7 @@
               Teacher: {
                avatar: "/static/co.png",
              },
-            suggestions: []
+            suggestions: ""
           }
       },
     methods: {

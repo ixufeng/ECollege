@@ -1,11 +1,9 @@
-import { read, save } from '../../storage'
 import { STORE_KEY_CONFIG_PAGE_LIMIT } from '../../constants'
 
 const state = {
   pageLimit: 20,
   showHeader:true,
-  showFooter:true,
-  showLogin:false
+  showFooter:true
 }
 
 const mutations = {
@@ -21,10 +19,8 @@ const mutations = {
   LOGIN_PAGE(state,flag) {
     state.showFooter = !!flag
     state.showHeader = !!flag
-  },
-  SHOW_LOGIN(state,flag) {
-    state.showLogin = !!flag
   }
+
 }
 
 const actions = {
@@ -48,9 +44,6 @@ const getters = {
   },
   showFooter (state) {
     return state.showFooter
-  },
-  showLogin(state) {
-    return state.showLogin
   }
 }
 
