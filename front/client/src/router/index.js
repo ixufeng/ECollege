@@ -5,6 +5,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from '../store'
 import teacher from './teacher'
+import student from './student'
+import laboratory from './laboratory'
 
 Vue.use(VueRouter)
 
@@ -21,7 +23,9 @@ const routes = [{
   component: (resolve) => {
     require(['../view/index.vue'], resolve)
   }
-},...teacher,{
+},...teacher,
+  ...student,
+  ...laboratory, {
   path: '*',
     component: {
     render (h) {
