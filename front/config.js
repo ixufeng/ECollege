@@ -9,7 +9,7 @@ var backendBase = {
   root: path.normalize(__dirname),
 
   // Server port
-  port: process.env.PORT || 8081,
+  port: process.env.PORT || 8082,
 
   // Secret for session, you will want to change this and make it an environment variable
   secrets: {

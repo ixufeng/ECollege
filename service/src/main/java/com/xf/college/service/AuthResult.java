@@ -9,7 +9,7 @@ public class AuthResult {
 
     private boolean login = false;
     private String message = null;
-    private Object object = null;
+    private Object user = null;
     private String redirect;
 
 
@@ -38,12 +38,12 @@ public class AuthResult {
         this.message = message;
     }
 
-    public Object getObject() {
-        return object;
+    public Object getUser() {
+        return user;
     }
 
-    public void setObject(Object object) {
-        this.object = object;
+    public void setUser(Object user) {
+        this.user = user;
     }
 
     public String getRedirect() {

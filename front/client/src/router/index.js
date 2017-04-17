@@ -44,7 +44,7 @@ router.beforeEach((to, from, next) => {
     store.dispatch('changeRouteLoading', true).then(() => {
       if (!to.meta.skipAuth) {
         if (!store.getters.isLogin) {
-            store.commit("SHOW_LOGIN",true)
+            next()
         } else {
           next()
         }

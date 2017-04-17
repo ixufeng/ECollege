@@ -8,6 +8,8 @@ sync(store, router)
 // ui library
 import Element from 'element-ui'
 Vue.use(Element)
+import  './common/utils/UserUtils'
+
 
 // ajax
 import './http'
