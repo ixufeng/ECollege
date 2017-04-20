@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 4.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xf.college.dao.HonorTypeDao">
+	<resultMap type="com.xf.college.model.HonorType" id="honorType">
+		 <id property="id" column="ID"></id>
+		 <result property="name" column="NAME"></result>
+		 <result property="des" column="DES"></result>
+		<result property="img" column="IMG"></result>
+	</resultMap>
+
+	<insert id="add" parameterType="com.xf.college.model.HonorType">
+		INSERT INTO honor_type ('TYPE_NAME','DES','IMG') VALUES(#{name},#{des},#{img})
+	</insert>
+
+	<select id="select" resultMap="honorType">
+		SELECT * from honor_type WHERE  ID=#{id}
+	</select>
+	<select id="selectAll" resultMap="honorType">
+		SELECT * from honor_type
+	</select>
+	<select id="selectByName" resultMap="honorType">
+		SELECT * from teacher_honor WHERE  TYPE_NAME = #{name}
+	</select>
+
+	<update id="update" parameterType="com.xf.college.model.HonorType">
+		UPDATE  SET TYPE_NAME=#{name},DES=#{des},IMG=#{img}
+		WHERE  ID=#{id}
+	</update>
+
+</mapper>

@@ -1,5 +1,6 @@
 package com.xf.college.api.controller;
 
+import com.xf.college.api.interceptor.ApiFilter;
 import com.xf.college.common.Auth;
 import com.xf.college.common.utils.StringUtil;
 import com.xf.college.model.apiwrapper.*;
@@ -22,7 +23,17 @@ import java.util.Objects;
  */
 public class BaseController {
 
-	protected <T> APIResult<T> asSuccess(T t) {
+
+
+    protected  int getAuth () {
+        HttpServletRequest request = ApiFilter.requestThreadLocal.get();
+        if (request==null || request.getAttribute(Auth.AUTH)==null) {
+            return -1;
+        }
+        return  (int) request.getAttribute(Auth.AUTH);
+    }
+
+    protected <T> APIResult<T> asSuccess(T t) {
 		return new APIResult<>(APIResultCode.SUCCESS.getValue(), null, t);
 	}
 

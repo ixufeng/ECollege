@@ -1,157 +1,101 @@
 <template>
   <div style="width: 100%;">
     <e-avatar></e-avatar>
-    <div class="maintitle">
-      <h1 class="font">个人荣誉</h1>
-    </div>
-    <div class="honor">
-      <el-row :gutter="60">
-        <el-col :span="12">
-          <div class="grid-content bg-purple">
-            <img :src="ETeacher.honor">
-            <div class="mainBody">
-              <div class="title">
-                <span>获</span>
-                <b>奖</b>
-              </div>
-              <div class="content">
-                <div class="h3">Sed ut perspiciatis unde omnis iste natus error sit voluptatem</div>
-                <p>date:&nbsp;<span style="color:#bfe7cd">2017.4.14</span></p>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500
-                  when an unknown printer it to make a type specimen book. It has survived not only five centuries, but also the leap.
-                  and typesetting industry.</p>
-                <el-button type="primary" style="background: #2c333d;border:none;margin-left: 20px">Readmore>></el-button>
-              </div>
-            </div>
+    <el-row>
 
+        <el-col :span="20" :offset="2">
+          <center>
+            <h1 class="font">个人荣誉</h1>
+          </center>
+          <div>
+            <span style="text-align: center;padding-left: 20px;">
+              <el-button size="middle" type="success">时间</el-button>
+              <el-button type="warning">访问</el-button>
+              <el-select v-model="values" multiple placeholder="选择荣誉类型" style="margin-left: 10px;">
+                <el-option
+                  v-for="item in options"
+                  :label="item.label"
+                  :value="item.value">
+                </el-option>
+              </el-select>
+            </span>
           </div>
+          <el-row>
+            <el-col :span="4" v-for="(o, index) in 10" :offset="0" style="margin: 20px;">
+              <el-card :body-style="{ padding: '0px' }">
+                <img src="/static/abt.jpg" class="image">
+                <div style="padding: 14px;">
+                  <span>好吃的汉堡</span>
+                  <div class="bottom clearfix">
+                    <time class="time">{{ currentDate }}</time>
+                    <el-button type="text" class="button">操作按钮</el-button>
+                  </div>
+                </div>
+              </el-card>
+            </el-col>
+          </el-row>
         </el-col>
-        <el-col :span="12" style="margin-right: 0px;">
-          <div class="grid-content bg-purple">
-            <img :src="ETeacher.academic">
-            <div class="mainBody">
-              <div class="title">
-                <span>学</span>
-                <b>术</b>
-              </div>
-              <div class="content">
-                <div class="h3">Sed ut perspiciatis unde omnis iste natus error sit voluptatem</div>
-                <p>date:&nbsp;<span style="color:#bfe7cd">2017.4.14</span></p>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500
-                  when an unknown printer it to make a type specimen book. It has survived not only five centuries, but also the leap.
-                  and typesetting industry.</p>
-                <el-button type="primary" style="background: #2c333d;border:none;margin-left: 20px">Readmore>></el-button>
-              </div>
-            </div>
-          </div>
-        </el-col>
-      </el-row>
-      <el-row  :gutter="60" style="margin-top: 60px">
-        <el-col :span="12">
-          <div class="grid-content bg-purple">
-            <img :src="ETeacher.recognize">
-            <div class="mainBody">
-              <div class="title">
-                <span>表</span>
-                <b>彰</b>
-              </div>
-              <div class="content">
-                <div class="h3">Sed ut perspiciatis unde omnis iste natus error sit voluptatem</div>
-                <p>date:&nbsp;<span style="color:#bfe7cd">2017.4.14</span></p>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500
-                  when an unknown printer it to make a type specimen book. It has survived not only five centuries, but also the leap.
-                  and typesetting industry.</p>
-                <el-button type="primary" style="background: #2c333d;border:none;margin-left: 20px">Readmore>></el-button>
-              </div>
-            </div>
+    </el-row>
 
-          </div>
-        </el-col>
-        <el-col :span="12" style="margin-right: 0px;">
-          <div class="grid-content bg-purple">
-            <img :src="ETeacher.media">
-            <div class="mainBody">
-              <div class="title">
-                <span>煤</span>
-                <b>体</b>
-              </div>
-              <div class="content">
-                <div class="h3">Sed ut perspiciatis unde omnis iste natus error sit voluptatem</div>
-                <p>date:&nbsp;<span style="color:#bfe7cd">2017.4.14</span></p>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500
-                  when an unknown printer it to make a type specimen book. It has survived not only five centuries, but also the leap.
-                  and typesetting industry.</p>
-                <el-button type="primary" style="background: #2c333d;border:none;margin-left: 20px">Readmore>></el-button>
-              </div>
-            </div>
-          </div>
-        </el-col>
-      </el-row>
-    </div>
   </div>
 </template>
 <script>
   export default{
       data() {
           return{
-              ETeacher:{
-                  honor:"/static/honor.png",
-                  academic:"/static/academic.png",
-                  recognize:"/static/recognize.png",
-                  media:"/static/media.png"
-              }
+            currentDate: new Date(),
+
+            options: [{
+              value: '选项1',
+              label: '黄金糕'
+            }, {
+              value: '选项2',
+              label: '双皮奶'
+            }, {
+              value: '选项3',
+              label: '蚵仔煎'
+            }, {
+              value: '选项4',
+              label: '龙须面'
+            }, {
+              value: '选项5',
+              label: '北京烤鸭'
+            }],
+            values:[]
           }
       }
   }
 </script>
 <style>
-  .honor{
-    width: 60%;
-    margin: 50px auto;
+
+  .time {
+    font-size: 13px;
+    color: #999;
   }
-  .font{
-    width:120px;
-    margin:30px auto;
-    font-size: 2.5em;
-    color: #2C333D;
+
+  .bottom {
+    margin-top: 13px;
+    line-height: 12px;
   }
-  .title{
-    float:left;
-    width:70px;
-    height:100px;
-    border-right:1px solid #B6B3B3;
-  }
-  .title span{
-    display: block;
-    text-align: center;
-    font-size: 3em;
-    font-weight: bold;
-    color:#bfe7cd;
-    margin-top:7px;
-  }
-  .title b{
-    display: block;
-    text-align: center;
-    font-size: 1.8em;
-    font-weight: 500;
-    color:#bfe7cd;
-    margin-top: 6px;
-  }
-  .content{
+
+  .button {
+    padding: 0;
     float: right;
-    width: 470px;
   }
-  .content .h3{
-    line-height: 2em;
-    font-size: 1.3em;
-    color:#2c333d;
-    padding-left: 20px;
-    margin-top: 10px;
+
+  .image {
+    width: 100%;
+    display: block;
   }
-  .content p{
-    line-height: 2em;
-    font-size: 1em;
-    color:#A09F9F;
-    padding-left: 20px;
+
+  .clearfix:before,
+  .clearfix:after {
+    display: table;
+    content: "";
   }
+
+  .clearfix:after {
+    clear: both
+  }
+
 </style>

@@ -10,7 +10,7 @@
                       <i class="iconfont icon-jiaoshi-copy teacher-item-icon"></i>
                     </a>
                   </el-badge>
-                  <h2>个人资料</h2>
+                  <h2>管理中心</h2>
                 </el-col>
                 <el-col :span="18">
                   <p>
@@ -23,7 +23,9 @@
             <el-row>
               <el-col :span="6">
                 <el-badge :value="7">
-                  <i class="iconfont icon-rongyu teacher-item-icon"></i>
+                  <a href="/teacher/honor">
+                    <i class="iconfont icon-rongyu teacher-item-icon"></i>
+                  </a>
                 </el-badge>
                 <h2>个人荣誉</h2>
               </el-col>

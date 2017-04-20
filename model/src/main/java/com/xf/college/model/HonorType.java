@@ -7,7 +7,19 @@ public class HonorType {
     private  int id;
     private String name;
     private String des;
+    private String img;
 
+
+    public String getImg() {
+        return img;
+    }
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public HonorType() {
+
+    }
     public HonorType(String name, String des) {
         this.name = name;
         this.des = des;
