@@ -2,14 +2,11 @@ package com.xf.college.api.controller;
 
 import com.xf.college.common.Auth;
 import com.xf.college.model.apiwrapper.APIResult;
+import com.xf.college.service.honor.HonorService;
 import com.xf.college.service.teacher.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.Objects;
 
 /**
@@ -20,18 +17,19 @@ import java.util.Objects;
 public class TeacherController extends BaseController{
 
     @Autowired
+    private HonorService honorService;
+
+    @Autowired
      private TeacherService teacherService;
 
     @RequestMapping("/info/{teacherId}")
     public APIResult getTeacherInfo(
-            @PathVariable("teacherId") String  teacherId,
-            HttpServletRequest request
+            @PathVariable("teacherId") String  teacherId
     ) {
-        Integer auth = (Integer) request.getAttribute(Auth.AUTH);
+        Integer auth = getAuth();
         if (Objects.equals(auth,Auth.TEACHER)||Objects.equals(auth,Auth.ADMIN)) {
             return asSuccess(teacherService.select(teacherId));
         }
-
         return handleNoAuth(auth);
     }
 
@@ -51,8 +49,5 @@ public class TeacherController extends BaseController{
         }
         return asSuccess(teacherService.findByName( name ));
     }
-
-
-
 
 }

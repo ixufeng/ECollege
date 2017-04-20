@@ -15,6 +15,7 @@ import java.io.IOException;
  */
 public class ApiFilter implements Filter {
 
+    public static ThreadLocal<HttpServletRequest> requestThreadLocal = new ThreadLocal<>();
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
@@ -25,6 +26,7 @@ public class ApiFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpSession session = request.getSession();
         request.setAttribute("auth",getAuth(session));
+        this.requestThreadLocal.set(request);
         filterChain.doFilter(servletRequest,servletResponse);
     }
 

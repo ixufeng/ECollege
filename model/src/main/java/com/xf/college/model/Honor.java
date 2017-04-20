@@ -1,18 +1,19 @@
-package com.xf.college.model.teacher;
+package com.xf.college.model;
 
 import java.util.Date;
 
 /**
  * Created by xufeng on 2017/3/27.
  */
-public class TeacherHonor {
+public class Honor {
     private int id;
     private String teacherId;
     private int honorType;
     private Date achieveTime;
     private String des; //描述
+    private String img;
 
-    public TeacherHonor(String teacherId, int honorType, Date achieveTime, String des) {
+    public Honor(String teacherId, int honorType, Date achieveTime, String des) {
         this.teacherId = teacherId;
         this.honorType = honorType;
         this.achieveTime = achieveTime;
@@ -56,5 +57,11 @@ public class TeacherHonor {
 
     public void setDes(String des) {
         this.des = des;
+    }
+    public String getImg() {
+        return img;
+    }
+    public void setImg(String imgs) {
+        this.img = imgs;
     }
 }
