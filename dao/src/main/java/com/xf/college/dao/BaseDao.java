@@ -7,10 +7,10 @@ import java.util.List;
  */
 public interface BaseDao<T,K> {
 
-    void  add(T t);
-    void  update(T t);
+    int  add(T t);
+    int  update(T t);
     List<T> selectAll();
     T select(K id);
     List<T> selectByName(String name);
-    void delete(K id);
+    int delete(K id);
 }
