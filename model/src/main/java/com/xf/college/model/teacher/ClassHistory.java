@@ -68,4 +68,23 @@ public class ClassHistory {
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj==null) {
+            return  this ==obj;
+        }
+        if (obj.getClass() ==this.getClass()) {
+            ClassHistory that = (ClassHistory) obj;
+            if (that.getId() == this.id) {
+                return true;
+            }
+        }
+        return  false;
+    }
+
+    @Override
+    public int hashCode() {
+        return this.id * this.teacherId.hashCode();
+    }
 }
