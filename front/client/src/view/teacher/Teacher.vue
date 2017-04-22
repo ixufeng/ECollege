@@ -71,7 +71,6 @@
 </template>
 <script>
   import ajaxUtils from '../../http/ajaxUtils'
-  import {getSessionUser,setSessionUser} from '../../storage/index'
   import store from '../../store/index'
   import userUtils from '../../common/utils/UserUtils'
   export default {

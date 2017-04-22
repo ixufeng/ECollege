@@ -14,4 +14,6 @@ public interface HonorService {
     Honor getHonorByName(String name);
     List<Honor> getHonorsByUserId(String id);
     List<HonorType> getHonorTypeList();
+    List<HonorType> getHonorTypeItem(List<Integer> list);
+    int addHonor(Honor honor);
 }

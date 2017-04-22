@@ -7,7 +7,11 @@ import com.xf.college.model.HonorType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * Created by xufeng on 2017/4/20.
@@ -36,11 +40,36 @@ public class HonorServiceImpl implements HonorService {
 
     @Override
     public List<Honor> getHonorsByUserId(String id) {
-        return null;
+        if (Objects.equals(id,null)||Objects.equals(id.trim(),"")) {
+            return Collections.emptyList();
+        }
+        return honorDao.getHonorListByUserId(id);
     }
 
     @Override
     public List<HonorType> getHonorTypeList() {
         return honorTypeDao.selectAll();
+    }
+
+    @Override
+    public List<HonorType> getHonorTypeItem(List<Integer> list) {
+        if (list==null || list.size()==0) {
+            return Collections.emptyList();
+        }
+        List<HonorType> items = new ArrayList<>();
+        if (list.size()==1) {
+            items.add(honorTypeDao.select(list.get(0)));
+            return items;
+        }
+        items = honorTypeDao.selectAll();
+        return  items.stream().filter(item->list.contains(item.getId())).collect(Collectors.toList());
+    }
+
+    @Override
+    public int addHonor(Honor honor) {
+        if (Objects.equals(honor,null) || honor.getTeacherId()==null) {
+            return 0;
+        }
+        return honorDao.add(honor);
     }
 }

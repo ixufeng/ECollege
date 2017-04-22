@@ -19,6 +19,9 @@ public class Honor {
         this.achieveTime = achieveTime;
         this.des = des;
     }
+    public Honor() {
+
+    }
     public int getId() {
         return id;
     }

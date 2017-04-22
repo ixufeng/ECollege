@@ -7,7 +7,7 @@ let ajaxUtils = {}
 ajaxUtils.send = (url,params,callback) => {
   let fullUrl = _initParams(url,params)
   $.ajax({
-    url:url,
+    url:fullUrl,
     type:'GET',
     success: (result)=> {
       callback(result)
@@ -22,6 +22,7 @@ ajaxUtils.post = (url,params,callback) => {
     url:url,
     type:'POST',
     data:params,
+    dataType: "json",
     success: (result)=> {
       callback(result)
     },
