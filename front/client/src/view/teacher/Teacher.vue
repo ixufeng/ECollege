@@ -42,7 +42,9 @@
             <el-row>
               <el-col :span="6">
                 <el-badge :value="3">
-                  <i class="iconfont icon-kecheng teacher-item-icon"></i>
+                  <a href="/teacher/class">
+                    <i class="iconfont icon-kecheng teacher-item-icon"></i>
+                  </a>
                 </el-badge>
                 <h2>历史课程</h2>
               </el-col>

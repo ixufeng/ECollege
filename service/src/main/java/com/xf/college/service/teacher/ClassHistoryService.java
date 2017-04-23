@@ -11,10 +11,10 @@ import java.util.Map;
  */
 public interface ClassHistoryService {
 
-    List<ClassHistory> getClassHistoryByTeacherId();
+    List<ClassHistory> getClassHistoryByTeacherId(String teacherId);
 
-    Map<String,List<ClassHistory>> sortClassByTime();
+    Map<String,List<ClassHistory>> sortClassByTime(String teacherId);
 
-    Map<ClassHistory,List<Date>> sortClassByType();
+    Map<ClassHistory,List<Date>> sortClassByType(String teacherId);
 
 }
