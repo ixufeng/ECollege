@@ -1,10 +1,9 @@
-package com.xf.college.service.teacher;
+package com.xf.college.service.teacher.impl;
 
-import com.xf.college.common.Auth;
 import com.xf.college.dao.teacher.TeacherDao;
-import com.xf.college.model.apiwrapper.APIResult;
 import com.xf.college.model.teacher.Teacher;
 import com.xf.college.service.RedisManager;
+import com.xf.college.service.teacher.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

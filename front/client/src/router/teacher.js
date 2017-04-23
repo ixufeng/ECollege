@@ -9,12 +9,12 @@ export default [{
 },{
   path:'/teacher/data',
   component: (resolve) => {
-    require(['../view/teacher/Teacher.data.vue'],resolve)
+    require(['../view/teacher/Teacher.data.vue'],resolve) //老师个人资料
   }
 },{
   path:'/teacher/class',
   component: ( resolve ) => {
-    require(['../view/teacher/Teacher.class.vue'],resolve)
+    require(['../view/teacher/Teacher.class.vue'],resolve) //老师历史课程
   }
 },{
   path:'/teacher/study',

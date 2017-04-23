@@ -6,14 +6,15 @@
 		<id property="id" column="T_ID"/>
 		<result property="teacherId" column="T_TEACHER_ID"/>
 		<result property="courseId" column="T_COURSE_ID"/>
-		<result property="classNumber" column="T_CLASS_NUMBER"/>
+		<result property="majorNumber" column="T_MAJOR_NUMBER"/>
 		<result property="beginTime" column="T_BEGIN_TIME"/>
 		<result property="endTime" column="T_END_TIME"/>
 		<result property="createTime"  column="T_CREATE_TIME"/>
+		<result property="courseName" column="course_name"></result>
 	</resultMap>
 
 	<insert id="add" parameterType="com.xf.college.model.teacher.ClassHistory">
-		INSERT INTO teacher_class_history VALUES(#{teacherId},#{id},#{courseId},#{createTime},#{beginTime},#{endTime},#{classNumber})
+		INSERT INTO teacher_class_history(T_TEACHER_ID,T_COURSE_ID,T_CREATE_TIME,T_BEGIN_TIME,T_END_TIME,T_MAJOR_NUMBER) VALUES(#{teacherId},#{courseId},#{createTime},#{beginTime},#{endTime},#{majorNumber})
 	</insert>
 
 	<select id="select" resultMap="classHistory">
@@ -23,17 +24,23 @@
 		SELECT * from teacher_class_history
 	</select>
 	<select id="selectByName" resultMap="classHistory">
-		SELECT * from teacher_class_history WHERE  T_CLASS_NUMBER = #{classNumber}
+		SELECT * from teacher_class_history WHERE  T_JAJOR_NUMBER = #{majorNumber}
 	</select>
 
 	<update id="update" parameterType="com.xf.college.model.teacher.ClassHistory">
-		UPDATE teacher_class_history SET T_ID=#{id},T_TEACHER_ID=#{teacherId},T_COURSE_ID=#{courseId},
-			T_CLASS_NUMBER=#{classNumber},T_BEGIN_TIME=#{beginTime},T_END_TIME=#{endTime},T_CREATE_TIME=#{createTime}
+		UPDATE teacher_class_history SET T_TEACHER_ID=#{teacherId},T_COURSE_ID=#{courseId},
+			T_JAJOR_NUMBER=#{majorNumber},T_BEGIN_TIME=#{beginTime},T_END_TIME=#{endTime},T_CREATE_TIME=#{createTime}
+			 WHERE  T_ID=#{id}
 	</update>
 
 	<delete id="delete">
 		DELETE FROM teacher_class_history WHERE T_ID=#{id}
 	</delete>
+
+	<select id="selectByTeacherId" resultMap="classHistory">
+		SELECT `T_TEACHER_ID`, `T_ID`, `T_COURSE_ID`, `T_CREATE_TIME`, `T_BEGIN_TIME`, `T_END_TIME`, `T_MAJOR_NUMBER`,
+			(SELECT `course_name` FROM `course` WHERE course_id=T_COURSE_ID ) AS `course_name` FROM `teacher_class_history`  where T_TEACHER_ID=#{teacherId}
+	</select>
 
 
 </mapper>
