@@ -17,4 +17,6 @@ public interface ClassHistoryService {
 
     Map<ClassHistory,List<Date>> sortClassByType(String teacherId);
 
+    String addClassHistory(ClassHistory classHistory);
+
 }

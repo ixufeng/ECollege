@@ -5,7 +5,7 @@
         <el-col :offset="2" :span="20">
           <div style="margin-top: 10px">
             <span style="text-align: center;padding-left: 20px;">
-              <el-button size="middle"  style="margin-left: 0px;" type="success"><i class="iconfont icon-shenqing"></i>添加课程</el-button>
+              <el-button size="middle" @click="showForm"  style="margin-left: 0px;" type="success"><i class="iconfont icon-shenqing"></i>添加课程</el-button>
             </span>
           </div>
           <el-table
@@ -59,16 +59,54 @@
           </el-table>
         </el-col>
       </el-row>
+      <el-dialog title="新增课程" v-model="dialogVisible" size="tiny" width="200px">
+        <el-form :model="form">
+            <el-select v-model="form.courseId" placeholder="请选择科目" class="e-form">
+              <el-option v-for="item in course"
+                :label="item.courseName + '('+ item.courseId +')'"
+                :value="item.courseId">
+              </el-option>
+            </el-select><br/>
+            <el-input v-model="form.majorId" placeholder="请输入专业号" type="number" class="e-form"></el-input><br/>
+            <el-date-picker
+              class="e-form"
+              v-model="form.beginTime"
+              type="month"
+              placeholder="请选择开始时间">
+            </el-date-picker><br/>
+            <el-date-picker
+              class="e-form"
+              v-model="form.endTime"
+              type="month"
+              placeholder="请选择结束时间">
+            </el-date-picker>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+          <el-button @click="dialogVisible = false">取 消</el-button>
+          <el-button type="primary" @click="addNewClass">确 定</el-button>
+        </div>
+      </el-dialog>
     </div>
 </template>
 <script>
   import ajaxUtils from '../../http/ajaxUtils'
   import store from '../../store/index'
   import userUtils from '../../common/utils/UserUtils'
+  import {getSessionUser,setSessionUser} from '../../storage/index'
   export default {
     data() {
         return{
-            tableData:[]
+            tableData:[],
+            dialogVisible:false,
+            teacher: {},
+            form: {
+                teacherId:'',
+                courseId:'',
+                majorId:'',
+                beginTime:'',
+                endTime:''
+            },
+            course:[],
         }
     },
     methods: {
@@ -78,6 +116,7 @@
           store.commit("SHOW_LOGIN",true)
           return
         }
+        this.teacher = teacher
         let params = {
             teacherId:teacher.id
         }
@@ -85,8 +124,35 @@
             if (result.code==200) {
                 console.log(result.result)
                 this.tableData = result.result
+            } else if ( result.code == 414) {
+              store.commit("SHOW_LOGIN",true)
+              return
             }
         })
+      },
+      addNewClass() {
+          this.form.teacherId = this.teacher.id;
+          ajaxUtils.post("/api/course/history/add",this.form,result=> {
+              if (result.code == 200 ) {
+                  this.$message.success("插入成功！")
+                  this.dialogVisible = false
+              }else {
+                  this.$message.error(result.message)
+              }
+          })
+      },
+
+
+      showForm() {
+          this.dialogVisible = true
+          this.loadCourseList()
+      },
+      loadCourseList(){
+          ajaxUtils.send("/api/course/all",null,result=>{
+              if (result.code == 200) {
+                this.course = result.result;
+              }
+          })
       }
     },
     mounted() {
@@ -102,6 +168,10 @@
     -webkit-text-stroke-width: 0.2px;
     -moz-osx-font-smoothing: grayscale;
   }
-
+.e-form{
+  width: 95%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
 
 </style>

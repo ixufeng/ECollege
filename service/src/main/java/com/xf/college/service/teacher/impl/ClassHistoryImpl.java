@@ -1,5 +1,6 @@
 package com.xf.college.service.teacher.impl;
 
+import com.xf.college.common.CommonResult;
 import com.xf.college.dao.teacher.ClassHistoryDao;
 import com.xf.college.model.teacher.ClassHistory;
 import com.xf.college.service.teacher.ClassHistoryService;
@@ -23,6 +24,23 @@ public class ClassHistoryImpl implements ClassHistoryService {
             return Collections.emptyList();
         }
         return classHistoryDao.selectByTeacherId(teacherId);
+    }
+
+    @Override
+    public String addClassHistory(ClassHistory classHistory) {
+        if (classHistory==null || classHistory.getTeacherId()==null || classHistory.getCourseId() == null ||
+                classHistory.getBeginTime()==null || classHistory.getEndTime()==null) {
+            return "请补全信息!";
+        }
+        if (classHistory.getBeginTime().getTime() >= classHistory.getEndTime().getTime()) {
+            return "时间范围不合法!";
+        }
+        int num = classHistoryDao.add(classHistory);
+        if (num>0) {
+            return CommonResult.SUCCESS;
+        } else {
+            return CommonResult.INSERT_ERROR;
+        }
     }
 
     /**
