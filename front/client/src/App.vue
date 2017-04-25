@@ -83,15 +83,6 @@ export default {
 @import "assets/css/flex.styl";
 @import "//at.alicdn.com/t/font_z9f2f7ifbadu0udi.css";
 
-@font-face {font-family: 'webfont';
-  src: url('//at.alicdn.com/t/hd0ayetrttx7ds4i.eot'); /* IE9*/
-  src: url('//at.alicdn.com/t/hd0ayetrttx7ds4i.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-  url('//at.alicdn.com/t/hd0ayetrttx7ds4i.woff') format('woff'), /* chrome、firefox */
-  url('//at.alicdn.com/t/hd0ayetrttx7ds4i.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
-  url('//at.alicdn.com/t/hd0ayetrttx7ds4i.svg#NotoSansHans-Black') format('svg'); /* iOS 4.1- */
-}
-
-
 ::-webkit-scrollbar
   width 4px
   height 4px

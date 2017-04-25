@@ -14,11 +14,11 @@ import java.util.Objects;
 @Service
 public class AuthService {
 
-    //@Value("${e_teacher_key_num}")
-    private final int teacherKeyNum = 8;
+    /*@Value("${e_student_key_num}")*/
+    private  int teacherKeyNum = 8;
 
-    //@Value("${e_student_key_num}")
-    private final  int studentKeyNum=10;
+   /* @Value("${e_student_key_num}")*/
+    private   int studentKeyNum=10;
 
 
     @Autowired

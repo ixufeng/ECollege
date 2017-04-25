@@ -46,13 +46,6 @@
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 
-
-    <!-- 引入配置文件 -->  
-    <bean id="propertyConfigurer"  
-        class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">  
-        <property name="location" value="classpath:/configs/jdbc.properties" />  
-    </bean>  
-    
   <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"  
         destroy-method="close">  
         <property name="driverClassName" value="${driver}" />  

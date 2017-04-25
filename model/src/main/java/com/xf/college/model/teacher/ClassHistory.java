@@ -16,6 +16,19 @@ public class ClassHistory {
     private Date endTime;
     private Date createTime;
 
+    public ClassHistory() {
+
+    }
+    public ClassHistory(String teacherId,String courseId,String majorNumber,Date beginTime,Date endTime) {
+        this.teacherId = teacherId;
+        this.courseId = courseId;
+        this.majorNumber = majorNumber;
+        this.beginTime =beginTime;
+        this.endTime = endTime;
+        this.createTime = new Date();
+    }
+
+
     public Date getCreateTime() {
         return createTime;
     }
@@ -104,5 +117,20 @@ public class ClassHistory {
     @Override
     public int hashCode() {
         return this.id * this.teacherId.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return "ClassHistory{" +
+                "id=" + id +
+                ", teacherId='" + teacherId + '\'' +
+                ", courseId='" + courseId + '\'' +
+                ", courseName='" + courseName + '\'' +
+                ", majorNumber='" + majorNumber + '\'' +
+                ", majorName='" + majorName + '\'' +
+                ", beginTime=" + beginTime +
+                ", endTime=" + endTime +
+                ", createTime=" + createTime +
+                '}';
     }
 }
