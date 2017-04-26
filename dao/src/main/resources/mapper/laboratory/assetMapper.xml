@@ -29,7 +29,7 @@
 
     <insert id="add" parameterType="com.xf.college.model.laboratory.Asset">
         INSERT INTO
-          common_equipment
+          asset
         VALUES
           (#{id},#{name},#{typeId},#{valid},#{usedCount},#{des},#{remark},#{imgs},#{beginTime},#{model},#{specification},#{price},#{nationality},
             #{factoryName},#{buyTime},#{userId},#{handleUserId},#{incoming},#{lastUseTime})
@@ -38,28 +38,28 @@
     <select id="select" resultMap="asset">
         SELECT `e_id`, `e_name`, `e_type_id`, `e_valid`, `e_use_count`, `e_des`, `e_remark`, `e_img`, `e_begin_time`, `e_model`, `e_spec`,
                 `e_price`, `e_nation`, `e_factory_name`, `e_buy_time`, `e_user_id`,(SELECT T_NAME from teacher WHERE  T_ID = e_user_id) as `e_user_name`,
-                `e_handle_user_id`, (SELECT T_NAME from teacher WHERE  T_ID = e_handle_user_id) as `e_handle_user_name`,`e_incoming`, `e_last_use_time`  FROM common_equipment WHERE e_id=#{id}
+                `e_handle_user_id`, (SELECT T_NAME from teacher WHERE  T_ID = e_handle_user_id) as `e_handle_user_name`,`e_incoming`, `e_last_use_time`  FROM asset WHERE e_id=#{id}
     </select>
     <select id="selectAll" resultMap="asset">
         SELECT `e_id`, `e_name`, `e_type_id`, `e_valid`, `e_use_count`, `e_des`, `e_remark`, `e_img`, `e_begin_time`, `e_model`, `e_spec`,
                 `e_price`, `e_nation`, `e_factory_name`, `e_buy_time`, `e_user_id`,(SELECT T_NAME from teacher WHERE  T_ID = e_user_id) as `e_user_name`,
-                `e_handle_user_id`, (SELECT T_NAME from teacher WHERE  T_ID = e_handle_user_id) as `e_handle_user_name`,`e_incoming`, `e_last_use_time` FROM `common_equipment` WHERE 1
+                `e_handle_user_id`, (SELECT T_NAME from teacher WHERE  T_ID = e_handle_user_id) as `e_handle_user_name`,`e_incoming`, `e_last_use_time` FROM `asset` WHERE 1
     </select>
     <select id="selectByName" resultMap="asset">
         SELECT `e_id`, `e_name`, `e_type_id`, `e_valid`, `e_use_count`, `e_des`, `e_remark`, `e_img`, `e_begin_time`, `e_model`, `e_spec`,
                 `e_price`, `e_nation`, `e_factory_name`, `e_buy_time`, `e_user_id`,(SELECT T_NAME from teacher WHERE  T_ID = e_user_id) as `e_user_name`,
-                `e_handle_user_id`, (SELECT T_NAME from teacher WHERE  T_ID = e_handle_user_id) as `e_handle_user_name`,`e_incoming`, `e_last_use_time`  FROM common_equipment
+                `e_handle_user_id`, (SELECT T_NAME from teacher WHERE  T_ID = e_handle_user_id) as `e_handle_user_name`,`e_incoming`, `e_last_use_time`  FROM asset
                     WHERE e_name=#{name}
     </select>
     <select id="selectByUserId" resultMap="asset">
          SELECT `e_id`, `e_name`, `e_type_id`, `e_valid`, `e_use_count`, `e_des`, `e_remark`, `e_img`, `e_begin_time`, `e_model`, `e_spec`,
                 `e_price`, `e_nation`, `e_factory_name`, `e_buy_time`, `e_user_id`,(SELECT T_NAME from teacher WHERE  T_ID = e_user_id) as `e_user_name`,
-                `e_handle_user_id`, (SELECT T_NAME from teacher WHERE  T_ID = e_handle_user_id) as `e_handle_user_name`,`e_incoming`, `e_last_use_time`  FROM common_equipment
+                `e_handle_user_id`, (SELECT T_NAME from teacher WHERE  T_ID = e_handle_user_id) as `e_handle_user_name`,`e_incoming`, `e_last_use_time`  FROM asset
                     WHERE e_user_id=#{userId}
     </select>
 
     <update id="update" parameterType="com.xf.college.model.laboratory.Asset">
-       UPDATE `common_equipment` SET
+       UPDATE `asset` SET
           `e_id`=#{id},`e_name`=#{name},`e_type_id`=#{typeId},`e_valid`=#{valid},`e_use_count`=#{useCount},`e_des`=#{des},`e_remark`=#{remark},`e_img`=#{img},
           `e_begin_time`=#{beginTime},`e_model`=#{model},`e_spec`=#{specification},`e_price`=#{price},`e_nation`=#{nationality},`e_factory_name`=#{factoryName},`e_buy_time`=#{buyTime},
           `e_user_id`=#{userId},`e_handle_user_id`=#{handleUserId},`e_incoming`=#{incoming},`e_last_use_time`=#{lastUseTime}
@@ -67,6 +67,6 @@
     </update>
 
     <delete id="delete">
-        DELETE FROM common_equipment WHERE e_id=#{id}
+        DELETE FROM asset WHERE e_id=#{id}
     </delete>
 </mapper>

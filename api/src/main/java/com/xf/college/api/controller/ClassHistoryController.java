@@ -4,13 +4,15 @@ import com.xf.college.common.Auth;
 import com.xf.college.common.CommonResult;
 import com.xf.college.model.apiwrapper.APIResult;
 import com.xf.college.model.teacher.ClassHistory;
+import com.xf.college.service.charts.ChartsService;
+import com.xf.college.service.charts.Range;
 import com.xf.college.service.teacher.ClassHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 
 /**
@@ -22,6 +24,9 @@ public class ClassHistoryController extends BaseController {
 
     @Autowired
     private ClassHistoryService classHistoryService;
+
+    @Autowired
+    private ChartsService chartsService;
 
     @RequestMapping("/list")
     public APIResult getTeacherClass(@RequestParam("teacherId") String teacherId) {
@@ -35,8 +40,8 @@ public class ClassHistoryController extends BaseController {
     public APIResult addTeacherClass(
            @RequestParam("courseId") String courseId,
            @RequestParam("teacherId") String teacherId,
-           @RequestParam("beginTime") Date beginTime,
-           @RequestParam("endTime") Date endTime,
+           @RequestParam("beginTime") LocalDate beginTime,
+           @RequestParam("endTime") LocalDate endTime,
            @RequestParam("majorId") String majorId
             ) {
         int auth = getAuth();
@@ -51,5 +56,16 @@ public class ClassHistoryController extends BaseController {
         } else {
             return handleNoAuth(auth);
         }
+    }
+    @RequestMapping("/histogram")
+    public APIResult getHistogram(
+            @RequestParam("teacherId") String teacherId,
+            @RequestParam(value = "from",required = false) Long from,
+            @RequestParam(value = "to" ,required = false) Long to
+    ) {
+        if (Objects.equals(from,null) || Objects.equals(to,null)) {
+            return asSuccess(chartsService.getClassHistoryHistogram(new Range(),teacherId));
+        }
+        return asSuccess(chartsService.getClassHistoryHistogram(new Range(from,to),teacherId));
     }
 }

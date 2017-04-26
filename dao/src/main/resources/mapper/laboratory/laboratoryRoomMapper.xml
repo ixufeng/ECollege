@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 4.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xf.college.dao.laboratory.LaboratoryRoomDao">
+    <resultMap id="laboratoryRoom" type="com.xf.college.model.laboratory.LaboratoryRoom">
+        <id property="roomNumber" column="room_number"></id>
+        <result column="des" property="des"></result>
+        <result property="roomType" column="room_type"></result>
+        <result property="admin" column="admin"></result>
+        <result property="adminName" column="admin_name"></result>
+        <result property="valid" column="valid"></result>
+        <result property="beginTime" column="begin_time"></result>
+        <result property="useCount" column="use_count"></result>
+    </resultMap>
+
+
+    <insert id="add" parameterType="com.xf.college.model.laboratory.LaboratoryRoom">
+        INSERT INTO `laboratory_room`(`room_number`, `des`, `room_type`, `admin`, `valid`, `begin_time`, `use_count`)
+            VALUES
+                (#{roomNumber},#{des},#{roomType},#{admin},#{valid},#{beginTime},#{use_count})
+    </insert>
+
+    <select id="select" resultMap="laboratoryRoom">
+        SELECT `room_number`, `des`, `room_type`, `admin`,(SELECT T_NAME from teacher WHERE T_ID=admin) AS `adminName`, `valid`, `begin_time`, `use_count` FROM `laboratory_room` WHERE room_number=#{roomNumber}
+    </select>
+    <select id="selectAll" resultMap="laboratoryRoom">
+       SELECT `room_number`, `des`, `room_type`, `admin`,(SELECT T_NAME from teacher WHERE T_ID=admin) AS `adminName`, `valid`, `begin_time`, `use_count` FROM `laboratory_room` WHERE 1
+    </select>
+    <select id="selectByName" resultMap="laboratoryRoom">
+       SELECT `room_number`, `des`, `room_type`, `admin`,(SELECT T_NAME from teacher WHERE T_ID=admin) AS `adminName`, `valid`, `begin_time`, `use_count` FROM `laboratory_room` WHERE room_type=#{roomType}
+    </select>
+
+    <update id="update" parameterType="com.xf.college.model.laboratory.LaboratoryRoom">
+       UPDATE `laboratory_room` SET
+      `des`=#{des},`room_type`=#{roomType},`admin`=#{admin},`valid`=#{valid},`begin_time`=#{beginTime},`use_count`=#{useCount} WHERE room_number=#{room_number}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM `laboratory_room` WHERE room_number=#{roomNumber}
+    </delete>
+
+
+
+
+</mapper>

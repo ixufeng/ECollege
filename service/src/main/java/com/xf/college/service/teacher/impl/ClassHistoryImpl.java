@@ -7,6 +7,7 @@ import com.xf.college.service.teacher.ClassHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.*;
 
 /**
@@ -32,7 +33,7 @@ public class ClassHistoryImpl implements ClassHistoryService {
                 classHistory.getBeginTime()==null || classHistory.getEndTime()==null) {
             return "请补全信息!";
         }
-        if (classHistory.getBeginTime().getTime() >= classHistory.getEndTime().getTime()) {
+        if (classHistory.getBeginTime().compareTo(classHistory.getEndTime()) > 0) {
             return "时间范围不合法!";
         }
         int num = classHistoryDao.add(classHistory);
@@ -75,16 +76,16 @@ public class ClassHistoryImpl implements ClassHistoryService {
      * @return
      */
     @Override
-    public Map<ClassHistory, List<Date>> sortClassByType(String teacherId) {
+    public Map<ClassHistory, List<LocalDate>> sortClassByType(String teacherId) {
         List<ClassHistory> list = getClassHistoryByTeacherId(teacherId);
         if (Objects.equals(list,null) || list.size()==0) {
             return null;
         }
-        Map<ClassHistory,List<Date>> map = new HashMap<>();
+        Map<ClassHistory,List<LocalDate>> map = new HashMap<>();
         list.stream().forEach(item-> {
-            List<Date> li = map.get(item);
+            List<LocalDate> li = map.get(item);
             if (Objects.equals(li,null)) {
-                List<Date> list1 = new ArrayList<>();
+                List<LocalDate> list1 = new ArrayList<>();
                 list1.add(item.getBeginTime());
                 map.put(item,list1);
             }else {

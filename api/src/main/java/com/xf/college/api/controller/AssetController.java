@@ -2,6 +2,7 @@ package com.xf.college.api.controller;
 
 import com.xf.college.model.apiwrapper.APIResult;
 import com.xf.college.service.assets.AssetService;
+import com.xf.college.service.assets.impl.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,6 +18,8 @@ public class AssetController extends BaseController{
 
     @Autowired
     private AssetService assetService;
+    @Autowired
+    private RoomService roomService;
     /**
      * 获取所有资产接口 对管理员可见
      * @return
@@ -37,4 +40,10 @@ public class AssetController extends BaseController{
 
         return asSuccess(assetService.selectByUserId(userId));
     }
+
+    @RequestMapping("/room/all")
+    public APIResult getAllRooms() {
+        return asSuccess(roomService.getAllRooms());
+    }
+
 }

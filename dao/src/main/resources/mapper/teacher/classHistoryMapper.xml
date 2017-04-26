@@ -42,5 +42,4 @@
 			(SELECT `course_name` FROM `course` WHERE course_id=T_COURSE_ID ) AS `course_name` FROM `teacher_class_history`  where T_TEACHER_ID=#{teacherId}
 	</select>
 
-
 </mapper>
