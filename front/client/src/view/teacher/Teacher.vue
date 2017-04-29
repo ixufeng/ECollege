@@ -1,10 +1,10 @@
 <template>
     <div  v-if="isLogin" style="width: 100%;">
       <e-avatar></e-avatar>
-        <el-row style="width: 100%;">
+        <el-row class="row-style">
           <el-col class="teacher-item" :offset="4" :span="8">
-            <el-row>
-                <el-col :span="6">
+            <el-row style="height: 240px;">
+                <el-col :span="6" style="padding-top: 50px">
                   <el-badge :value="7">
                     <a href="/teacher/data">
                       <i class="iconfont icon-jiaoshi-copy teacher-item-icon"></i>
@@ -13,15 +13,12 @@
                   <h2>管理中心</h2>
                 </el-col>
                 <el-col :span="18">
-                  <p>
-                    sdfsgfsg
-                  </p>
                 </el-col>
             </el-row>
           </el-col>
-          <el-col class="teacher-item" :offset="4" :span="6">
+          <el-col class="teacher-item" :offset="0" :span="6">
             <el-row>
-              <el-col :span="6">
+              <el-col :span="6" style="padding-top: 50px">
                 <el-badge :value="7">
                   <a href="/teacher/honor">
                     <i class="iconfont icon-rongyu teacher-item-icon"></i>
@@ -30,17 +27,14 @@
                 <h2>个人荣誉</h2>
               </el-col>
               <el-col :span="18">
-                <p>
-                  sdfgdyhrthrtjhrj
-                </p>
               </el-col>
             </el-row>
           </el-col>
         </el-row>
-        <el-row>
+        <el-row class="row-style">
           <el-col class="teacher-item" :offset="4" :span="8">
             <el-row>
-              <el-col :span="6">
+              <el-col :span="6" style="padding-top: 50px">
                 <el-badge :value="3">
                   <a href="/teacher/class">
                     <i class="iconfont icon-kecheng teacher-item-icon"></i>
@@ -49,22 +43,20 @@
                 <h2>历史课程</h2>
               </el-col>
               <el-col :span="18">
-                <p>wesgyertujh</p>
+                  <histogram :userId="teacher.id"></histogram>
               </el-col>
             </el-row>
           </el-col>
-          <el-col class="teacher-item" :offset="4" :span="6">
+          <el-col class="teacher-item" :offset="0" :span="6">
             <el-row>
-              <el-col :span="6">
+              <el-col :span="6" style="padding-top: 50px">
                 <el-badge :value="1">
                   <i class="iconfont icon-jiaoyuyanjiu teacher-item-icon"></i>
                 </el-badge>
                 <h2>科研情况</h2>
               </el-col>
               <el-col :span="18">
-                <p>
-                  sgrdhttjh
-                </p>
+                <histogram></histogram>
               </el-col>
             </el-row>
           </el-col>
@@ -75,19 +67,28 @@
   import ajaxUtils from '../../http/ajaxUtils'
   import store from '../../store/index'
   import userUtils from '../../common/utils/UserUtils'
+  import histogram from '../../components/charts/TeacherHistogram.vue'
   export default {
+      data() {
+          return {
+              teacher: {
+
+              }
+          }
+      },
       methods: {
           initTeacherPage() {
-              let teacher = userUtils.isTeacher()
-              if (!teacher) {
+              this.teacher = userUtils.isTeacher()
+              if (!this.teacher) {
                   store.commit("SHOW_LOGIN",true)
                   return
               }
-            ajaxUtils.post("/api/teacher/info/" + teacher.id,null,result=> {
-                console.log(result)
-            })
           }
       },
+      components: {
+            histogram
+      },
+
       mounted() {
           this.initTeacherPage()
       },
@@ -125,4 +126,8 @@
     font-family: 'Nunito-Bold';
 
   }
+  .row-style{
+
+  }
+
 </style>

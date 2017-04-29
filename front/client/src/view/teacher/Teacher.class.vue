@@ -1,5 +1,5 @@
 <template>
-    <div style="width: 100%">
+    <div  style="width: 100%">
       <e-avatar></e-avatar>
       <el-row>
         <el-col :offset="2" :span="20">
@@ -132,12 +132,14 @@
       },
       addNewClass() {
           this.form.teacherId = this.teacher.id;
+          this.form.beginTime = new Date(this.form.beginTime).getTime()
+          this.form.endTime = new Date(this.form.endTime).getTime()
           ajaxUtils.post("/api/course/history/add",this.form,result=> {
               if (result.code == 200 ) {
                   this.$message.success("插入成功！")
                   this.dialogVisible = false
               }else {
-                  this.$message.error(result.message)
+                  this.$message.error(result.message || "unKnown error")
               }
           })
       },

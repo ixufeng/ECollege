@@ -1,5 +1,6 @@
 package com.xf.college.service.charts;
 
+import com.xf.college.common.utils.DateUtils;
 import com.xf.college.dao.teacher.ClassHistoryDao;
 import com.xf.college.model.teacher.ClassHistory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,18 +23,14 @@ public class ChartsServiceImpl implements ChartsService {
         if (list == null) {
             return map;
         }
+        for (int yea = range.getFrom().getYear() , toYear = range.getTo().getYear();yea <= toYear;yea ++ ) {
+            map.put(yea,new ArrayList());
+        }
         for (ClassHistory classHistory:list) {
             if ( range.isInYearRange(classHistory.getBeginTime())) {
-                int year = classHistory.getBeginTime().getYear();
+                int year = DateUtils.ofLocalDte(classHistory.getBeginTime()).getYear();
                 List<ClassHistory> li = map.get(year);
-                if (li==null) {
-                    List<ClassHistory> l = new ArrayList();
-                    l.add(classHistory);
-                    map.put(year,l);
-                }else {
-                    li.add(classHistory);
-                    map.put(year,li);
-                }
+                li.add(classHistory);
             }
          }
         return map;

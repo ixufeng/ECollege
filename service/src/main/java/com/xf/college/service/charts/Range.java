@@ -1,6 +1,9 @@
 package com.xf.college.service.charts;
 
+import com.xf.college.common.utils.DateUtils;
+
 import java.time.LocalDate;
+import java.util.Date;
 
 /**
  * Created by xufeng on 2017/4/26.
@@ -11,8 +14,8 @@ public class Range {
     private LocalDate to;
 
     public Range (){
-       this.from = LocalDate.now();
-       this.to = LocalDate.of(this.from.getYear(),1,1);
+       this.to = LocalDate.now();
+       this.from = LocalDate.of(this.to.getYear()-5,1,1);
     }
     public Range(long from,long to) {
         if ( from > to ) { //keep from less than to
@@ -37,13 +40,15 @@ public class Range {
     }
     /**
      * 比较年份的区间，以from 为基准
-     * @param from
+     * @param date
      * @return
      */
-   public boolean isInYearRange(LocalDate from) {
+   public boolean isInYearRange(Date date) {
+       LocalDate from = DateUtils.ofLocalDte(date);
         if ( from == null ) {
             return false;
         }
+        int y = from.getYear();
         if (from.getYear() >= this.from.getYear() && from.getYear()<=this.to.getYear()) {
             return  true;
         }

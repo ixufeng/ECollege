@@ -14,7 +14,7 @@ import java.util.Objects;
  */
 @RequestMapping("/teacher")
 @RestController
-public class TeacherController extends BaseController{
+public class    TeacherController extends BaseController{
 
     @Autowired
     private HonorService honorService;
