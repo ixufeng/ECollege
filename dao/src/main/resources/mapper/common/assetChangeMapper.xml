@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 4.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xf.college.dao.laboratory.AssetChangeDao">
+	<resultMap type="com.xf.college.model.AssetChange" id="assetChange">
+		 <id property="assetNumber" column="asset_number"></id>
+		<result property="assetName" column="asset_name"></result>
+		<result property="sourceUserId" column="source_user_id"></result>
+		<result property="destUserId" column="dest_user_id"></result>
+		<result property="createTime" column="create_time"></result>
+		<result property="completeTime" column="complete_time"></result>
+		<result property="state" column="state"></result>
+		<result property="handlerId" column="handler_id"></result>
+		<result property="destUserName" column="dest_user_name"></result>
+		<result property="sourceUserName" column="source_user_name"></result>
+	</resultMap>
+
+	<insert id="add" parameterType="com.xf.college.model.AssetChange">
+		INSERT INTO `asset_change`(`asset_number`, `asset_name`, `source_user_Id`, `dest_user_id`, `create_time`, `complete_time`, `state`, `handler_id`)
+		 VALUES (#{assetNumber},#{assetName},#{sourceUserId},#{destUserId},#{createTime},#{completeTime},#{state},#{handlerId})
+	</insert>
+
+	<select id="select" resultMap="assetChange">
+		SELECT `asset_number`, `asset_name`, `source_user_Id`,(SELECT  T_NAME FROM teacher where T_ID = source_user_id) AS `source_user_name`,
+		`dest_user_id`,(SELECT  T_NAME FROM teacher where T_ID = dest_user_id) AS `dest_user_name`,
+		 `create_time`, `complete_time`, `state`, `handler_id`  from asset_chage WHERE  asset_number=#{assetNumber}
+	</select>
+	<select id="selectAll" resultMap="assetChange">
+		SELECT * from asset_change
+	</select>
+	<select id="selectByName" resultMap="assetChange">
+		SELECT * from asset_change WHERE  asset_name= #{assetName}
+	</select>
+
+	<select id="selectByUserId" resultMap="assetChange">
+		SELECT * from asset_change WHERE  source_user_id= #{sourceUserId}
+	</select>
+
+	<update id="update" parameterType="com.xf.college.model.Course">
+		UPDATE `asset_change` SET `state`=#{state},`complete_time`=#{completeTime}, WHERE asset_number=#{assetNumber}
+	</update>
+
+</mapper>

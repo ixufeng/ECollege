@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -40,13 +40,13 @@ public class ClassHistoryController extends BaseController {
     public APIResult addTeacherClass(
            @RequestParam("courseId") String courseId,
            @RequestParam("teacherId") String teacherId,
-           @RequestParam("beginTime") LocalDate beginTime,
-           @RequestParam("endTime") LocalDate endTime,
+           @RequestParam("beginTime") Long beginTime,
+           @RequestParam("endTime") Long endTime,
            @RequestParam("majorId") String majorId
             ) {
         int auth = getAuth();
         if (auth==Auth.TEACHER || auth == Auth.ADMIN) {
-            ClassHistory classHistory = new ClassHistory(teacherId,courseId,majorId,beginTime,endTime);
+            ClassHistory classHistory = new ClassHistory(teacherId,courseId,majorId,new Date(beginTime),new Date(endTime));
             String res = classHistoryService.addClassHistory(classHistory);
             if (Objects.equals(res, CommonResult.SUCCESS)) {
                 return asSuccess("添加成功！");

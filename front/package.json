@@ -32,6 +32,7 @@
     "compression": "^1.6.2",
     "cookie-parser": "^1.4.3",
     "crypto": "0.0.3",
+    "echarts": "^3.5.4",
     "ejs": "^2.5.2",
     "element-ui": "^1.0.3",
     "express": "^4.14.0",

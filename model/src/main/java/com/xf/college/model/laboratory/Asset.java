@@ -10,7 +10,7 @@ public class Asset {
     private String name;
     private String typeId; //分类号
     private Date beginTime;
-    private int valid;    //现状
+    private int valid;    //现状 0 在库中，1 在使用中 ，2 处理中 ，仍在使用者手中
     private int usedCount;  //使用次数
     private String des;  //描述
     private String remark;  //备注

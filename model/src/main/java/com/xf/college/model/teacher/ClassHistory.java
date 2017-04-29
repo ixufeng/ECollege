@@ -1,6 +1,6 @@
 package com.xf.college.model.teacher;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 /**
  * Created by xufeng on 2017/3/25.
@@ -12,28 +12,28 @@ public class ClassHistory {
     private String courseName; //for vo
     private String majorNumber;
     private String majorName;// for vo
-    private LocalDate beginTime;
-    private LocalDate endTime;
-    private LocalDate createTime;
+    private Date beginTime;
+    private Date endTime;
+    private Date createTime;
 
     public ClassHistory() {
 
     }
-    public ClassHistory(String teacherId,String courseId,String majorNumber,LocalDate beginTime,LocalDate endTime) {
+    public ClassHistory(String teacherId,String courseId,String majorNumber,Date beginTime,Date endTime) {
         this.teacherId = teacherId;
         this.courseId = courseId;
         this.majorNumber = majorNumber;
         this.beginTime =beginTime;
         this.endTime = endTime;
-        this.createTime = LocalDate.now();
+        this.createTime = new Date();
     }
 
 
-    public LocalDate getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(LocalDate createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
     public int getId() {
@@ -68,19 +68,19 @@ public class ClassHistory {
         this.majorNumber = classNumber;
     }
 
-    public LocalDate getBeginTime() {
+    public Date getBeginTime() {
         return beginTime;
     }
 
-    public void setBeginTime(LocalDate beginTime) {
+    public void setBeginTime(Date beginTime) {
         this.beginTime = beginTime;
     }
 
-    public LocalDate getEndTime() {
+    public Date getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(LocalDate endTime) {
+    public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
 

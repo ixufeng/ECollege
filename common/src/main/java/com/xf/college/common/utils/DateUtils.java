@@ -18,9 +18,14 @@ package com.xf.college.common.utils;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
 public final class DateUtils {
 
@@ -59,6 +64,20 @@ public final class DateUtils {
         calendar.set(Calendar.MILLISECOND, 0);
 
         return calendar.getTime().getTime();
+    }
+    @Deprecated
+    public static LocalDate ofLocalDte (Long timeStamp) {
+        if (timeStamp==null) {
+            return LocalDate.now();
+        }
+        return LocalDateTime.ofInstant(Instant.ofEpochSecond(timeStamp), TimeZone
+                .getDefault().toZoneId()).toLocalDate();
+    }
+    public static LocalDate ofLocalDte (Date date) {
+        if (date==null) {
+            return LocalDate.now();
+        }
+        return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
     }
 
 }

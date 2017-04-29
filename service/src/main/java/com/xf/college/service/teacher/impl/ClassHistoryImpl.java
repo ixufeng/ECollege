@@ -7,7 +7,6 @@ import com.xf.college.service.teacher.ClassHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.*;
 
 /**
@@ -76,16 +75,16 @@ public class ClassHistoryImpl implements ClassHistoryService {
      * @return
      */
     @Override
-    public Map<ClassHistory, List<LocalDate>> sortClassByType(String teacherId) {
+    public Map<ClassHistory, List<Date>> sortClassByType(String teacherId) {
         List<ClassHistory> list = getClassHistoryByTeacherId(teacherId);
         if (Objects.equals(list,null) || list.size()==0) {
             return null;
         }
-        Map<ClassHistory,List<LocalDate>> map = new HashMap<>();
+        Map<ClassHistory,List<Date>> map = new HashMap<>();
         list.stream().forEach(item-> {
-            List<LocalDate> li = map.get(item);
+            List<Date> li = map.get(item);
             if (Objects.equals(li,null)) {
-                List<LocalDate> list1 = new ArrayList<>();
+                List<Date> list1 = new ArrayList<>();
                 list1.add(item.getBeginTime());
                 map.put(item,list1);
             }else {

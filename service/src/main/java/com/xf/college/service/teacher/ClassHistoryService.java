@@ -2,7 +2,7 @@ package com.xf.college.service.teacher;
 
 import com.xf.college.model.teacher.ClassHistory;
 
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -15,7 +15,7 @@ public interface ClassHistoryService {
 
     Map<String,List<ClassHistory>> sortClassByTime(String teacherId);
 
-    Map<ClassHistory,List<LocalDate>> sortClassByType(String teacherId);
+    Map<ClassHistory,List<Date>> sortClassByType(String teacherId);
 
     String addClassHistory(ClassHistory classHistory);
 

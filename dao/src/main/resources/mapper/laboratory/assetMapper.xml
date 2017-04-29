@@ -12,7 +12,6 @@
         <result column="e_remark" property="remark"></result>
         <result column="e_img" property="imgs"></result>
         <result column="e_begin_time" property="beginTime"></result>
-
         <result column="e_model" property="model"></result>
         <result column="e_spec" property="specification"></result>
         <result column="e_price" property="price"></result>
@@ -36,9 +35,10 @@
     </insert>
 
     <select id="select" resultMap="asset">
-        SELECT `e_id`, `e_name`, `e_type_id`, `e_valid`, `e_use_count`, `e_des`, `e_remark`, `e_img`, `e_begin_time`, `e_model`, `e_spec`,
+         SELECT `e_id`, `e_name`, `e_type_id`, `e_valid`, `e_use_count`, `e_des`, `e_remark`, `e_img`, `e_begin_time`, `e_model`, `e_spec`,
                 `e_price`, `e_nation`, `e_factory_name`, `e_buy_time`, `e_user_id`,(SELECT T_NAME from teacher WHERE  T_ID = e_user_id) as `e_user_name`,
-                `e_handle_user_id`, (SELECT T_NAME from teacher WHERE  T_ID = e_handle_user_id) as `e_handle_user_name`,`e_incoming`, `e_last_use_time`  FROM asset WHERE e_id=#{id}
+                `e_handle_user_id`, (SELECT T_NAME from teacher WHERE  T_ID = e_handle_user_id) as `e_handle_user_name`,`e_incoming`, `e_last_use_time`  FROM asset
+                    WHERE e_id = #{id}
     </select>
     <select id="selectAll" resultMap="asset">
         SELECT `e_id`, `e_name`, `e_type_id`, `e_valid`, `e_use_count`, `e_des`, `e_remark`, `e_img`, `e_begin_time`, `e_model`, `e_spec`,
@@ -49,7 +49,7 @@
         SELECT `e_id`, `e_name`, `e_type_id`, `e_valid`, `e_use_count`, `e_des`, `e_remark`, `e_img`, `e_begin_time`, `e_model`, `e_spec`,
                 `e_price`, `e_nation`, `e_factory_name`, `e_buy_time`, `e_user_id`,(SELECT T_NAME from teacher WHERE  T_ID = e_user_id) as `e_user_name`,
                 `e_handle_user_id`, (SELECT T_NAME from teacher WHERE  T_ID = e_handle_user_id) as `e_handle_user_name`,`e_incoming`, `e_last_use_time`  FROM asset
-                    WHERE e_name=#{name}
+
     </select>
     <select id="selectByUserId" resultMap="asset">
          SELECT `e_id`, `e_name`, `e_type_id`, `e_valid`, `e_use_count`, `e_des`, `e_remark`, `e_img`, `e_begin_time`, `e_model`, `e_spec`,
