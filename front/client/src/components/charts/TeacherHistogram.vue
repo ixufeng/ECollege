@@ -19,7 +19,10 @@ export  default {
     computed: {
       options() {
           return {
-            color: ['#3398DB'],
+            title: {
+             subtext: '==近年授课数量波动总览 ( --进入查看授课详情 )==',
+            },
+            color: ['#2bcc63'],
             tooltip : {
               trigger: 'axis',
               axisPointer : {
