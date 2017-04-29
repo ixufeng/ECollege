@@ -21,63 +21,14 @@
                   </el-row>
                 </el-tab-pane>
                 <el-tab-pane label="我的资产" name="asset">
-                  <div style="margin-bottom: 8px">
-                    <span style="text-align: center;padding-left: 20px;">
-                      <el-button size="small"  type="success">申请资产</el-button>
-
-                      <el-button size="small" style="margin-left: 10px" type="success">批量转移资产</el-button>
-                    </span>
-                  </div>
-                    <el-table
-                      :data="assets.data"
-                      style="width: 100%">
-                      <el-table-column
-                        prop="id"
-                        label="编号"
-                        width="180">
-                      </el-table-column>
-                      <el-table-column
-                        prop="name"
-                        label="使用次数"
-                        width="usedCount">
-                      </el-table-column>
-                      <el-table-column
-                        prop="buyTime"
-                        label="使用时间">
-                      </el-table-column>
-                      <el-table-column
-                        prop="buyTime"
-                        label="购买时间">
-                      </el-table-column>
-                      <el-table-column
-                        prop="userName"
-                        label="使用人">
-                      </el-table-column>
-                      <el-table-column
-                        prop="handleUserName"
-                        label="经手人">
-                      </el-table-column>
-                      <el-table-column
-                        fixed="right"
-                        label=" 操作"
-                        width="120">
-                        <template scope="scope">
-                          <el-button
-                            type="text"
-                            size="small"
-                          @click="handleAsset(scope.row.id)">
-                            申请回收
-                          </el-button>
-                        </template>
-                      </el-table-column>
-                    </el-table>
+                    <asset-list :userId="user_id_asset"></asset-list>
                 </el-tab-pane>
-                <el-tab-pane label="我的申请" name="apply" >我的申请</el-tab-pane>
-                <el-tab-pane label="定时任务补偿"  name="" >定时任务补偿</el-tab-pane>
+                <el-tab-pane label="我的申请" name="apply" >
+                    <apply-list :userId="user_id_apply"></apply-list>
+                </el-tab-pane>
               </el-tabs>
             </el-col>
         </el-row>
-
       <el-dialog title="个人信息修改" v-model="dialogVisible">
         <el-form :model="form">
           <el-form-item label="活动名称" :label-width="formLabelWidth">
@@ -103,7 +54,13 @@
     import {getSessionUser,setSessionUser} from '../../storage/index'
     import userUtils from '../../common/utils/UserUtils'
     import ajaxUtils from '../../http/ajaxUtils'
+    import assetList from './teacher.asset.vue'
+    import applyList from './teacher.apply.vue'
     export default{
+        components: {
+          assetList,
+          applyList
+        },
         data() {
             return {
               teacher:{},
@@ -114,16 +71,16 @@
               },
               formLabelWidth:"200px",
               dialogVisible:false,
-              assets:{
-                  init:false,
-                  data:[]
-              }
+              user_id_asset:'',
+              user_id_apply:'',
             }
         },
       methods:{
         tabClick(tab) {
-          if((tab.name=='asset' && !this.assets.init)) {
-              this.getAssets();
+          if(tab.name == 'asset') {
+              this.user_id_asset = this.teacher.id
+          } else if (tab.name =="apply") {
+              this.user_id_apply = this.teacher.id
           }
         },
             modifyData() {
@@ -142,30 +99,7 @@
                        value:this.teacher[item]
                    })
                 }
-            },
-          getAssets() {
-              ajaxUtils.send("/api/asset/list",{userId:this.teacher.id},result=>{
-                  console.log(result)
-                  if (result.code == 200) {
-                      this.assets.data = result.result
-                      this.assets.init = true
-                  }
-              })
-          },
-          handleAsset(assetId) {
-            let params  = {
-                teacherId:this.teacher.id,
-                list:[assetId]
             }
-            ajaxUtils.post("/api/asset/recycle",params,result=> {
-                if(result.code == 200) {
-                  this.$message.success("申请成功，等待处理！")
-                }else {
-                  this.$message.error("申请失败，稍后重试！")
-                }
-            })
-            console.log(assetId)
-          }
       },
       mounted() {
         this.initData()
