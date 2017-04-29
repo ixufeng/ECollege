@@ -23,8 +23,12 @@
                 <el-tab-pane label="我的资产" name="asset">
                     <asset-list :userId="user_id_asset"></asset-list>
                 </el-tab-pane>
-                <el-tab-pane label="我的申请" name="apply" >
+                <el-tab-pane label="资产相关" name="apply" >
                     <apply-list :userId="user_id_apply"></apply-list>
+                </el-tab-pane>
+                <el-tab-pane label="实验室申请" name="laboratory" >
+                </el-tab-pane>
+                <el-tab-pane label="代办事项" name="things" >
                 </el-tab-pane>
               </el-tabs>
             </el-col>

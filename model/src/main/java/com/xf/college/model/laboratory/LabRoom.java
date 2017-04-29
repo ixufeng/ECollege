@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Created by xufeng on 2017/4/26.
  */
-public class LaboratoryRoom {
+public class LabRoom {
     private String roomNumber;
     private String des;
     private String roomType;

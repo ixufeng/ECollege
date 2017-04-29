@@ -14,7 +14,7 @@ public class AssetChange {
     private String destUserName; //for vo
     private Date createTime;
     private Date completeTime;
-    private int state; // 0 等待处理 1 处理完成  2 处理失败(需要补全材料)
+    private int state; // 0 等待处理 1 处理完成  2 处理失败(需要不全材料)
     private String handlerId;
 
     public AssetChange() {
