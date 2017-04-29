@@ -6,5 +6,6 @@
 - frontend   vue2.0/
 
 frontend 运行：
- -npm install 
- -npm run client (默认端口9001 默认代理api端口 8082) 
+ - npm install 
+ 
+ - npm run client (默认端口9001 默认代理api端口 8082) 
