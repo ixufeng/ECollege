@@ -2,7 +2,7 @@
     <div  v-if="isLogin" style="width: 100%;">
       <e-avatar></e-avatar>
         <el-row class="row-style">
-          <el-col class="teacher-item" :offset="4" :span="8">
+          <el-col class="teacher-item" :offset="3" :span="8">
             <el-row style="height: 240px;">
                 <el-col :span="6" style="padding-top: 50px">
                   <el-badge :value="7">
@@ -16,7 +16,7 @@
                 </el-col>
             </el-row>
           </el-col>
-          <el-col class="teacher-item" :offset="0" :span="6">
+          <el-col class="teacher-item" :offset="2" :span="6">
             <el-row>
               <el-col :span="6" style="padding-top: 50px">
                 <el-badge :value="7">
@@ -32,7 +32,7 @@
           </el-col>
         </el-row>
         <el-row class="row-style">
-          <el-col class="teacher-item" :offset="4" :span="8">
+          <el-col class="teacher-item" :offset="3" :span="8">
             <el-row>
               <el-col :span="6" style="padding-top: 50px">
                 <el-badge :value="3">
@@ -47,7 +47,7 @@
               </el-col>
             </el-row>
           </el-col>
-          <el-col class="teacher-item" :offset="0" :span="6">
+          <el-col class="teacher-item" :offset="2" :span="6">
             <el-row>
               <el-col :span="6" style="padding-top: 50px">
                 <el-badge :value="1">

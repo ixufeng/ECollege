@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2017/3/30.
  */
-public interface AssetDao extends BaseDao<AssetDao,String>{
+public interface AssetDao extends BaseDao<Asset,String>{
     /**
      * 查询使用人的所有设备
      * @param userId

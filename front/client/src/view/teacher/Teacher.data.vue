@@ -21,6 +21,13 @@
                   </el-row>
                 </el-tab-pane>
                 <el-tab-pane label="我的资产" name="asset">
+                  <div style="margin-bottom: 8px">
+                    <span style="text-align: center;padding-left: 20px;">
+                      <el-button size="small"  type="success">申请资产</el-button>
+
+                      <el-button size="small" style="margin-left: 10px" type="success">批量转移资产</el-button>
+                    </span>
+                  </div>
                     <el-table
                       :data="assets.data"
                       style="width: 100%">
@@ -57,13 +64,9 @@
                         <template scope="scope">
                           <el-button
                             type="text"
-                            size="small">
-                            移除
-                          </el-button>
-                          <el-button
-                            type="text"
-                            size="small">
-                            修改
+                            size="small"
+                          @click="handleAsset(scope.row.id)">
+                            申请回收
                           </el-button>
                         </template>
                       </el-table-column>
@@ -148,6 +151,20 @@
                       this.assets.init = true
                   }
               })
+          },
+          handleAsset(assetId) {
+            let params  = {
+                teacherId:this.teacher.id,
+                list:[assetId]
+            }
+            ajaxUtils.post("/api/asset/recycle",params,result=> {
+                if(result.code == 200) {
+                  this.$message.success("申请成功，等待处理！")
+                }else {
+                  this.$message.error("申请失败，稍后重试！")
+                }
+            })
+            console.log(assetId)
           }
       },
       mounted() {
