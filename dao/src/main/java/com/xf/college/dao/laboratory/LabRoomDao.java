@@ -8,4 +8,5 @@ import com.xf.college.model.laboratory.LabRoom;
  */
 public interface LabRoomDao extends BaseDao<LabRoom,String> {
 
+
 }

@@ -5,8 +5,8 @@
         <el-row :gutter="20">
           <el-col :span="6"><div class="small-title"><i class="iconfont icon-jiaoshi-copy">&nbsp;</i> <a class="small-title" href="/teacher">TEACHER</a></div></el-col>
           <el-col :span="6"><div class="small-title"><i class="iconfont icon-xuesheng"></i>&nbsp;<a class="small-title" href="/student">STUDENT</a></div></el-col>
-          <el-col :span="6"><div class="small-title"><i class="iconfont icon-shiyanshi1"></i>&nbsp;<a class="small-title" href="laboratory">LABORATORY</a></div></el-col>
-          <el-col :span="6"><div class="small-title"><i class="iconfont icon-about"></i>&nbsp;<a class="small-title" href="contact">CONTACT</a></div></el-col>
+          <el-col :span="6"><div class="small-title"><i class="iconfont icon-shiyanshi1"></i>&nbsp;<a class="small-title" href="/lab">LABORATORY</a></div></el-col>
+          <el-col :span="6"><div class="small-title"><i class="iconfont icon-about"></i>&nbsp;<a class="small-title" href="/contact">CONTACT</a></div></el-col>
         </el-row>
       </el-col>
     </el-row>

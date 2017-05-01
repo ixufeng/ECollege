@@ -8,6 +8,7 @@ import java.util.Date;
 public class LabApply {
     private int id;
     private String labId;
+    private String labType;
     private String userId;
     private String userName;//for vo
     private String handlerId;
@@ -18,6 +19,14 @@ public class LabApply {
     private int state;   //申请状态  1 等待 2 完成 3 未通过
     private String des;
     private String result;   //结果的描述信息 如管理员 拒绝，可以给出理由
+
+    public String getLabType() {
+        return labType;
+    }
+
+    public void setLabType(String labType) {
+        this.labType = labType;
+    }
 
     public int getId() {
         return id;
