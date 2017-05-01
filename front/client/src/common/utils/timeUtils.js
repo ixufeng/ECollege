@@ -16,3 +16,24 @@ Date.prototype.Format = function (fmt) { //author: meizz
     if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
   return fmt;
 }
+
+let timeUtils = {}
+/**
+ * 获取未来的几天
+ * @param dayNum
+ * @returns {[*]}
+ */
+timeUtils.getNextDays =(dayNum)=> {
+  var oDate = new Date();   //获取当前时间
+  var dayArr = [];     //定义一个数组存储所以时间
+  for(var i=0;i<dayNum;i++){
+    dayArr.push(new Date(oDate.getFullYear(),oDate.getMonth(),oDate.getDate() + i));   //把未来几天的时间放到数组里
+  }
+  return dayArr;   //返回一个数组。
+}
+
+export default timeUtils
+
+
+
+
