@@ -14,4 +14,7 @@ userUtils.isStudent = () => {
   }
   return student
 }
+userUtils.isLogin = ()=> {
+    return userUtils.isTeacher()?userUtils.isTeacher():userUtils.isStudent()
+}
 export  default  userUtils

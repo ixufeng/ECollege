@@ -33,10 +33,12 @@ ajaxUtils.post = (url,params,callback) => {
 }
 
 let _initParams = (url,params) => {
-  url = url + "?"
   if (!params) {
     return url
   }
+
+  url = url + "?"
+
   for (let item in params) {
     url = url + item + "=" + params[item] + "&"
   }

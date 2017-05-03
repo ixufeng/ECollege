@@ -9,45 +9,50 @@
         <result column="user_id" property="userId"></result>
         <result column="create_time" property="createTime"></result>
         <result column="state" property="state"></result>
-        <result column="begin_time" property="beginTime"></result>
-        <result column="end_time" property="endTime"></result>
         <result column="handler_id" property="handlerId"></result>
         <result column="des" property="des"></result>
         <result column="lab_type" property="labType"></result>
+        <result column="class_index" property="classes"></result>
+        <result column="current_day" property="currentDay"></result>
     </resultMap>
 
 
     <insert id="add" parameterType="com.xf.college.model.laboratory.LabApply">
-       INSERT INTO `laboratory_apply`(`lab_id`, `userId`,`lab_type`, `create_time`, `state`, `begin_time`, `end_time`, `handler_id`, `des`)
+       INSERT INTO `laboratory_apply` ( `lab_id`, `user_id`,`lab_type`,`create_time`,`state`,`des`, `class_index` , `current_day` )
             VALUES
-                (#{labId},#{userId},#{labType},#{createTime},#{state},#{beginTime},#{endTime},#{handlerId},#{des}
+                (#{labId},#{userId},#{labType},#{createTime},#{state},#{des},#{classes},#{currentDay})
     </insert>
 
     <select id="select" resultMap="labApply">
-        SELECT `lab_id`, `id`, `user_id`,`lab_type`, `create_time`, `state`, `begin_time`, `end_time`, `handler_id`, `des` FROM `laboratory_apply` WHERE id = #{id}
+        SELECT `lab_id`, `id`, `user_id`,`lab_type`, `create_time`, `state`, `handler_id`, `des` ,`class_index` ,`current_day`
+        FROM `laboratory_apply`
+          WHERE id = #{id}
     </select>
 
     <select id="selectByUserId" resultMap="labApply">
-        SELECT `lab_id`, `id`, `user_id`, `lab_type`,`create_time`, `state`, `begin_time`, `end_time`, `handler_id`, `des` FROM `laboratory_apply` WHERE user_id = #{userId}
+        SELECT `lab_id`, `id`, `user_id`, `lab_type`,`create_time`, `state`, `handler_id`, `des`,`class_index` FROM `laboratory_apply` WHERE user_id = #{userId}
     </select>
 
     <select id="selectAll" resultMap="labApply">
-        SELECT `lab_id`, `id`, `user_id`,`lab_type`, `create_time`, `state`, `begin_time`, `end_time`, `handler_id`, `des` FROM `laboratory_apply` WHERE 1
+        SELECT `lab_id`, `id`, `user_id`,`lab_type`, `create_time`, `state`, `handler_id`, `des`,`class_index`,`current_day`
+         FROM `laboratory_apply` WHERE 1
     </select>
 
 
     <select id="selectByLabId" resultMap="labApply">
-        SELECT `lab_id`, `id`, `user_id`,`lab_type`, `create_time`, `state`, `begin_time`, `end_time`, `handler_id`, `des` FROM `laboratory_apply` WHERE lab_id = #{labId}
+        SELECT `lab_id`, `id`, `user_id`,`lab_type`, `create_time`, `state`, `handler_id`, `des`,`class_index`,`current_day`
+         FROM `laboratory_apply` WHERE lab_id = #{labId}
     </select>
 
     <select id="selectByLabType" resultMap="labApply">
-        SELECT `lab_id`, `id`, `user_id`,`lab_type`, `create_time`, `state`, `begin_time`, `end_time`, `handler_id`, `des` FROM `laboratory_apply` WHERE lab_type = #{labType}
+        SELECT `lab_id`, `id`, `user_id`,`lab_type`, `create_time`, `state`, `handler_id`, `des` ,`class_index`,`current_day`
+         FROM `laboratory_apply` WHERE lab_type = #{labType}
     </select>
 
     <update id="update" parameterType="com.xf.college.model.laboratory.LabApply">
         UPDATE `laboratory_apply`
-          SET `lab_id`=#{labId},`state`=#{state},
-               `begin_time`=beginTime,`end_time`=#{endTime},`des`=#{des} WHERE id={id}
+          SET `lab_id`=#{labId},`state`=#{state},`des`=#{des},`class_index`=#{classes},`current_day`=#{currentDay}
+             WHERE id={id}
     </update>
 
     <delete id="delete">
