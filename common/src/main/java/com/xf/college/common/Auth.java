@@ -11,4 +11,11 @@ public class Auth {
     public final static Integer BLACK = -1;
     public final static Integer NO_AUTH = -2;
     //...
+
+    public static boolean IS_LOGIN (int auth) {
+        if (auth == ADMIN || auth == STUDENT || auth == TEACHER) {
+            return true;
+        }
+        return false;
+    }
 }

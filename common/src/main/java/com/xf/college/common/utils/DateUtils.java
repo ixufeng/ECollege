@@ -39,7 +39,8 @@ public final class DateUtils {
         }
     };
 
-    private static final String FORMAT = "yyyy-MM-dd HH:mm:ss SSS";
+    public static final String FORMAT = "yyyy-MM-dd HH:mm:ss SSS";
+    public static final String DAY_FORMAT = "yyyy-MM-dd";
 
     private DateUtils() {
     }
@@ -53,6 +54,11 @@ public final class DateUtils {
         String pattern = (fmt == null) ? FORMAT : fmt;
         final SimpleDateFormat format = new SimpleDateFormat(pattern);
         return format.format(new Date(date));
+    }
+    public static String formatDate(Date date,String fmt) {
+         String pattern = (fmt == null) ? FORMAT : fmt;
+         final SimpleDateFormat format = new SimpleDateFormat(pattern);
+         return format.format(date);
     }
 
     public static long timestampToMidNight(long timestamp) {

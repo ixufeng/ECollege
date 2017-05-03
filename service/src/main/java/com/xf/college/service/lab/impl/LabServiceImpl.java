@@ -1,10 +1,10 @@
 package com.xf.college.service.lab.impl;
 
+import com.xf.college.common.CommonResult;
 import com.xf.college.dao.laboratory.LabRoomApplyDao;
 import com.xf.college.dao.laboratory.LabRoomDao;
 import com.xf.college.model.laboratory.LabApply;
 import com.xf.college.model.laboratory.LabRoom;
-import com.xf.college.service.charts.Range;
 import com.xf.college.service.lab.LabService;
 import com.xf.college.service.lab.LabStateBo;
 import com.xf.college.service.lab.LabTypeGroup;
@@ -28,8 +28,20 @@ public class LabServiceImpl implements LabService {
     private LabRoomApplyDao labRoomApplyDao;
 
     @Override
-    public int LabApointment(String userId, String labId, Range range) {
-        return 0;
+    public String labApointment(LabApply labApply) {
+
+        if (labApply == null || labApply.getLabId() == null || labApply.getClassValue().length == 0) {
+            System.out.println(labApply.getClassValue());
+            return CommonResult.IMCOMPLETE_MESSAGE;
+        }
+        if (labApply.getCurrentDay() == null || labApply.getCurrentDay().length()!=10) {
+            return  CommonResult.IMCOMPLETE_MESSAGE;
+        }
+        int result = labRoomApplyDao.add(labApply);
+        if ( result > 0 ) {
+            return CommonResult.SUCCESS;
+        }
+        return CommonResult.ERROR;
     }
 
     @Override
@@ -86,8 +98,10 @@ public class LabServiceImpl implements LabService {
             if (labStateBo == null) {
                 labStateBo = new LabStateBo();
             }
-
+            labStateBo.setLabId(key);
+            labStateBo.addApply(labApply);
+            map.put(key,labStateBo);
         });
-        return null;
+        return map;
     }
 }

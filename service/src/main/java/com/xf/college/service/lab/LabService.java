@@ -1,7 +1,7 @@
 package com.xf.college.service.lab;
 
+import com.xf.college.model.laboratory.LabApply;
 import com.xf.college.model.laboratory.LabRoom;
-import com.xf.college.service.charts.Range;
 
 import java.util.List;
 import java.util.Map;
@@ -12,13 +12,11 @@ import java.util.Map;
 public interface LabService {
 
     /**
-     * 实验室预约
-     * @param userId
-     * @param labId
-     * @param range
+     *
+     * @param labApply
      * @return
      */
-    int LabApointment(String userId, String labId, Range range);
+    String labApointment(LabApply labApply);
 
     /**
      * 按照实验室类别分类
