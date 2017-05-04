@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 /**
  * Created by xufeng on 2017/3/6.
  */
-public class JSONUtils {
+public class JSONTools {
 
     public static String toJsonString(Object o, String defaultValue) {
         try {
