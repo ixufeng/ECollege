@@ -19,6 +19,12 @@ public class Honor {
         this.achieveTime = achieveTime;
         this.des = des;
     }
+
+    public Honor(int honorType,String des, Date achieveTime) {
+        this.honorType = honorType;
+        this.des = des;
+        this.achieveTime = achieveTime;
+    }
     public Honor() {
 
     }

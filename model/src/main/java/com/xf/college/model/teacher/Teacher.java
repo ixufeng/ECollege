@@ -15,7 +15,17 @@ public class Teacher {
     private String identity;
     private String phone;
     private Date birthday;
+    private String mail;  //邮箱
     private int limit;
+
+    public Teacher(){
+
+    }
+    public Teacher(String userId,String phone,String mail){
+        this.id = userId;
+        this.phone = phone;
+        this.mail = mail;
+    }
 
     public int getLimit() {
         return limit;
@@ -46,6 +56,14 @@ public class Teacher {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
     }
 
     public String[] getAvatars1() {

@@ -7,6 +7,7 @@ import com.xf.college.service.honor.HonorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -21,16 +22,15 @@ public class HonorController extends BaseController {
     private HonorService honorService;
 
     /**
-     * 管理员接口,获取全部类型
      * @return
      */
     @RequestMapping(value = "/honorType/list",method = RequestMethod.GET)
     public APIResult getHonorTypeList(){
         int auth = getAuth();
-        if (auth != 0) {
-           return handleNoAuth(Auth.NO_AUTH);
+        if (Auth.IS_LOGIN(auth)) {
+            return asSuccess(honorService.getHonorTypeList());
         }
-        return asSuccess(honorService.getHonorTypeList());
+        return handleNoAuth(Auth.NO_AUTH);
     }
 
 
@@ -51,9 +51,16 @@ public class HonorController extends BaseController {
         return asSuccess(honorService.getHonorTypeItem(list));
     }
 
-    @RequestMapping(value = "/honor/add",method = RequestMethod.PUT)
-    public APIResult addHonor(@RequestParam("honor")Honor honor) {
+    @RequestMapping(value = "/honor/add",method = RequestMethod.POST)
+    public APIResult addHonor(
+            @RequestParam("honorType") int honorType,
+            @RequestParam("achieveTime")Date achieveTime,
+            @RequestParam("des") String des,
+            @RequestParam("userId") String userId
+            ) {
         int auth = getAuth();
+        Honor honor = new Honor(honorType,des,achieveTime);
+        honor.setTeacherId(userId);
         if (Objects.equals(auth,Auth.TEACHER)||Objects.equals(auth,Auth.STUDENT)||Objects.equals(auth,Auth.ADMIN)) {
             return asSuccess(honorService.addHonor(honor));
         }

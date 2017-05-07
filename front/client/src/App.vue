@@ -81,7 +81,7 @@ export default {
 @import "assets/css/animate.styl";
 @import "assets/fonts/iconfont.css";
 @import "assets/css/flex.styl";
-@import "//at.alicdn.com/t/font_z9f2f7ifbadu0udi.css";
+@import "//at.alicdn.com/t/font_xntknjxwcz19vn29.css";
 
 ::-webkit-scrollbar
   width 4px
@@ -122,7 +122,7 @@ a
     .app-container
       position relative
       flex 1
-      min-height 600px
+      min-height 1000px
       display flex
       justify-content center
       margin 0

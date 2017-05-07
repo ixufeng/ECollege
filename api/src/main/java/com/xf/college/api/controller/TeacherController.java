@@ -1,7 +1,9 @@
 package com.xf.college.api.controller;
 
 import com.xf.college.common.Auth;
+import com.xf.college.common.CommonResult;
 import com.xf.college.model.apiwrapper.APIResult;
+import com.xf.college.model.teacher.Teacher;
 import com.xf.college.service.honor.HonorService;
 import com.xf.college.service.teacher.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,11 @@ public class    TeacherController extends BaseController{
     @Autowired
      private TeacherService teacherService;
 
+    /**
+     * 获取老师信息
+     * @param teacherId
+     * @return
+     */
     @RequestMapping("/info/{teacherId}")
     public APIResult getTeacherInfo(
             @PathVariable("teacherId") String  teacherId
@@ -50,4 +57,30 @@ public class    TeacherController extends BaseController{
         return asSuccess(teacherService.findByName( name ));
     }
 
+
+    /**
+     * 更新用户相关信息
+     * @param userId
+     * @param phone
+     * @param mail
+     * @return
+     */
+    @RequestMapping(value = "/update",method = RequestMethod.POST)
+    public APIResult updateTeacher(
+            @RequestParam("userId") String userId,
+            @RequestParam(value = "phone",required = false) String phone,
+            @RequestParam(value = "mail",required = false) String mail
+    ) {
+        int auth = getAuth();
+        if (!Auth.IS_LOGIN(auth)) {
+            return asUnLogin("请先登录！");
+        }
+        Teacher teacher = new Teacher(userId,phone,mail);
+        String result = teacherService.updateTeacher(teacher);
+        if (CommonResult.SUCCESS.equals(result)) {
+            return asSuccess("修改成功！");
+        } else {
+            return asError(result);
+        }
+    }
 }

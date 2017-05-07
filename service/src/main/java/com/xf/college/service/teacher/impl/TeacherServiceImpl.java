@@ -1,5 +1,6 @@
 package com.xf.college.service.teacher.impl;
 
+import com.xf.college.common.CommonResult;
 import com.xf.college.dao.teacher.TeacherDao;
 import com.xf.college.model.teacher.Teacher;
 import com.xf.college.service.RedisManager;
@@ -23,6 +24,29 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Autowired
     private RedisManager redisManager;
+
+    @Override
+    public String updateTeacher(Teacher teacher) {
+        //name || mail
+        if (teacher != null && teacher.getId() != null) {
+            String userId = teacher.getId();
+            Teacher oldTeacher = teacherDao.select(userId);
+            if (oldTeacher == null) {
+                return CommonResult.QUERY_ERROR;
+            }
+            if (teacher.getMail() != null) {
+                oldTeacher.setMail(teacher.getMail());
+            }
+            if (teacher.getPhone() != null) {
+                oldTeacher.setPhone(teacher.getPhone());
+            }
+            int result = teacherDao.update(oldTeacher);
+            if ( result > 0 ) {
+                return CommonResult.SUCCESS;
+            }
+        }
+        return CommonResult.INSERT_ERROR;
+    }
 
     @Override
     public Teacher select(String teacherId) {

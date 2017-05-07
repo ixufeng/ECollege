@@ -67,7 +67,11 @@ public class HonorServiceImpl implements HonorService {
 
     @Override
     public int addHonor(Honor honor) {
+
         if (Objects.equals(honor,null) || honor.getTeacherId()==null) {
+            return 0;
+        }
+        if (honor.getHonorType() <= 0 ) {
             return 0;
         }
         return honorDao.add(honor);
