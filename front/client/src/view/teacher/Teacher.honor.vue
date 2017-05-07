@@ -18,7 +18,7 @@
                          :remote="true"
                          @change="selectByHonorType"
                          :loading="honorTypeLoading"
-                          @remove-tag="removeTag">
+                          @remove-tag="selectByHonorType">
                 <el-option
                   v-for="item in honorTypeOptions"
                   :label="item.label"
@@ -47,14 +47,20 @@
     </el-row>
     <el-dialog :close-on-click-modal="false" title="申请新的荣誉" v-model="newHonor.isShow" size="tiny">
       <el-form :model="newHonor.model">
-          <el-input v-model="newHonor.model.honorType" class="form" placeholder="荣誉类型" auto-complete="off"></el-input>
-          <el-input v-model="newHonor.model.des" class="form" placeholder="描述"></el-input>
+          <el-select v-model="newHonor.model.honorType" class="form" clearable placeholder="请选择荣誉类型">
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.name"
+              :value="item.id">
+            </el-option>
+          </el-select>
+          <el-input v-model="newHonor.model.des" required class="form" placeholder="描述"></el-input>
           <el-date-picker class="form"
             v-model="newHonor.model.achieveTime"
             type="date"
             placeholder="选择日期">
           </el-date-picker>
-
       </el-form>
       <div slot="footer">
         <el-button type="info" @click="newHonor.isShow=false">撤销</el-button>
@@ -72,9 +78,12 @@
       data() {
           return{
             currentDate: new Date(),
+            teacher: {},
             honorTypeOptions: [],
             values:[],
             honors:[],
+            honorsBack:[],
+            options:[],
             honorTypeLoading:true,
             newHonor:{
                 isShow:false,
@@ -88,16 +97,16 @@
       },
     methods: {
           initData() {
-            let teacher = userUtils.isTeacher()
-            if (!teacher) {
+             this.teacher = userUtils.isTeacher()
+            if (!this.teacher) {
                 store.commit("SHOW_LOGIN",true)
                 return
             }
-            let params = {userId:teacher.id}
+            let params = {userId:this.teacher.id}
             ajaxUtils.send("/api/honor/list",params,result=> {
                 if (result.code==200) {
                     this.honors = result.result
-
+                    this.honorsBack = [...this.honors]
                 } else if (result.code == 414) {
                     store.commit("SHOW_LOGIN",true)
                     return
@@ -108,7 +117,7 @@
           extractHonorType(flag) {
               if (flag) {
                   let honorTypeId = []
-                  this.honors.map(h=>honorTypeId.push(h.honorType))
+                  this.honorsBack.map(h=>honorTypeId.push(h.honorType))
                   this.honorTypeLoading = true
                   ajaxUtils.post("/api/honor/item",{list:honorTypeId},result=>{
                       if (result.code == 200) {
@@ -129,13 +138,48 @@
           sortHonor(flag) {
           },
           selectByHonorType(values) {
-
+              console.log(values)
+              if (values.length == 0 ) {
+                  this.honors = [...this.honorsBack]
+                  return
+              }
+              this.honors = this.honorsBack.filter(item =>values.indexOf(item.honorType) != -1 )
           },
-          removeTag(value) {
-              console.log(value)
+          loadHonorType() {
+              let url = "/api/honorType/list"
+              ajaxUtils.send(url,null,result=> {
+                  if(result != -1 && result.code == 200) {
+                      this.options = result.result
+                  }
+              })
+          },
+
+          checkHonorForm() {
+              if (this.newHonor.model.honorType == null || this.newHonor.model.honorType == "" ||
+                  this.newHonor.model.des == null || this.newHonor.model.des.trim() == "" ||
+                  this.newHonor.model.achieveTime == null){
+                  this.$message.info("请补充完信息后提交！")
+                  return false;
+              }
+              return true
           },
           addHonor() {
+              if (this.options.length == 0 ) {
+                  this.loadHonorType()
+              }
+              this.newHonor.model.userId = this.teacher.id  //添加用户
               this.newHonor.isShow = true
+              if ( !this.checkHonorForm() ) return
+              let url = "/api/honor/add"
+              ajaxUtils.post(url,this.newHonor.model,result=> {
+                  if (result != -1 && result.code == 200) {
+                      this.$message.success("申请成功，等待审核");
+                      this.newHonor.isShow = false
+                  }
+              })
+
+
+
           }
 
     },
@@ -178,6 +222,7 @@
     clear: both
   }
   .form{
+    width:80%;;
     margin-bottom: 10px;
   }
 

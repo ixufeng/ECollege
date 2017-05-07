@@ -13,11 +13,11 @@ import com.sendcloud.sdk.util.ResponseData;
  */
 public class CloudMail implements Mail {
 
-    private static CloudMail mail = new CloudMail();
+    private static  CloudMail mail = new CloudMail();
 
 
     private CloudMail() {
-
+        throw new IllegalAccessError("this class can not instance");
     }
 
     public static  CloudMail getInstance(){
@@ -76,9 +76,9 @@ public class CloudMail implements Mail {
     }
 
     public static void main(String[] args) {
-        MailContext mailContext = new MailContext("862363337@qq.com","江苏科技大学 电信学院实验室");
-        mailContext.setContent("你好，我们是江苏科技大学张家港校区");
-        mailContext.setHtml("<h1>hello world<h1>");
+        MailContext mailContext = new MailContext("2514362803@qq.com","约炮专家");
+        mailContext.setContent("你的胸真的有C吗");
+        mailContext.setHtml("<h1><a href='http://www.111we.com'确认有></a><h1>");
         CloudMail.getInstance().send(mailContext);
     }
 }

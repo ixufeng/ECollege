@@ -1,6 +1,5 @@
 package com.xf.college.service.lab.impl;
 
-import com.xf.college.common.CommonResult;
 import com.xf.college.dao.laboratory.LabRoomApplyDao;
 import com.xf.college.dao.laboratory.LabRoomDao;
 import com.xf.college.model.laboratory.LabApply;
@@ -27,22 +26,6 @@ public class LabServiceImpl implements LabService {
     @Autowired
     private LabRoomApplyDao labRoomApplyDao;
 
-    @Override
-    public String labApointment(LabApply labApply) {
-
-        if (labApply == null || labApply.getLabId() == null || labApply.getClassValue().length == 0) {
-            System.out.println(labApply.getClassValue());
-            return CommonResult.IMCOMPLETE_MESSAGE;
-        }
-        if (labApply.getCurrentDay() == null || labApply.getCurrentDay().length()!=10) {
-            return  CommonResult.IMCOMPLETE_MESSAGE;
-        }
-        int result = labRoomApplyDao.add(labApply);
-        if ( result > 0 ) {
-            return CommonResult.SUCCESS;
-        }
-        return CommonResult.ERROR;
-    }
 
     @Override
     public Map<String, List<LabRoom>> groupByName() {

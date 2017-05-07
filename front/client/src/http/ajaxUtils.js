@@ -31,6 +31,20 @@ ajaxUtils.post = (url,params,callback) => {
     }
   })
 }
+ajaxUtils.put = (url,params,callback) => {
+  $.ajax({
+    url:url,
+    type:'PUT',
+    data:params,
+    dataType: "json",
+    success: (result)=> {
+      callback(result)
+    },
+    error: (result)=> {
+      callback(-1,result)
+    }
+  })
+}
 
 let _initParams = (url,params) => {
   if (!params) {

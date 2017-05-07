@@ -122,7 +122,7 @@ a
     .app-container
       position relative
       flex 1
-      min-height 600px
+      min-height 1000px
       display flex
       justify-content center
       margin 0

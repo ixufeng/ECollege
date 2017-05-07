@@ -2,9 +2,11 @@ package com.xf.college.api.controller;
 
 import com.xf.college.common.Auth;
 import com.xf.college.common.CommonResult;
+import com.xf.college.dao.laboratory.LabRoomApplyDao;
 import com.xf.college.dao.laboratory.LabRoomDao;
 import com.xf.college.model.apiwrapper.APIResult;
 import com.xf.college.model.laboratory.LabApply;
+import com.xf.college.service.lab.LabApplyService;
 import com.xf.college.service.lab.LabService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +26,13 @@ public class LabController extends BaseController{
     private LabRoomDao labRoomDao;
 
     @Autowired
+    private LabRoomApplyDao labRoomApplyDao;
+
+    @Autowired
     private LabService labService;
+
+    @Autowired
+    private LabApplyService labApplyService;
 
     /**
      * 共有接口
@@ -75,7 +83,7 @@ public class LabController extends BaseController{
         int auth = getAuth();
         if (Auth.IS_LOGIN(auth)) {
             LabApply  labApply = new LabApply(labId,labType,userId,dayTime,classes);
-            String result = labService.labApointment(labApply);
+            String result = labApplyService.labApointment(labApply);
             if (Objects.equals(result, CommonResult.SUCCESS)) {
                 return asSuccess(null);
             }
@@ -83,4 +91,5 @@ public class LabController extends BaseController{
         }
         return asUnLogin("请先登录!");
     }
+
 }

@@ -1,5 +1,5 @@
 <template>
-    <div v-if="!showLogin" style="width: 100%;">
+    <div v-if="!showLogin" style="width: 100%; height: auto;">
         <e-avatar></e-avatar>
         <el-row style="padding-bottom: 20px;">
             <el-col :span="16" :offset="3" style="height: 500px;padding-top: 20px;">
@@ -19,6 +19,14 @@
                       {{item.value}}
                     </el-col>
                   </el-row>
+
+                  <div><span class="label">姓名:</span></div>
+                  <div><span style="width: 60px;">姓名;</span></div>
+                  <div><span style="width: 60px;">姓名;</span></div>
+                  <div><span style="width: 60px;">姓名;</span></div>
+                  <div><span style="width: 60px;">姓名;</span></div>
+                  <div><span style="width: 60px;">姓名;</span></div>
+                  <div><span style="width: 60px;">姓名;</span></div>
                 </el-tab-pane>
                 <el-tab-pane label="我的资产" name="asset">
                     <asset-list :userId="user_id_asset"></asset-list>
@@ -26,7 +34,8 @@
                 <el-tab-pane label="资产相关" name="apply" >
                     <apply-list :userId="user_id_apply"></apply-list>
                 </el-tab-pane>
-                <el-tab-pane label="实验室申请" name="laboratory" >
+                <el-tab-pane label="实验室申请" name="lab" >
+                    <lab-apply-list :userId="user_id_lab"></lab-apply-list>
                 </el-tab-pane>
                 <el-tab-pane label="代办事项" name="things" >
                 </el-tab-pane>
@@ -60,23 +69,26 @@
     import ajaxUtils from '../../http/ajaxUtils'
     import assetList from './teacher.asset.vue'
     import applyList from './teacher.apply.vue'
+    import labApplyList from './teacher.lab_apply.vue'
     export default{
         components: {
           assetList,
-          applyList
+          applyList,
+          labApplyList
         },
         data() {
             return {
-              teacher:{},
-              teacherData:[],
-              form:{
-                name:"徐峰",
-                region:''
+              teacher: {},
+              teacherData: [],
+              form: {
+                name: "徐峰",
+                region: ''
               },
-              formLabelWidth:"200px",
-              dialogVisible:false,
-              user_id_asset:'',
-              user_id_apply:'',
+              formLabelWidth: "200px",
+              dialogVisible: false,
+              user_id_asset: '',
+              user_id_apply: '',
+              user_id_lab:''
             }
         },
       methods:{
@@ -85,6 +97,8 @@
               this.user_id_asset = this.teacher.id
           } else if (tab.name =="apply") {
               this.user_id_apply = this.teacher.id
+          } else if (tab.name == "lab") {
+              this.user_id_lab = this.teacher.id
           }
         },
             modifyData() {
@@ -116,5 +130,12 @@
     }
 </script>
 <style>
+  .label{
+    width: 80px;
+    text-align: right;
+    height: 40px;
+    line-height: 40px;
+    font-size: 16px
+  }
 
 </style>
