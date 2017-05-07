@@ -9,26 +9,34 @@
 		<result property="limit" column="T_LIMIT"/>
 		<result property="identity" column="T_IDENTITY"/>
 		<result property="password" column="T_PASSWORD"/>
-		<result property="avatars"  column="T_AVATOR"/>
+		<result property="avatars"  column="T_AVATAR"/>
 		<result property="birthday" column="T_BIRTHDAY"/>
+		<result property="mail" column="T_MAIL"/>
 	</resultMap>
 
 	<insert id="add" parameterType="com.xf.college.model.teacher.Teacher">
-		INSERT INTO teacher VALUES(#{id},#{name},#{sex},#{limit},#{identity},#{password},#{avatars},#{birthday})
+INSERT INTO `teacher`(`T_ID`, `T_NAME`, `T_SEX`, `T_LIMIT`, `T_IDENTITY`, `T_PASSWORD`, `T_AVATAR`, `T_BIRTHDAY`, `T_PHONE`, `T_MAIL`)
+		VALUES
+			(#{id},#{name},#{sex},#{limit},#{identity},#{password},#{avatars},#{birthday},#{phone},#{mail})
 	</insert>
 
 	<select id="select" resultMap="teacher">
-		SELECT * from teacher WHERE  T_ID=#{id}
+		SELECT `T_ID`, `T_NAME`, `T_SEX`, `T_LIMIT`, `T_IDENTITY`, `T_PASSWORD`, `T_AVATAR`, `T_BIRTHDAY`, `T_PHONE`, `T_MAIL`
+			FROM `teacher` WHERE  T_ID=#{id}
 	</select>
 	<select id="selectAll" resultMap="teacher">
-		SELECT * from teacher
+		SELECT `T_ID`, `T_NAME`, `T_SEX`, `T_LIMIT`, `T_IDENTITY`, `T_PASSWORD`, `T_AVATAR`, `T_BIRTHDAY`, `T_PHONE`, `T_MAIL`
+			FROM `teacher` WHERE 1
 	</select>
 	<select id="selectByName" resultMap="teacher">
-		SELECT * from teacher WHERE  T_NAME = #{name}
+		SELECT `T_ID`, `T_NAME`, `T_SEX`, `T_LIMIT`, `T_IDENTITY`, `T_PASSWORD`, `T_AVATAR`, `T_BIRTHDAY`, `T_PHONE`, `T_MAIL`
+			FROM `teacher` WHERE  T_NAME = #{name}
 	</select>
 
 	<update id="update" parameterType="com.xf.college.model.teacher.Teacher">
-		UPDATE teacher SET T_ID=#{id},T_NAME=#{name},T_SEX=#{sex},	T_LIMIT=#{limit},T_IDENTITY=#{identity},T_PASSWORD=#{password},T_AVATARS=#{avatars},T_BIRTHDAY=#{birthday}
+		UPDATE teacher SET
+			T_NAME=#{name},T_SEX=#{sex},T_LIMIT=#{limit},T_IDENTITY=#{identity},T_PASSWORD=#{password},T_AVATAR=#{avatars},T_BIRTHDAY=#{birthday},`T_PHONE`=#{phone},`T_MAIL`=#{mail}
+				WHERE  T_ID=#{id}
 	</update>
 
 	<delete id="delete">
