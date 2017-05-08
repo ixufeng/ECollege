@@ -7,10 +7,7 @@ import com.xf.college.model.HonorType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -75,5 +72,24 @@ public class HonorServiceImpl implements HonorService {
             return 0;
         }
         return honorDao.add(honor);
+    }
+
+    /**
+     * 按照类型获取教师的获奖
+     * @param userId
+     * @return
+     */
+    @Override
+    public Map<String, List<Honor>> getHonorMap(String userId) {
+        Map<String,List<Honor>> map = new HashMap<>();
+        List<Honor> list = honorDao.selectAll();
+        list.forEach((Honor item) -> {
+            String key = HonorType.getTypeName(item.getHonorType());
+            List li = map.get(key);
+            if (li == null) li = new ArrayList();
+            li.add(item);
+            map.put(key,li);
+        });
+        return map;
     }
 }

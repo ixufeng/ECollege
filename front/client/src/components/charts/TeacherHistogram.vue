@@ -20,7 +20,7 @@ export  default {
       options() {
           return {
             title: {
-             subtext: '==近年授课数量波动总览 ( --进入查看授课详情 )==',
+             subtext: '近年授课数量波动总览 ( --进入查看授课详情 )',
             },
             color: ['#2bcc63'],
             tooltip : {
@@ -53,7 +53,7 @@ export  default {
             series : [
               {
                 name:'课程数量',
-                type:'bar',
+                type:'line',
                 barWidth: '40%',
                 data:this.yVal
               }

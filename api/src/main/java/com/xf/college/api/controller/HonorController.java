@@ -67,4 +67,15 @@ public class HonorController extends BaseController {
         return  handleNoAuth(auth);
     }
 
+    @RequestMapping(value = "/honor/histogram",method = RequestMethod.GET)
+    public APIResult getHonorGroup(
+            @RequestParam("userId") String userId
+    ) {
+        int auth = getAuth();
+        if (Auth.IS_LOGIN(auth)) {
+            return asSuccess(honorService.getHonorMap(userId));
+        }
+        return handleNoAuth(auth);
+    }
+
 }
