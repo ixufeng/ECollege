@@ -95,7 +95,7 @@
                ],
                series : [
                  {
-                   name:'直接访问',
+                   name:'实验室使用总次数',
                    type:'bar',
                    barWidth: '60%',
                    data:this.hisDataY

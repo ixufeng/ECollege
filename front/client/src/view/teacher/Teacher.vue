@@ -13,6 +13,13 @@
                   <h2>管理中心</h2>
                 </el-col>
                 <el-col :span="18">
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <a href="#" style="height: 25px;line-height: 25px;">你有三个资源更新了状态</a><br>
+                  <a href="#" style="height: 25px;line-height: 25px;">有新的任务为处理</a><br>
+                  <a href="#" style="height: 25px;line-height: 25px;">上次登录时间为 20：08</a><br>
                 </el-col>
             </el-row>
           </el-col>
@@ -27,6 +34,7 @@
                 <h2>个人荣誉</h2>
               </el-col>
               <el-col :span="18">
+                <honor-histogram :userId="teacher.id"></honor-histogram>
               </el-col>
             </el-row>
           </el-col>
@@ -51,12 +59,14 @@
             <el-row>
               <el-col :span="6" style="padding-top: 50px">
                 <el-badge :value="1">
-                  <i class="iconfont icon-jiaoyuyanjiu teacher-item-icon"></i>
+                  <a href="/teacher/study">
+                    <i class="iconfont icon-jiaoyuyanjiu teacher-item-icon"></i>
+                  </a>
                 </el-badge>
                 <h2>科研情况</h2>
               </el-col>
               <el-col :span="18">
-                <histogram></histogram>
+                <study-histogram :userId="teacher.id"></study-histogram>
               </el-col>
             </el-row>
           </el-col>
@@ -68,6 +78,8 @@
   import store from '../../store/index'
   import userUtils from '../../common/utils/UserUtils'
   import histogram from '../../components/charts/TeacherHistogram.vue'
+  import honorHistogram from '../../components/charts/TeacherHistogramHonor.vue'
+  import studyHistogram from '../../components/charts/TeacherHistogramStudy.vue'
   export default {
       data() {
           return {
@@ -86,7 +98,9 @@
           }
       },
       components: {
-            histogram
+        histogram,
+        honorHistogram,
+        studyHistogram
       },
 
       mounted() {

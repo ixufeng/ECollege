@@ -27,6 +27,10 @@
         SELECT * from teacher_study WHERE  T_STUDY_NAME = #{studyName}
     </select>
 
+    <select id="selectByUserId" resultMap="teacherStudy">
+        SELECT * from teacher_study WHERE  T_TEACHER_ID = #{userId}
+    </select>
+
     <update id="update" parameterType="com.xf.college.model.teacher.TeacherStudy">
         UPDATE teacher_study SET T_STUDY_ID=#{id},T_TEACHER_ID=#{teacherId},T_STUDY_NAME=#{studyName},
         T_STUDY_INTRO=#{studyIntro},T_STUDY_TYPE=#{studyType},T_STUDY_LINK=#{studyLink},T_STUDY_IMG=#{studyImg},T_STUDY_BEGIN=#{beginTime}
