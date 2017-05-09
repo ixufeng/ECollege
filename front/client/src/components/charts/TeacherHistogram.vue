@@ -53,7 +53,7 @@ export  default {
             series : [
               {
                 name:'课程数量',
-                type:'line',
+                type:'bar',
                 barWidth: '40%',
                 data:this.yVal
               }

@@ -13,6 +13,13 @@
                   <h2>管理中心</h2>
                 </el-col>
                 <el-col :span="18">
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <a href="#" style="height: 25px;line-height: 25px;">你有三个资源更新了状态</a><br>
+                  <a href="#" style="height: 25px;line-height: 25px;">有新的任务为处理</a><br>
+                  <a href="#" style="height: 25px;line-height: 25px;">上次登录时间为 20：08</a><br>
                 </el-col>
             </el-row>
           </el-col>
@@ -59,7 +66,7 @@
                 <h2>科研情况</h2>
               </el-col>
               <el-col :span="18">
-                <histogram></histogram>
+                <study-histogram :userId="teacher.id"></study-histogram>
               </el-col>
             </el-row>
           </el-col>
@@ -72,6 +79,7 @@
   import userUtils from '../../common/utils/UserUtils'
   import histogram from '../../components/charts/TeacherHistogram.vue'
   import honorHistogram from '../../components/charts/TeacherHistogramHonor.vue'
+  import studyHistogram from '../../components/charts/TeacherHistogramStudy.vue'
   export default {
       data() {
           return {
@@ -91,7 +99,8 @@
       },
       components: {
         histogram,
-        honorHistogram
+        honorHistogram,
+        studyHistogram
       },
 
       mounted() {

@@ -78,4 +78,22 @@ public class TeacherStudy {
     public void setBeginTime(Date beginTime) {
         this.beginTime = beginTime;
     }
+
+    public enum  StudyType{
+
+        thesis("论文"),
+        patent("专利"),
+        teach("教学研究"),
+        science("科学研究"),
+        other("其他");
+
+        private final String value;
+
+         StudyType(String name) {
+             this.value =name;
+        }
+        public String getValue() {
+            return value;
+        }
+    }
 }
