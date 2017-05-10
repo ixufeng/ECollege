@@ -81,7 +81,7 @@ export default {
 @import "assets/css/animate.styl";
 @import "assets/fonts/iconfont.css";
 @import "assets/css/flex.styl";
-@import "//at.alicdn.com/t/font_xntknjxwcz19vn29.css";
+@import "//at.alicdn.com/t/font_dwdkgucn0qpsnhfr.css";
 
 ::-webkit-scrollbar
   width 4px
