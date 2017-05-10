@@ -12,6 +12,7 @@
 		<result property="avatars"  column="T_AVATAR"/>
 		<result property="birthday" column="T_BIRTHDAY"/>
 		<result property="mail" column="T_MAIL"/>
+		<result property="phone" column="T_PHONE"/>
 	</resultMap>
 
 	<insert id="add" parameterType="com.xf.college.model.teacher.Teacher">
