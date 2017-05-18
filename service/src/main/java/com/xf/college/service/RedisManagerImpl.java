@@ -34,6 +34,10 @@ public class RedisManagerImpl implements RedisManager {
     private ScheduledExecutorService studentExecutorService = Executors.newSingleThreadScheduledExecutor();
 
 
+    /**
+     * 从数据库中获取所有老师信息
+     * @return
+     */
     @Override
     public List<Teacher> getAllTeacherFromDB() {
         List<Teacher> list = teacherDao.selectAll();
@@ -44,6 +48,7 @@ public class RedisManagerImpl implements RedisManager {
         });
         return null;
     }
+
 
     @Override
     public List<Student> getAllStudentFromDB() {
