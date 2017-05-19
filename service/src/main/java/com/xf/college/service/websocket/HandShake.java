@@ -19,15 +19,17 @@ public class HandShake implements HandshakeInterceptor{
     @Override
     public boolean beforeHandshake(ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse, WebSocketHandler webSocketHandler, Map<String, Object> map) throws Exception {
         System.out.println("socket connect");
+
         if (serverHttpRequest instanceof ServletServerHttpRequest) {
             ServletServerHttpRequest servletRequest = (ServletServerHttpRequest) serverHttpRequest;
             HttpSession session = servletRequest.getServletRequest().getSession(false);
             // 标记用户
-            String uid = (String) session.getAttribute("uid");
-            if (uid != null) {
-                map.put("uid", uid);
+            String userId = (String) session.getAttribute("userId");
+            if (userId != null) {
+                map.put("userId", userId);
             } else {
-                return false;
+                System.out.println("login first");
+                return true;
             }
         }
         return true;

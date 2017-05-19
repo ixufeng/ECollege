@@ -1,9 +1,12 @@
 package com.xf.college.service.websocket;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.socket.*;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -24,10 +27,9 @@ public class CollegeWebSocketHandler implements WebSocketHandler {
      * 建立连接后
      */
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-        String uid = (String) session.getAttributes().get("uid");
-        if (userSocketSessionMap.get(uid) == null) {
-            userSocketSessionMap.put(uid, session);
-        }
+        String userId = (String) session.getAttributes().get("userId");
+        //save session
+        userSocketSessionMap.putIfAbsent(userId, session);
     }
 
     /**
@@ -35,7 +37,13 @@ public class CollegeWebSocketHandler implements WebSocketHandler {
      */
     @Override
     public void handleMessage(WebSocketSession webSocketSession, WebSocketMessage<?> webSocketMessage) throws Exception {
-
+        if (webSocketMessage.getPayloadLength() == 0){
+            return;
+        }
+        String msg = webSocketMessage.getPayload().toString();
+        SocketMessage message = new Gson().fromJson(msg,SocketMessage.class);
+        message.setDate(new Date());
+        sendMessageToUser(message.getToUserId(),new TextMessage(new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create().toJson(message)));
     }
 
     /**
@@ -71,12 +79,12 @@ public class CollegeWebSocketHandler implements WebSocketHandler {
     /**
      * 给某个用户发送消息
      *
-     * @param uid
+     * @param toUserId
      * @param message
      * @throws IOException
      */
-    public void sendMessageToUser(Long uid, TextMessage message)throws IOException {
-        WebSocketSession session = userSocketSessionMap.get(uid);
+    public void sendMessageToUser(String toUserId, TextMessage message)throws IOException {
+        WebSocketSession session = userSocketSessionMap.get(toUserId);
         if (session != null && session.isOpen()) {
             session.sendMessage(message);
         }

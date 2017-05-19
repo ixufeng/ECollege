@@ -1,6 +1,8 @@
 package com.xf.college.service;
 
 
+import com.xf.college.model.User;
+
 /**
  * Created by xufeng on 2017/4/15.
  */
@@ -9,7 +11,7 @@ public class AuthResult {
 
     private boolean login = false;
     private String message = null;
-    private Object user = null;
+    private User user = null;
     private String redirect;
 
 
@@ -38,11 +40,11 @@ public class AuthResult {
         this.message = message;
     }
 
-    public Object getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(Object user) {
+    public void setUser(User user) {
         this.user = user;
     }
 

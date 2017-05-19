@@ -19,6 +19,14 @@ const routes = [{
     skipAuth: true
   }
 },{
+  path: '/socket',
+  component: (resolve) => {
+    require(['../view/socket.vue'], resolve)
+  },
+  meta: {
+    skipAuth: true
+  }
+},{
   path:'/index',
   component: (resolve) => {
     require(['../view/index.vue'], resolve)
