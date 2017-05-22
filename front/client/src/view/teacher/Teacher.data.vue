@@ -48,6 +48,7 @@
                 </el-tab-pane>
                 <el-tab-pane label="代办事项" name="things" >
                     <span slot="label"> <i class="iconfont icon-shijian"></i> 待办事项 </span>
+                    <admin-handle :userId="user_id_handle"></admin-handle>
                 </el-tab-pane>
               </el-tabs>
             </el-col>
@@ -83,11 +84,15 @@
     import assetList from './teacher.asset.vue'
     import applyList from './teacher.apply.vue'
     import labApplyList from './teacher.lab_apply.vue'
+    import adminHandle from './admin.handle.vue'
+    import tableContainer from '../../components/TableContainer.vue'
     export default{
         components: {
           assetList,
           applyList,
-          labApplyList
+          labApplyList,
+          adminHandle,
+          tableContainer
         },
         data() {
             return {
@@ -102,7 +107,8 @@
               dialogVisible: false,
               user_id_asset: '',
               user_id_apply: '',
-              user_id_lab:''
+              user_id_lab:'',
+              user_id_handle:''
             }
         },
       methods:{
@@ -113,6 +119,8 @@
               this.user_id_apply = this.teacher.id
           } else if (tab.name == "lab") {
               this.user_id_lab = this.teacher.id
+          } else if (tab.name == "things") {
+              this.user_id_handle = this.teacher.id
           }
         },
           modifyData(flag) {
@@ -136,7 +144,7 @@
             ajaxUtils.post(url,params,result=> {
                 if (result.code == 200) {
                     this.$message.success("修改成功！")
-                    this.dialogVisible = true;
+                    this.dialogVisible = false;
                     return
                 }
                 if (result.code == 414) {

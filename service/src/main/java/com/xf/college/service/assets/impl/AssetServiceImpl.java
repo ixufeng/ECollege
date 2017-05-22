@@ -51,6 +51,8 @@ public class AssetServiceImpl implements AssetService{
             int add = assetChangeDao.add(assetChange);
             if (add > 0) {
                 resultList.add(asset.getId());
+                asset.setValid(2);
+                assetDao.update(asset);
             }
         }
         return resultList;

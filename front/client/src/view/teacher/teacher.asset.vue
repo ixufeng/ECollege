@@ -41,10 +41,30 @@
         width="120">
         <template scope="scope">
           <el-button
+            v-if="scope.row.valid==1"
             type="text"
             size="small"
             @click="handleAsset(scope.row.id)">
             申请回收
+          </el-button>
+        </template>
+      </el-table-column>
+      <el-table-column
+        fixed="right"
+        label=" 状态"
+        width="120">
+        <template scope="scope">
+          <el-button
+            type="success"
+            v-if="scope.row.valid==1"
+            size="small">
+            使用中
+          </el-button>
+          <el-button
+            type="info"
+            v-if="scope.row.valid==2"
+            size="small">
+            审核中...
           </el-button>
         </template>
       </el-table-column>

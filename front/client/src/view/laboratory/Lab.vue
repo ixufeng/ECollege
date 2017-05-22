@@ -25,7 +25,7 @@
                       <span style="font-size: 15px;color: #024db3;font-weight: 700;cursor: pointer">{{item.roomNumber}}</span>
                     </el-col>
                     <el-col class="cell" v-for="date in nextWeek" :span="3">
-                      <el-progress :show-text="false" :percentage="getLabApplyClass(item.roomNumber,date)"></el-progress>
+                      <el-progress :show-text="false" :percentage="getLabApplyClass(item.roomNumber,date)" :status="getLabApplyClass(item.roomNumber,date) >60?'exception':'success'"></el-progress>
                       <div style="text-align: center;">
                         <el-button type="text" @click="detail(item)">详情</el-button>
                         <el-button @click="appoint(item.roomNumber,date)" type="text">预约</el-button>

@@ -23,7 +23,7 @@
 	<select id="select" resultMap="assetChange">
 		SELECT `asset_number`, `asset_name`, `source_user_Id`,(SELECT  T_NAME FROM teacher where T_ID = source_user_id) AS `source_user_name`,
 		`dest_user_id`,(SELECT  T_NAME FROM teacher where T_ID = dest_user_id) AS `dest_user_name`,
-		 `create_time`, `complete_time`, `state`, `handler_id`  from asset_chage WHERE  asset_number=#{assetNumber}
+		 `create_time`, `complete_time`, `state`, `handler_id`  from asset_change WHERE  asset_number=#{assetNumber}
 	</select>
 	<select id="selectAll" resultMap="assetChange">
 		SELECT * from asset_change

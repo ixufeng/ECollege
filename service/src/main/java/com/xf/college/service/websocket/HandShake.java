@@ -29,7 +29,7 @@ public class HandShake implements HandshakeInterceptor{
                 map.put("userId", userId);
             } else {
                 System.out.println("login first");
-                return true;
+                return false;
             }
         }
         return true;
