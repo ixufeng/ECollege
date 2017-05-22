@@ -31,3 +31,6 @@ out/
 /front/node_modules
 /front/npm-debug.log
 /front/client/dist
+/admin/node_modules
+/admin/npm-debug.log
+/admin/client/dist
