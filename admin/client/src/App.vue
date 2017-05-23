@@ -3,7 +3,7 @@
   <div id="app-main">
      <x-menu></x-menu>
     <div class="app-wrapper">
-        <my-header></my-header>
+        <x-header></x-header>
       <div class="app-container" :class="{active: true}">
         <router-view></router-view>
       </div>
@@ -23,50 +23,9 @@ import MyHeader from './components/Header1.vue'
 
 
 
-import Rate from './components/Rate.vue'
-
-
-import Table0 from './components/Table0.vue'
-import Table1 from './components/Table1.vue'
-import Table2 from './components/Table2.vue'
-import Table3 from './components/Table3.vue'
-import Table4 from './components/Table4.vue'
-import Table5 from './components/Table5.vue'
-
-import GysForm from './components/GysForm.vue'
-
-import pie1 from './components/Pie1.vue'
-import pie2 from './components/Pie2.vue'
-import Pie3 from './components/Pie3.vue'
-
-import sandian from './components/sandian.vue'
-
-
 Vue.component('EFooter',EFooter)
 Vue.component('ContentModule', ContentModule)
 Vue.component('EHeader',Header)
-
-Vue.component('GysForm',GysForm)
-Vue.component('Rate',Rate)
-
-
-Vue.component('Table0',Table0)
-Vue.component('Table1',Table1)
-Vue.component('Table2',Table2)
-Vue.component('Table3',Table3)
-Vue.component('Table4',Table4)
-Vue.component('Table5',Table5)
-
-
-Vue.component('Pie',pie1)
-Vue.component('Pie2',pie2)
-Vue.component('Pie3',Pie3)
-
-Vue.component('sandian',sandian)
-
-
-
-
 
 
 

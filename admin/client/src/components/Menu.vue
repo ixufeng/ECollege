@@ -1,12 +1,16 @@
 <template>
   <transition name="menu">
     <div id="app-menu">
-      <router-link class="logo-wrapper" to="/" exact>药物订单管理系统</router-link>
-      <ul class="menu">
-        <li v-for="item in currentMenu" class="menu-item">
-          <span class="menu-link"><i class="el-icon-menu"></i>&nbsp;&nbsp;{{item.label}}</span>
-        </li>
-      </ul>
+      <router-link class="logo-wrapper" to="/" exact>学院信息后台管理</router-link>
+      <el-menu default-active="2" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" theme="dark">
+        <template v-for="item in menu">
+          <el-submenu  v-if="item.hasChild" :index="item.index">
+            <template slot="title">{{item.label}}</template>
+              <el-menu-item v-for="child in item.child" :index="child.index">{{child.label}}</el-menu-item>
+          </el-submenu>
+          <el-menu-item v-if="!item.hasChild" :index="item.index">{{item.label}}</el-menu-item>
+        </template>
+      </el-menu>
     </div>
   </transition>
 </template>
@@ -16,51 +20,72 @@ import store from '../store/index'
 export default {
     data() {
         return {
-            menu:{
-                menu1:[{
-                    label:'人员查询',
-                    icon:'',
-
+            menu:[{
+                label:'资产管理',
+                icon:'',
+                index:'1',
+                child: [{
+                  index:'1-0',
+                  label:'资产总览',
+                  link:'',
                 },{
-                    label:'人员查询',
-                    icon:'',
-
+                    index:'1-1',
+                    label:'申请审核',
+                    link:'',
                 },{
-                    label:'人员查询',
-                    icon:'',
-
+                    index:'1-2',
+                    label:'新增资产',
+                    link:''
                 }],
-                menu2:[{
-                    label:'药品查询',
-                    icon:'',
-
+                hasChild:true
+            },{
+                index:'2',
+                label:'实验室管理',
+                icon:'',
+                hasChild:true,
+                child:[{
+                    index:'2-0',
+                    label:'实验室总览',
+                    link:''
                 },{
-                    label:'药品订单',
-                    icon:'',
-
+                    index:'2-1',
+                    label:'申请审核',
+                    link:''
+                },{
+                    index:'2-2',
+                    label:'实验室设置',
+                    link:''
+                },{
+                  index:'2-3',
+                  label:'新增实验室',
+                  link:''
                 }],
-                menu3:[{
-                    label:'xxx',
-                    icon:'',
-
+            },{
+                index:3,
+                label:'课程管理',
+                icon:'',
+                hasChild:true,
+                child:[{
+                    label:'课程总览',
+                    index:'3-0',
+                    link:''
                 },{
-                    label:'sss',
-                    icon:'',
-
+                  label:'新增课程',
+                  index:'3-1',
+                  link:''
                 },{
-                    label:'xxx',
-                    icon:'',
-
+                  label:'课程更改',
+                  index:'3-2',
+                  link:''
                 }]
-            }
+            },{
+                index:4,
+                label:'用户设置',
+                icon:'',
+                link:''
+            }]
         }
     },
-   computed: {
-       currentMenu: function(){
-           let index = "menu" + store.getters.menuIndex
-           return this.menu[index]
-       }
-},
 
 }
 </script>

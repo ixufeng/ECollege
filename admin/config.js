@@ -9,7 +9,7 @@ var backendBase = {
   root: path.normalize(__dirname),
 
   // Server port
-  port: process.env.PORT || 8081,
+  port: process.env.PORT || 8082,
 
   // Secret for session, you will want to change this and make it an environment variable
   secrets: {
@@ -31,7 +31,7 @@ var backendBase = {
 
 var development = {
   frontend: {
-    port: 9001,
+    port: 9002,
     assetsRoot: path.resolve(__dirname, './client/src'),
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
