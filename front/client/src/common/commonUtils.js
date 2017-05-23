@@ -6,7 +6,7 @@ let commonUtils = {}
     }
     commonUtils.formatDate = (timeStamp, fmt) => {
         if(fmt==null){
-            fmt = "yyyy-MM-dd hh:mm:ss"
+            fmt = "yyyy-MM-dd"
         }
         let date = new Date(timeStamp)
         var o = {

@@ -1,6 +1,6 @@
 <template>
-  <div style="width: 100%;height: 140px;">
-    <div style="width: 350px;height:200px" id="my_charts_study">
+  <div style="width: 100%;height: 200px;">
+    <div style="width: 350px;height: 200px" id="my_charts_study">
 
     </div>
   </div>
@@ -9,13 +9,14 @@
   import eCharts from 'echarts'
   import ajaxUtils from '../../http/ajaxUtils'
   export  default {
-    props:["userId"],
+    props:["userId","_type","_width","_height"],
     data () {
       return {
         xVal:[],
         yVal:[]
       }
     },
+
     computed: {
       options() {
         return {
@@ -50,10 +51,11 @@
               show:false,
             }
           ],
+
           series : [
             {
               name:'课程数量',
-              type:'line',
+              type:this._type || 'line',
               barWidth: '40%',
               data:this.yVal
             }

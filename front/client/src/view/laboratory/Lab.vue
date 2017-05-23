@@ -2,7 +2,6 @@
     <div style="width: 100%;height: auto;">
         <lab-part></lab-part>
         <div>
-          <center><h2>实验室预约</h2></center>
           <el-row>
             <el-col :span="19" :offset="1">
               <el-card>
@@ -26,9 +25,9 @@
                       <span style="font-size: 15px;color: #024db3;font-weight: 700;cursor: pointer">{{item.roomNumber}}</span>
                     </el-col>
                     <el-col class="cell" v-for="date in nextWeek" :span="3">
-                      <el-progress :show-text="false" :percentage="getLabApplyClass(item.roomNumber,date)"></el-progress>
+                      <el-progress :show-text="false" :percentage="getLabApplyClass(item.roomNumber,date)" :status="getLabApplyClass(item.roomNumber,date) >60?'exception':'success'"></el-progress>
                       <div style="text-align: center;">
-                        <el-button type="text">详情</el-button>
+                        <el-button type="text" @click="detail(item)">详情</el-button>
                         <el-button @click="appoint(item.roomNumber,date)" type="text">预约</el-button>
                       </div>
                     </el-col>
@@ -51,10 +50,65 @@
                 <el-checkbox v-for="index in classChoice" :label="index" :disabled="hasSelected(appointForm.labId,appointForm.dayTime,index)" :key="city">{{index}}</el-checkbox>
               </el-checkbox-group>
             </el-form-item>
+            <el-form-item label-width="80px" label="申请理由">
+                <el-input  style="width: 80%"></el-input>
+            </el-form-item>
           </el-form>
           <div slot="footer">
             <el-button type="info">取消</el-button>
             <el-button @click="appointClick" type="success">预约</el-button>
+          </div>
+        </el-dialog>
+        <el-dialog title="实验室详情" v-model="showLabDetail">
+          <div id="lab-detail" v-if="selectedLab!=null">
+            <el-row class="el-row">
+              <el-col :span="8">
+                实验室
+              </el-col>
+              <el-col :span="16">
+                {{selectedLab.roomNumber}}
+              </el-col>
+            </el-row>
+            <el-row>
+              <el-col :span="8">
+                实验室类型
+              </el-col>
+              <el-col :span="16">
+                {{selectedLab.roomType}}
+              </el-col>
+            </el-row>
+            <el-row>
+              <el-col :span="8">
+                管理员
+              </el-col>
+              <el-col :span="16">
+                {{selectedLab.adminName}}
+              </el-col>
+            </el-row>
+            <el-row>
+              <el-col :span="8">
+                实验室状态
+              </el-col>
+              <el-col :span="16">
+                {{selectedLab.valid==1?"正常":'异常'}}
+              </el-col>
+            </el-row>
+            <el-row>
+              <el-col :span="8">
+                使用次数
+              </el-col>
+              <el-col :span="16">
+                {{selectedLab.useCount}}
+              </el-col>
+            </el-row>
+            <el-row>
+              <el-col :span="8">
+                设备数量
+              </el-col>
+              <el-col :span="16">
+                {{selectedLab.useCount}}
+              </el-col>
+            </el-row>
           </div>
         </el-dialog>
     </div>
@@ -78,6 +132,7 @@
               nextWeek:timeUtils.getNextDays(7),
               labApplyMap:{},
               showAppointDialog:false,
+              showLabDetail:false,
               appointForm: {
                   labId:'',
                   userId:'',
@@ -88,7 +143,8 @@
               },
               applyKeyVal:{},
               classChoice:["1","2","3","4","5"],
-              selectedClass:[]  //某天已经选择过的课时
+              selectedClass:[],  //某天已经选择过的课时
+              selectedLab:null
           }
       },
       components: {
@@ -109,6 +165,13 @@
         }
       },
       methods: {
+          detail(lab) {
+              console.log(lab)
+              this.showLabDetail = true
+              this.selectedLab = lab
+
+
+          },
           clearForm() {
             this.appointForm.labId = ''
             this.appointForm.classValue  = []
@@ -152,7 +215,7 @@
               this.appointForm.dayTime = timeUtils.format(date,"yyyy-MM-dd")
               let time = timeUtils.format(date,'yyyy-MM-dd')
               let key = roomNumber + "-" + time
-              console.log(key)
+
           },
         /**
          * 获取实验室在某天已预约的课时
@@ -198,7 +261,7 @@
           initData() {
               ajaxUtils.send("/api/lab/group_type",null,result=> {
                   if (result.code==200) {
-                      console.log('type',this.labTypeGroup)
+
                       this.labTypeGroup = result.result
                   }
               })
@@ -244,5 +307,8 @@
       text-align: center;
       font-size: 16px;
       font-weight: 700;
+  }
+  #lab-detail > .el-row{
+    margin: 10px;
   }
 </style>

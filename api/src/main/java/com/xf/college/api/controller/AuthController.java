@@ -32,6 +32,7 @@ public class AuthController extends BaseController{
 
         if (result.isLogin()) {
             session.setAttribute("user",result.getUser());
+            session.setAttribute("userId",result.getUser().getId());
             return asSuccess(result);
         }else {
             return asUnLogin(result.getMessage());

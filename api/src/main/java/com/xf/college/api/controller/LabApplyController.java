@@ -50,6 +50,18 @@ public class LabApplyController extends BaseController {
         if (auth != Auth.ADMIN) {
             return asUnAuthError("没有权限");
         }
-        return asSuccess(labRoomApplyDao.selectAll());
+        return asSuccess(labApplyService.selectAll());
+    }
+
+    /**
+     * 管理员接口
+     * @return
+     */
+    public APIResult checkLabApply(
+            @RequestParam("userId") String userId,
+            @RequestParam("labId") String labId,
+            @RequestParam("state") String state  //审核结果
+    ) {
+        return null;
     }
 }

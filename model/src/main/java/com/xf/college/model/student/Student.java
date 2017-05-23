@@ -1,12 +1,14 @@
 package com.xf.college.model.student;
 
 
+import com.xf.college.model.User;
+
 import java.util.Date;
 
 /**
  * Created by xufeng on 2017/3/25.
  */
-public class Student {
+public class Student implements User{
 
     private final String id;
     private String name;

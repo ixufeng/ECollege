@@ -40,8 +40,28 @@
             <span style="line-height: 20px;font-size: 16px">我的项目</span>
             <el-button style="float: right;" size="small" type="primary">添加项目</el-button>
           </div>
-          <div class="study-item">
-            this is body
+          <div style="display: block;">
+            <study-histogram :userId="teacher.id" _type="bar"></study-histogram>
+          </div>
+          <div v-if="currentStudy!=null" style="width: 100%;">
+            <div class="title">
+              <span> <i class="iconfont icon-bumenchuangxinyanjiubu"></i> {{currentStudy.studyName}}</span>
+              <span style="float: right;font-size: 13px ;color: #7b7b7b;margin-right: 10px"><i class="iconfont icon-shijian"></i>&nbsp;创建时间：{{timeFormat(currentStudy.beginTime)}}</span>
+            </div>
+            <div>
+              <span class="small-title"><i class="iconfont icon-hand"></i>研究方向</span>
+              <p style="margin-left: 40px">
+                {{currentStudy.studyType}}
+              </p>
+              <span class="small-title"><i class="iconfont icon-hand"></i>研究简介</span>
+              <p style="margin-left: 40px;line-height: 20px">
+                {{currentStudy.studyIntro}}
+              </p>
+              <span class="small-title"><i class="iconfont icon-hand"></i>友情链接</span>
+              <p style="margin-left: 40px">
+                {{currentStudy.studyLink}}
+              </p>
+            </div>
           </div>
         </el-card>
         </div>
@@ -53,6 +73,8 @@
   import ajaxUtils from '../../http/ajaxUtils'
   import store from '../../store/index'
   import userUtils from '../../common/utils/UserUtils'
+  import studyHistogram from '../../components/charts/TeacherHistogramStudy.vue'
+  import commonUtils from '../../common/commonUtils'
   export default {
       data() {
           return {
@@ -61,7 +83,13 @@
             currentStudy:null
           }
       },
+      components: {
+        studyHistogram
+      },
       methods: {
+          timeFormat(time,fmt) {
+              return commonUtils.formatDate(time,fmt);
+          },
           initData() {
             this.teacher = userUtils.isTeacher()
             if (!this.teacher) {
@@ -140,10 +168,32 @@
     min-height: 36px;
   }
   .box-card{
+    padding-bottom: 20px;
     margin: 5px;
   }
   .study-item{
+    cursor:pointer;
     line-height: 20px;
+  }
+  .study-item :hover{
+    color: #0086b3;
+    text-decoration: underline;
+  }
+  .title{
+    margin-top: 10px;
+    height:30px;
+    padding-left: 10px;
+    border: 1px solid #ccc;
+    line-height: 30px;
+    font-size: 15px;
+    color: #03a9f3;
+    font-weight: 600;
+  }
+  .small-title{
+    margin-top: 40px;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 30px;
   }
 
 </style>

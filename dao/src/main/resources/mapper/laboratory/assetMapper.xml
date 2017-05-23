@@ -60,7 +60,7 @@
 
     <update id="update" parameterType="com.xf.college.model.laboratory.Asset">
        UPDATE `asset` SET
-          `e_id`=#{id},`e_name`=#{name},`e_type_id`=#{typeId},`e_valid`=#{valid},`e_use_count`=#{useCount},`e_des`=#{des},`e_remark`=#{remark},`e_img`=#{img},
+          `e_id`=#{id},`e_name`=#{name},`e_type_id`=#{typeId},`e_valid`=#{valid},`e_use_count`=#{usedCount},`e_des`=#{des},`e_remark`=#{remark},`e_img`=#{imgs},
           `e_begin_time`=#{beginTime},`e_model`=#{model},`e_spec`=#{specification},`e_price`=#{price},`e_nation`=#{nationality},`e_factory_name`=#{factoryName},`e_buy_time`=#{buyTime},
           `e_user_id`=#{userId},`e_handle_user_id`=#{handleUserId},`e_incoming`=#{incoming},`e_last_use_time`=#{lastUseTime}
              WHERE E_ID = #{id}

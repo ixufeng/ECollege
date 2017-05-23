@@ -33,4 +33,7 @@ public interface LabApplyService {
     String checkLabApply(int labApplyId);
 
 
+    List<LabApply> selectAll();
+
+
 }

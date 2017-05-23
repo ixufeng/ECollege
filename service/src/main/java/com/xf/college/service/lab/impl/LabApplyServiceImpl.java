@@ -53,6 +53,15 @@ public class LabApplyServiceImpl implements LabApplyService{
         return list.stream().filter(item-> item.getState() == state).collect(Collectors.toList());
     }
 
+    /**
+     * @return
+     */
+    @Override
+    public List<LabApply> selectAll() {
+        List<LabApply> list = labRoomApplyDao.selectAll();
+        return list.stream().filter(item->item.getState()==0).collect(Collectors.toList());
+    }
+
     @Override
     public String checkLabApply(int labApplyId) {
         return null;

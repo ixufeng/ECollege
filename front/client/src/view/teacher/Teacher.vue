@@ -23,8 +23,8 @@
                 </el-col>
             </el-row>
           </el-col>
-          <el-col class="teacher-item" :offset="2" :span="6">
-            <el-row>
+          <el-col class="teacher-item" :offset="2" :span="8">
+            <el-row style="height: 240px;">
               <el-col :span="6" style="padding-top: 50px">
                 <el-badge :value="7">
                   <a href="/teacher/honor">
@@ -34,14 +34,14 @@
                 <h2>个人荣誉</h2>
               </el-col>
               <el-col :span="18">
-                <honor-histogram :userId="teacher.id"></honor-histogram>
+                  <honor-histogram :userId="teacher.id"></honor-histogram>
               </el-col>
             </el-row>
           </el-col>
         </el-row>
         <el-row class="row-style">
           <el-col class="teacher-item" :offset="3" :span="8">
-            <el-row>
+            <el-row style="height: 240px;">
               <el-col :span="6" style="padding-top: 50px">
                 <el-badge :value="3">
                   <a href="/teacher/class">
@@ -55,8 +55,8 @@
               </el-col>
             </el-row>
           </el-col>
-          <el-col class="teacher-item" :offset="2" :span="6">
-            <el-row>
+          <el-col class="teacher-item" :offset="2" :span="8">
+            <el-row style="height: 240px;">
               <el-col :span="6" style="padding-top: 50px">
                 <el-badge :value="1">
                   <a href="/teacher/study">
@@ -80,6 +80,7 @@
   import histogram from '../../components/charts/TeacherHistogram.vue'
   import honorHistogram from '../../components/charts/TeacherHistogramHonor.vue'
   import studyHistogram from '../../components/charts/TeacherHistogramStudy.vue'
+  import tableContainer from '../../components/TableContainer.vue'
   export default {
       data() {
           return {
@@ -100,7 +101,8 @@
       components: {
         histogram,
         honorHistogram,
-        studyHistogram
+        studyHistogram,
+        tableContainer
       },
 
       mounted() {
@@ -127,9 +129,10 @@
     color: #00cfbd;
   }
   .teacher-item {
-    padding-top: 30px;
-    height:180px;
-    padding-bottom: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    padding-left: 20px;
+
   }
   .teacher-item-text {
     width: 80%;
