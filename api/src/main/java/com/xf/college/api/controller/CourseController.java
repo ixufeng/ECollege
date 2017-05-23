@@ -17,8 +17,11 @@ public class CourseController extends BaseController {
     private CourseService courseService;
 
 
+
     @RequestMapping("/all")
     public APIResult getCourseList(){
         return asSuccess(courseService.getCourseList());
     }
+
+
 }

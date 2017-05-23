@@ -27,7 +27,7 @@ export default {
                 child: [{
                   index:'1-0',
                   label:'资产总览',
-                  link:'',
+                  link:'asset_list',
                 },{
                     index:'1-1',
                     label:'申请审核',
@@ -46,7 +46,7 @@ export default {
                 child:[{
                     index:'2-0',
                     label:'实验室总览',
-                    link:''
+                    link:'/lab_list'
                 },{
                     index:'2-1',
                     label:'申请审核',
@@ -68,7 +68,7 @@ export default {
                 child:[{
                     label:'课程总览',
                     index:'3-0',
-                    link:''
+                    link:'/course_list'
                 },{
                   label:'新增课程',
                   index:'3-1',

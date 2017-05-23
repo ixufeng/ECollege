@@ -9,7 +9,7 @@
             </span>
           </div>
           <el-table
-            :data="tableData"
+            :data="pageData"
             stripe
             style="width: 100%;margin-top: 20px;">
             <el-table-column
@@ -45,18 +45,23 @@
               <template scope="scope">
                 <el-button
                   type="text"
-                  size="small">
+                  size="small"
+                  @click="deleteClass(scope.row)">
                   移除
-                </el-button>
-                <el-button
-                  type="text"
-                  size="small">
-                  修改
                 </el-button>
               </template>
             </el-table-column>
 
           </el-table>
+          <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :current-page="current_page"
+            :page-sizes="[10, 20]"
+            :page-size="page_size"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="tableData.length">
+          </el-pagination>
         </el-col>
       </el-row>
       <el-dialog title="新增课程" v-model="dialogVisible" size="tiny" width="200px">
@@ -94,8 +99,16 @@
   import userUtils from '../../common/utils/UserUtils'
   import {getSessionUser,setSessionUser} from '../../storage/index'
   export default {
+      computed: {
+          pageData() {
+              let start = (this.current_page - 1) * this.page_size
+              return [...this.tableData].splice(start,this.page_size)
+          }
+      },
     data() {
         return{
+            page_size:10,
+            current_page:1,
             tableData:[],
             dialogVisible:false,
             teacher: {},
@@ -110,6 +123,28 @@
         }
     },
     methods: {
+      addStudy() {
+
+      },
+      deleteClass(item) {
+          if (window.confirm("确认删除？")) {
+              let params = {courseId:item.id}
+              ajaxUtils.post("/api/course/delete",params,result=> {
+                  if (result.code == 200) {
+                      this.$message.success("删除成功！");
+                  }else if (result.code == 414) {
+                      this.$message.error("请先登录！");
+                  }
+              })
+          }
+
+      },
+      handleSizeChange(size) {
+          this.page_size = size;
+      },
+      handleCurrentChange(pageIndex) {
+          this.current_page = pageIndex
+      },
       initData() {
         let teacher = userUtils.isTeacher()
         if (!teacher) {
@@ -122,7 +157,6 @@
         }
         ajaxUtils.send("/api/course/list",params,result=> {
             if (result.code==200) {
-                console.log(result.result)
                 this.tableData = result.result
             } else if ( result.code == 414) {
               store.commit("SHOW_LOGIN",true)
