@@ -1,6 +1,7 @@
 package com.xf.college.api.controller;
 
 import com.xf.college.common.Auth;
+import com.xf.college.dao.HonorDao;
 import com.xf.college.model.Honor;
 import com.xf.college.model.apiwrapper.APIResult;
 import com.xf.college.service.honor.HonorService;
@@ -20,6 +21,9 @@ public class HonorController extends BaseController {
 
     @Autowired
     private HonorService honorService;
+
+    @Autowired
+    private HonorDao honorDao;
 
     /**
      * @return
@@ -65,6 +69,21 @@ public class HonorController extends BaseController {
             return asSuccess(honorService.addHonor(honor));
         }
         return  handleNoAuth(auth);
+    }
+
+    @RequestMapping(value = "/honor/delete",method = RequestMethod.POST)
+    public APIResult deleteHonor(
+            @RequestParam("id") int id
+    ){
+            int auth = getAuth();
+            if (Auth.IS_LOGIN(auth)) {
+                int result =  honorDao.delete(id);
+                if (result > 0) {
+                    return asSuccess("删除成功！");
+                }
+                return asError("删除失败");
+            }
+            return asUnLogin("请先登录");
     }
 
     @RequestMapping(value = "/honor/histogram",method = RequestMethod.GET)

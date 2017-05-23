@@ -13,35 +13,19 @@ export default [{
   component: (resolve) => {
     require(['../view/ThingList.vue'], resolve)
   }
-},
-{
-  path: '/demo',
+},{
+  path: '/asset_list',
   component: (resolve) => {
-    require(['../view/demo.vue'], resolve)
+    require(['../view/AssetList.vue'], resolve)
   }
-},
-{
-  path:'/demo2',
-  component:(resolve)=>{
-    require(['../view/Pie2.vue'], resolve)
+},{
+  path: '/lab_list',
+  component: (resolve) => {
+    require(['../view/LabList.vue'], resolve)
   }
-},
-{
-  path:'/table1',
-  component:(resolve)=>{
-    require(['../view/Table1.vue'], resolve)
+},{
+  path: '/course_list',
+  component: (resolve) => {
+    require(['../view/CourseList.vue'], resolve)
   }
-},
-{
-  path:'/table4',
-  component:(resolve)=>{
-    require(['../view/Table4.vue'], resolve)
-  }
-},
-{
-  path:'/gys_add',
-  component:(resolve)=>{
-    require(['../view/Gys_add.vue'], resolve)
-  }
-}
-]
+}]

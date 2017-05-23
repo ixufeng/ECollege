@@ -10,7 +10,7 @@
           <div>
             <span style="text-align: center;padding-left: 20px;">
               <el-button size="middle" @click="sortHonor(1)" type="success">时间 <i class="iconfont icon-xiajiang"></i></el-button>
-              <el-button type="warning" @click="sortHonor(2)">访问 <i class="iconfont icon-xiajiang"></i></el-button>
+             <!-- <el-button type="warning" @click="sortHonor(2)">访问 <i class="iconfont icon-xiajiang"></i></el-button>-->
               <el-select v-model="values"
                          multiple placeholder="按类型筛选"
                          style="margin-left: 10px;"
@@ -25,11 +25,11 @@
                   :value="item.value">
                 </el-option>
               </el-select>
-              <el-button size="middle" @click="addHonor" style="margin-left: 10px" type="success"><i class="iconfont icon-shenqing"></i>申请荣誉</el-button>
+              <el-button size="middle" @click="addHonor" style="margin-left: 10px" type="success"><i class="iconfont icon-shenqing"></i>添加荣誉</el-button>
             </span>
           </div>
           <el-row>
-            <el-col :span="4" v-for="(item, index) in honors" :offset="0" style="margin: 20px;">
+            <el-col :span="4" v-for="(item, index) in pageHonor" :offset="0" style="margin: 20px;">
               <el-card :body-style="{ padding: '0px' }">
                 <img src="/static/abt.jpg" class="image">
                 <div style="padding: 14px;">
@@ -37,12 +37,21 @@
                   <div class="bottom clearfix">
                     <time class="time">{{ item.achieveTime }}</time>
                     <el-button type="info" size="small" class="button">查看详细</el-button>
-                    <el-button type="danger" size="small" class="button">删除</el-button>
+                    <el-button type="danger" size="small" class="button" @click="deleteHonor(item)">删除</el-button>
                   </div>
                 </div>
               </el-card>
             </el-col>
           </el-row>
+          <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :current-page="current_page"
+            :page-sizes="[10, 20, 30, 40]"
+            :page-size="page_size"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="honors.length">
+          </el-pagination>
         </el-col>
     </el-row>
     <el-dialog :close-on-click-modal="false" title="申请新的荣誉" v-model="newHonor.isShow" size="tiny">
@@ -75,8 +84,16 @@
   import store from '../../store/index'
   import userUtils from '../../common/utils/UserUtils'
   export default{
+      computed: {
+          pageHonor() {
+              let start = (this.current_page - 1) * this.page_size
+              return [...this.honors].splice(start,this.page_size)
+          }
+      },
       data() {
           return{
+            page_size:10,
+            current_page:1,
             currentDate: new Date(),
             teacher: {},
             honorTypeOptions: [],
@@ -96,6 +113,31 @@
           }
       },
     methods: {
+          handleSizeChange(size) {
+            this.page_size = size
+          },
+          handleCurrentChange(pageIndex) {
+
+            this.current_page = pageIndex
+          },
+          deleteHonor(honor) {
+              let flag = false
+              if(honor) {
+                  flag = window.confirm("确认删除此条记录？")
+              }
+              if (flag) {
+                  let params = {
+                      id:honor.id
+                  }
+                  ajaxUtils.post("/api/honor/delete",params,result=> {
+                      if (result.code == 200) {
+                          this.$message.success("删除成功！")
+                      }else {
+                        this.$message.warning("删除失败！")
+                      }
+                  })
+              }
+          },
           initData() {
              this.teacher = userUtils.isTeacher()
             if (!this.teacher) {
@@ -136,6 +178,12 @@
               }
           },
           sortHonor(flag) {
+              if (flag == 1) {
+                  //sort by time
+                  this.honors.sort((h1,h2)=>{
+                      return new Date(h1.achieveTime).getTime() >new Date(h2.achieveTime).getTime();
+                  })
+              }
           },
           selectByHonorType(values) {
               console.log(values)

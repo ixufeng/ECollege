@@ -9,7 +9,7 @@
             </span>
           </div>
           <el-table
-            :data="tableData"
+            :data="pageData"
             stripe
             style="width: 100%;margin-top: 20px;">
             <el-table-column
@@ -57,6 +57,15 @@
             </el-table-column>
 
           </el-table>
+          <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :current-page="current_page"
+            :page-sizes="[10, 20]"
+            :page-size="page_size"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="tableData.length">
+          </el-pagination>
         </el-col>
       </el-row>
       <el-dialog title="新增课程" v-model="dialogVisible" size="tiny" width="200px">
@@ -94,8 +103,16 @@
   import userUtils from '../../common/utils/UserUtils'
   import {getSessionUser,setSessionUser} from '../../storage/index'
   export default {
+      computed: {
+          pageData() {
+              let start = (this.current_page - 1) * this.page_size
+              return [...this.tableData].splice(start,this.page_size)
+          }
+      },
     data() {
         return{
+            page_size:10,
+            current_page:1,
             tableData:[],
             dialogVisible:false,
             teacher: {},
@@ -110,6 +127,12 @@
         }
     },
     methods: {
+      handleSizeChange(size) {
+          this.page_size = size;
+      },
+      handleCurrentChange(pageIndex) {
+          this.current_page = pageIndex
+      },
       initData() {
         let teacher = userUtils.isTeacher()
         if (!teacher) {
