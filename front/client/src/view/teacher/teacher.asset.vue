@@ -2,8 +2,7 @@
   <div style="width: 100%">
     <div style="margin-bottom: 8px">
         <span style="text-align: center;padding-left: 20px;">
-          <el-button size="small"  type="success">申请资产</el-button>
-          <el-button size="small" style="margin-left: 10px" type="success">批量转移资产</el-button>
+          <el-button size="small"  type="success" @click="assetApplyHandle">申请资产</el-button>
         </span>
     </div>
     <el-table
@@ -69,6 +68,20 @@
         </template>
       </el-table-column>
     </el-table>
+    <el-dialog title="新增项目" v-model="dialogVisible" size="tiny" width="200px">
+      <el-form :model="form">
+        <el-form-item style="width: 80%" label="资产名称" label-width="100px">
+          <el-input v-model="form.assetName" placeholder="资产名称"  class="e-form"></el-input><br/>
+        </el-form-item>
+        <el-form-item style="width: 80%" label="申请描述" label-width="100px">
+          <el-input v-model="form.des"  type="textarea"   class="e-form"></el-input><br/>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="assetApplyHandle(0)">确 定</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 <script>
@@ -80,10 +93,29 @@
           assets:{
             init:false,
             data:[]
+          },
+          dialogVisible:false,
+          form: {
+              assetName:'',
+              des:'',
+              userId:''
           }
         }
     },
     methods: {
+      assetApplyHandle(flag) {
+          this.dialogVisible = true
+          if (flag == 0) {
+              ajaxUtils.post("/api/asset/apply_asset",this.form,result=> {
+                  if (result.code == 200) {
+                      this.$message.success("申请成功，等该管理员处理");
+                  } else {
+                    this.$message.info(result.message)
+                  }
+              })
+            this.dialogVisible = false
+          }
+      },
         getAssets() {
           ajaxUtils.send("/api/asset/list",{userId:this.userId},result=>{
             console.log(result)
@@ -105,7 +137,6 @@
               this.$message.error("申请失败，稍后重试！")
             }
           })
-          console.log(assetId)
         }
     },
     watch: {

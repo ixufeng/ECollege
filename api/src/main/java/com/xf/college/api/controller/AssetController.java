@@ -1,10 +1,12 @@
 package com.xf.college.api.controller;
 
 import com.xf.college.common.Auth;
+import com.xf.college.dao.laboratory.AssetApplyDao;
 import com.xf.college.dao.laboratory.AssetChangeDao;
 import com.xf.college.dao.laboratory.AssetDao;
 import com.xf.college.model.apiwrapper.APIResult;
 import com.xf.college.model.laboratory.Asset;
+import com.xf.college.model.laboratory.AssetApply;
 import com.xf.college.service.assets.AssetService;
 import com.xf.college.service.assets.impl.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +29,15 @@ public class AssetController extends BaseController{
     private AssetService assetService;
     @Autowired
     private RoomService roomService;
-
     @Autowired
     private AssetChangeDao assetChangeDao;
-
-
     @Autowired
     private AssetDao assetDao;
+
+    @Autowired
+    private AssetApplyDao assetApplyDao;
+
+
     /**
      * 获取所有资产接口 对管理员可见
      * @return
@@ -93,5 +97,30 @@ public class AssetController extends BaseController{
     ) {
         int auth = getAuth();
         return asSuccess(assetChangeDao.selectByUserId(userId));
+    }
+
+    /**
+     * 申请新的资产
+     * @param userId
+     * @param des
+     * @param assetName
+     * @return
+     */
+    @RequestMapping(value = "/apply_asset")
+    public APIResult addAssetApply(
+            @RequestParam("userId") String userId,
+            @RequestParam("des") String des,
+            @RequestParam("assetName") String assetName
+    ) {
+        int auth = getAuth();
+        if (Auth.IS_LOGIN(auth)) {
+            AssetApply assetApply = new AssetApply(userId,assetName,des);
+            int result = assetApplyDao.add(assetApply);
+            if (result > 0) {
+                return asSuccess("申请成功");
+            }
+            return asError("申请失败");
+        }
+        return asUnLogin("请先登录");
     }
 }
