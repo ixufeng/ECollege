@@ -14,7 +14,7 @@
     </resultMap>
 
     <insert id="add" parameterType="com.xf.college.model.teacher.TeacherStudy">
-        INSERT INTO teacher_study VALUES(#{id},#{teacherId},#{studyName},#{studyIntro},#{studyType},#{studyLink},#{studyImg},#{beginTime})
+        INSERT INTO teacher_study VALUES(#{teacherId},#{id},#{studyName},#{studyIntro},#{studyType},#{studyLink},#{studyImg},#{beginTime})
     </insert>
 
     <select id="select" resultMap="teacherStudy">

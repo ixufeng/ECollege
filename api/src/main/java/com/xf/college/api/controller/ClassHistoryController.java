@@ -2,6 +2,7 @@ package com.xf.college.api.controller;
 
 import com.xf.college.common.Auth;
 import com.xf.college.common.CommonResult;
+import com.xf.college.dao.teacher.ClassHistoryDao;
 import com.xf.college.model.apiwrapper.APIResult;
 import com.xf.college.model.teacher.ClassHistory;
 import com.xf.college.service.charts.ChartsService;
@@ -9,6 +10,7 @@ import com.xf.college.service.charts.Range;
 import com.xf.college.service.teacher.ClassHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,6 +26,9 @@ public class ClassHistoryController extends BaseController {
 
     @Autowired
     private ClassHistoryService classHistoryService;
+
+    @Autowired
+    private ClassHistoryDao classHistoryDao;
 
     @Autowired
     private ChartsService chartsService;
@@ -67,5 +72,20 @@ public class ClassHistoryController extends BaseController {
             return asSuccess(chartsService.getClassHistoryHistogram(new Range(),teacherId));
         }
         return asSuccess(chartsService.getClassHistoryHistogram(new Range(from,to),teacherId));
+    }
+
+    @RequestMapping(value = "/delete",method = RequestMethod.POST)
+    public APIResult deleteCourse(
+            @RequestParam("courseId") int courseId
+    ) {
+        int auth = getAuth();
+        if (Auth.IS_LOGIN(auth)) {
+            int result = classHistoryDao.delete(courseId);
+            if (result > 0 ) {
+                return asSuccess("删除成功");
+            }
+            return asError("删除失败");
+        }
+        return asUnLogin("请先登录");
     }
 }

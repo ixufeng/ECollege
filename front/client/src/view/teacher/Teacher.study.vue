@@ -7,7 +7,7 @@
         <el-card class="box-card">
           <div slot="header" class="clearfix">
             <span style="line-height: 20px;font-size: 16px">近期发表的论文</span>
-            <el-button style="float: right;"  size="small" type="primary">添加论文</el-button>
+            <el-button style="float: right;"  size="small" type="primary" @click="addNewStudy(1)">添加论文</el-button>
           </div>
           <div v-for="o in article"  class="study-item">
             <a @click="pickStudy(o)"><i class="iconfont icon-yanjiubaogao"></i> &nbsp;&nbsp;&nbsp;{{o.studyName}}</a>
@@ -16,7 +16,7 @@
         <el-card class="box-card">
           <div slot="header" class="clearfix">
             <span style="line-height: 20px;font-size: 16px">我的专利</span>
-            <el-button style="float: right;" size="small" type="primary">添加专利</el-button>
+            <el-button style="float: right;" size="small" type="primary"  @click="addNewStudy(1)">添加专利</el-button>
           </div>
           <div v-for="o in patent"  class="study-item">
             <a @click="pickStudy(o)"><i class="iconfont icon-yanjiubaogao"></i>{{o.studyName}}</a>
@@ -25,7 +25,7 @@
         <el-card class="box-card">
           <div slot="header" class="clearfix">
             <span style="line-height: 20px;font-size: 16px">我的项目</span>
-            <el-button style="float: right;" size="small" type="primary">添加项目</el-button>
+            <el-button style="float: right;" size="small" type="primary"  @click="addNewStudy(1)">添加项目</el-button>
           </div>
           <div v-for="o in project"  class="study-item">
             <a @click="pickStudy(o)"><i class="iconfont icon-jiaoyuyanjiu2"></i> &nbsp;&nbsp;&nbsp;{{o.studyName }}</a>
@@ -67,6 +67,49 @@
         </div>
       </el-col>
     </el-row>
+    <el-dialog title="新增项目" v-model="dialogVisible" size="tiny" width="200px">
+      <el-form :model="form">
+        <el-form-item style="width: 80%" label="项目名称" label-width="100px">
+          <el-input v-model="form.studyName" placeholder="课程名称"  class="e-form"></el-input><br/>
+        </el-form-item>
+        <el-form-item style="width: 80%" label="项目类别" label-width="100px">
+          <el-select v-model="form.studyType" placeholder="请选择项目类别" class="e-form">
+            <el-option
+              label="科学研究"
+              value="科学研究"
+            ></el-option>
+            <el-option
+              label="教学研究"
+              value="教学研究">
+            </el-option>
+            <el-option
+              label="论文"
+              value="论文">
+            </el-option>
+            <el-option
+              label="专利"
+              value="专利">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item style="width: 80%" label="项目时间" label-width="100px">
+          <el-date-picker
+            class="e-form"
+            v-model="form.beginTime"
+            type="month"
+            placeholder="请选择开始时间">
+          </el-date-picker>
+        </el-form-item>
+        <el-form-item style="width: 80%" label="项目介绍" label-width="100px">
+          <el-input v-model="form.intro"  type="textarea"   class="e-form"></el-input><br/>
+        </el-form-item>
+
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="addNewStudy(0)">确 定</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 <script>
@@ -78,15 +121,38 @@
   export default {
       data() {
           return {
+            dialogVisible:false,
             teacher:{},
             studyData:{},
-            currentStudy:null
+            currentStudy:null,
+            form: {
+                beginTime:'',
+                studyType:'',
+                intro:'',
+                userId:'',
+                studyName:''
+            }
           }
       },
       components: {
         studyHistogram
       },
       methods: {
+          addNewStudy(flag) {
+              this.dialogVisible = true
+              if(flag == 0) {
+                  this.form.userId = this.teacher.id
+                  ajaxUtils.post("/api/study/add",this.form,result=> {
+                      if(result.code == 200) {
+                          this.$message.success("添加成功！")
+                      } else if (result.code == 414) {
+                          this.$message.error("请先登录")
+                      }
+
+                  })
+                this.dialogVisible = false
+              }
+          },
           timeFormat(time,fmt) {
               return commonUtils.formatDate(time,fmt);
           },

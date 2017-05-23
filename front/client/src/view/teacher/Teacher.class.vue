@@ -45,13 +45,9 @@
               <template scope="scope">
                 <el-button
                   type="text"
-                  size="small">
+                  size="small"
+                  @click="deleteClass(scope.row)">
                   移除
-                </el-button>
-                <el-button
-                  type="text"
-                  size="small">
-                  修改
                 </el-button>
               </template>
             </el-table-column>
@@ -127,6 +123,22 @@
         }
     },
     methods: {
+      addStudy() {
+
+      },
+      deleteClass(item) {
+          if (window.confirm("确认删除？")) {
+              let params = {courseId:item.id}
+              ajaxUtils.post("/api/course/delete",params,result=> {
+                  if (result.code == 200) {
+                      this.$message.success("删除成功！");
+                  }else if (result.code == 414) {
+                      this.$message.error("请先登录！");
+                  }
+              })
+          }
+
+      },
       handleSizeChange(size) {
           this.page_size = size;
       },
@@ -145,7 +157,6 @@
         }
         ajaxUtils.send("/api/course/list",params,result=> {
             if (result.code==200) {
-                console.log(result.result)
                 this.tableData = result.result
             } else if ( result.code == 414) {
               store.commit("SHOW_LOGIN",true)

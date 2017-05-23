@@ -1,12 +1,16 @@
 package com.xf.college.api.controller;
 
 import com.xf.college.common.Auth;
+import com.xf.college.dao.teacher.TeacherStudyDao;
 import com.xf.college.model.apiwrapper.APIResult;
+import com.xf.college.model.teacher.TeacherStudy;
 import com.xf.college.service.study.StudyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Date;
 
 /**
  * Created by xufeng on 2017/5/8.
@@ -17,6 +21,9 @@ public class StudyController extends BaseController{
 
     @Autowired
     private StudyService studyService;
+
+    @Autowired
+    private TeacherStudyDao teacherStudyDao;
 
     @RequestMapping("/list")
     public APIResult getUserStudy(
@@ -30,10 +37,27 @@ public class StudyController extends BaseController{
     }
     @RequestMapping("/add")
     public APIResult addStudy(
-            @RequestParam("userId") String userId
+            @RequestParam("userId") String userId,
+            @RequestParam("studyName") String studyName,
+            @RequestParam("intro") String intro,
+            @RequestParam("studyType") String studyType,
+            @RequestParam("beginTime") Date beginTime
 
     ) {
-        return null;
+        int auth = getAuth();
+        if (Auth.IS_LOGIN(auth)) {
+            TeacherStudy teacherStudy = new TeacherStudy();
+            teacherStudy.setStudyName(studyName);
+            teacherStudy.setTeacherId(userId);
+            teacherStudy.setStudyIntro(intro);
+            teacherStudy.setStudyType(studyType);
+            teacherStudy.setBeginTime(beginTime);
+            int result = teacherStudyDao.add(teacherStudy);
+            if (result > 0) {
+                return asSuccess("添加成功");
+            }
+        }
+        return asUnLogin("请先登录");
     }
 
     @RequestMapping("/histogram")

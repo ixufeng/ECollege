@@ -27,4 +27,8 @@
 		WHERE  course_id=#{courseId}
 	</update>
 
+	<delete id="delete">
+		DELETE FROM course WHERE course_id=#{id}
+	</delete>
+
 </mapper>
