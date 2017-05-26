@@ -10,7 +10,7 @@ import java.util.Date;
  */
 public class Student implements User{
 
-    private final String id;
+    private  String id;
     private String name;
     private String password;
     private String avatars;
@@ -18,7 +18,7 @@ public class Student implements User{
     private Date birthday;
     private String phone;
     private String identify;
-    private final Date admissionTime;
+    private  Date admissionTime;
 
 
     public Student(String id, String name, String profession, Date admissionTime) {
@@ -26,6 +26,10 @@ public class Student implements User{
         this.name = name;
         this.profession = profession;
         this.admissionTime = admissionTime;
+    }
+
+    public Student() {
+
     }
 
     public Date getBirthday() {
@@ -122,4 +126,11 @@ public class Student implements User{
         return admissionTime;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setAdmissionTime(Date admissionTime) {
+        this.admissionTime = admissionTime;
+    }
 }

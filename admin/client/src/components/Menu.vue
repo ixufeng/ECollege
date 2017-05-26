@@ -2,13 +2,21 @@
   <transition name="menu">
     <div id="app-menu">
       <router-link class="logo-wrapper" to="/" exact>学院信息后台管理</router-link>
-      <el-menu default-active="2" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" theme="dark">
+      <el-menu default-active="2" class="menu" @open="handleOpen" @close="handleClose" theme="dark">
         <template v-for="item in menu">
           <el-submenu  v-if="item.hasChild" :index="item.index">
             <template slot="title">{{item.label}}</template>
-              <el-menu-item v-for="child in item.child" :index="child.index">{{child.label}}</el-menu-item>
+              <el-menu-item  class="menu-item" v-for="child in item.child" :index="child.index">
+                <router-link class="menu-link" :to="child.link">
+                  {{child.label}}
+                </router-link>
+              </el-menu-item>
           </el-submenu>
-          <el-menu-item v-if="!item.hasChild" :index="item.index">{{item.label}}</el-menu-item>
+          <el-menu-item class="menu-item" v-if="!item.hasChild" :index="item.index">
+            <router-link class="menu-link" :to="item.link">
+              {{item.label}}
+            </router-link>
+          </el-menu-item>
         </template>
       </el-menu>
     </div>
@@ -31,11 +39,11 @@ export default {
                 },{
                     index:'1-1',
                     label:'申请审核',
-                    link:'',
+                    link:'/asset_apply',
                 },{
                     index:'1-2',
                     label:'新增资产',
-                    link:''
+                    link:'/asset_add'
                 }],
                 hasChild:true
             },{
@@ -50,15 +58,11 @@ export default {
                 },{
                     index:'2-1',
                     label:'申请审核',
-                    link:''
-                },{
-                    index:'2-2',
-                    label:'实验室设置',
-                    link:''
+                    link:'lab_apply'
                 },{
                   index:'2-3',
                   label:'新增实验室',
-                  link:''
+                  link:'lab_add'
                 }],
             },{
                 index:3,
@@ -72,17 +76,17 @@ export default {
                 },{
                   label:'新增课程',
                   index:'3-1',
-                  link:''
+                  link:'course_add'
                 },{
                   label:'课程更改',
                   index:'3-2',
-                  link:''
+                  link:'course_config'
                 }]
             },{
                 index:4,
                 label:'用户设置',
                 icon:'',
-                link:''
+                link:'user_config'
             }]
         }
     },
@@ -90,7 +94,7 @@ export default {
 }
 </script>
 <style lang="stylus">
-@import "../assets/css/variable"
+@import "../assets/css/variable.styl";
 .menu-enter-active
 .menu-leave-active
   transition all .5s

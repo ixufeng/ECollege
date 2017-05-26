@@ -1,4 +1,3 @@
-
 <template>
   <div id="app-main">
      <x-menu></x-menu>
@@ -19,24 +18,22 @@ import NProgress from './components/NProgress'
 import ContentModule from './components/ContentModule'
 import EFooter from './components/Footer'
 import Header from './components/Header.vue'
-import MyHeader from './components/Header1.vue'
-
-
+import { mapGetters } from 'vuex'
 
 Vue.component('EFooter',EFooter)
 Vue.component('ContentModule', ContentModule)
 Vue.component('EHeader',Header)
-
-
 
 export default {
 
   components: {
     XHeader,
     XMenu,
-    NProgress,
-    MyHeader
-  }
+    NProgress
+  },
+  computed: {
+    ...mapGetters(['loggedIn'])
+  },
 }
 </script>
 <style lang="stylus">

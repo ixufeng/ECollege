@@ -26,6 +26,7 @@ public class AuthController extends BaseController{
             @RequestParam("userName") String userName,
             @RequestParam("password") String password,
             @RequestParam(value = "redirect",required = false) String redirect,
+            @RequestParam(value = "flag",required = false) Integer flag,
             HttpSession session) {
         AuthResult result = authService.auth(userName,password);
         result.setRedirect(redirect);

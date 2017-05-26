@@ -8,9 +8,11 @@ import java.util.Date;
 public class AssetApply {
     private int id;
     private String userId;
+    private String userName; // for vo
     private String assetName;
     private Date createTime;
     private String handlerId;
+    private String handlerUserName; //for vo
     private String des;
 
     public AssetApply () {
@@ -69,5 +71,21 @@ public class AssetApply {
 
     public void setHandlerId(String handlerId) {
         this.handlerId = handlerId;
+    }
+
+    public String getHandlerUserName() {
+        return handlerUserName;
+    }
+
+    public void setHandlerUserName(String handlerUserName) {
+        this.handlerUserName = handlerUserName;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

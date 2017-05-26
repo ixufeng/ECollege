@@ -30,6 +30,23 @@ public class Asset {
     private Date incoming;//入库时间
     private Date lastUseTime; //最后一次使用时间
 
+    public Asset () {
+
+    }
+
+    public Asset(String id,String name,String model,String type,String des,String factoryName,Date buyTime,String nation,double price) {
+        this.id = id;
+        this.name = name;
+        this.model = model;
+        this.typeId = type;
+        this.des = des;
+        this.factoryName = factoryName;
+        this.buyTime = buyTime;
+        this.nationality = nation;
+        this.price = price;
+        this.incoming = new Date();
+    }
+
 
 
     public String getImgs() {

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -100,6 +101,19 @@ public class AssetController extends BaseController{
     }
 
     /**
+     * 返回系统所有的资产申请
+     * @return
+     */
+    @RequestMapping("/apply/all")
+    public APIResult getAllAssetApply() {
+        int auth = getAuth();
+       /* if (Auth.ADMIN == auth) {
+            return asSuccess(assetApplyDao.selectAll());
+        }*/
+        return asSuccess(assetApplyDao.selectAll());
+    }
+
+    /**
      * 申请新的资产
      * @param userId
      * @param des
@@ -122,5 +136,30 @@ public class AssetController extends BaseController{
             return asError("申请失败");
         }
         return asUnLogin("请先登录");
+    }
+
+    /**
+     * 管理员接口
+     * @return
+     */
+    @RequestMapping(value = "/add",method = RequestMethod.POST)
+    public APIResult addNewAsset(
+            @RequestParam("name") String name,
+            @RequestParam("model") String model,
+            @RequestParam("type") String type,
+            @RequestParam("id") String id,
+            @RequestParam("des") String des,
+            @RequestParam("factoryName") String factoryName,
+            @RequestParam("buyTime") Date buyTime,
+            @RequestParam("nation") String nation,
+            @RequestParam("price") double price
+
+    ) {
+        Asset asset = new Asset(id,name,model,type,des,factoryName,buyTime,nation,price);
+        int result = assetService.add(asset);
+        if (result > 0 ) {
+            return asSuccess("添加成功");
+        }
+        return asError("添加失败");
     }
 }

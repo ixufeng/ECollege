@@ -47,9 +47,9 @@ public class LabApplyController extends BaseController {
     @RequestMapping("/all")
     public APIResult getAllLabApply () {
         int auth = getAuth();
-        if (auth != Auth.ADMIN) {
+      /*  if (auth != Auth.ADMIN) {
             return asUnAuthError("没有权限");
-        }
+        }*/
         return asSuccess(labApplyService.selectAll());
     }
 

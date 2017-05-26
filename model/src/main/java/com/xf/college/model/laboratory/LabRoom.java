@@ -16,6 +16,20 @@ public class LabRoom {
     private long useCount;
 
 
+    public LabRoom () {
+
+    }
+
+    public LabRoom (String roomNumber,String des,String roomType,Date beginTime,long useCount) {
+        this.roomNumber = roomNumber;
+        this.des = des;
+        this.roomType = roomType;
+        this.beginTime = beginTime;
+        this.useCount = useCount;
+        this.valid = 0;
+    }
+
+
     public String getRoomNumber() {
         return roomNumber;
     }

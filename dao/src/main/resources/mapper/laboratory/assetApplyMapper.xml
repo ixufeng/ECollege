@@ -4,10 +4,12 @@
 <mapper namespace="com.xf.college.dao.laboratory.AssetApplyDao">
     <resultMap id="assetApply" type="com.xf.college.model.laboratory.AssetApply">
         <id column="id" property="id"></id>
-        <result column="userId" property="user_id"></result>
-        <result column="assetName" property="asset_name"></result>
-        <result column="createTime" property="create_time"></result>
-        <result column="handlerId" property="handler_id"></result>
+        <result column="user_id" property="userId"></result>
+        <result column="user_name" property="userName"></result>
+        <result column="asset_name" property="assetName"></result>
+        <result column="create_time" property="createTime"></result>
+        <result column="handler_id" property="handlerId"></result>
+        <result column="handler_user_name" property="handlerUserName"></result>
         <result column="des" property="des"></result>
     </resultMap>
 
@@ -16,14 +18,14 @@
     </insert>
 
     <select id="select" resultMap="assetApply">
-          SELECT  * FROM `asset_apply` WHERE id = #{id}
+         SELECT `id`, `user_id`,(SELECT `T_NAME` from `teacher` WHERE T_ID=user_id) as `user_name`, `asset_name`, `create_time`, `handler_id`, `des` FROM `asset_apply` WHERE id = #{id}
     </select>
     <select id="selectAll" resultMap="assetApply">
-        SELECT  * FROM `asset_apply`
+        SELECT `id`, `user_id`,(SELECT `T_NAME` from `teacher` WHERE T_ID=user_id) as `user_name`, `asset_name`, `create_time`, `handler_id`, `des` FROM `asset_apply` WHERE 1
     </select>
 
     <select id="selectByUserId" resultMap="assetApply">
-      SELECT * FROM `asset_apply` WHERE user_id = #{userId}
+      SELECT `id`, `user_id`,(SELECT `T_NAME` from `teacher` WHERE T_ID=user_id) as `user_name`, `asset_name`, `create_time`, `handler_id`, `des` FROM `asset_apply` user_id = #{userId}
     </select>
 
     <update id="update" parameterType="com.xf.college.model.laboratory.AssetApply">

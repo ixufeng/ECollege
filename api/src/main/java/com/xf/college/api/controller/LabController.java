@@ -6,13 +6,16 @@ import com.xf.college.dao.laboratory.LabRoomApplyDao;
 import com.xf.college.dao.laboratory.LabRoomDao;
 import com.xf.college.model.apiwrapper.APIResult;
 import com.xf.college.model.laboratory.LabApply;
+import com.xf.college.model.laboratory.LabRoom;
 import com.xf.college.service.lab.LabApplyService;
 import com.xf.college.service.lab.LabService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -90,6 +93,23 @@ public class LabController extends BaseController{
             return asError(result);
         }
         return asUnLogin("请先登录!");
+    }
+
+    @RequestMapping(value = "/add",method = RequestMethod.POST)
+    public APIResult addLab(
+            @RequestParam("roomNumber") String roomNumber,
+            @RequestParam("roomType") String roomType,
+            @RequestParam("des") String des,
+            @RequestParam("useCount") long useCount,
+            @RequestParam("beginTime") Date beginTime
+    ) {
+        int auth = getAuth();
+        LabRoom labRoom = new LabRoom(roomNumber,des,roomType,beginTime,useCount);
+        int result = labRoomDao.add(labRoom);
+        if (result > 0 ) {
+            return asSuccess("添加成功");
+        }
+        return asError("添加失败");
     }
 
 }

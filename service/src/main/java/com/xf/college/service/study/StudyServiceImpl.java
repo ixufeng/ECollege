@@ -42,4 +42,17 @@ public class StudyServiceImpl implements StudyService {
 
         return 0;
     }
+
+    /**
+     * 查询用户的项目
+     * @param userId
+     * @return
+     */
+    @Override
+    public List<TeacherStudy> getStudentByUser(String userId) {
+        if (Objects.equals(userId,null)) {
+            return Collections.emptyList();
+        }
+        return teacherStudyDao.selectByUserId(userId);
+    }
 }
