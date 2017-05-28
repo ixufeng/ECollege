@@ -10,6 +10,15 @@ public class Course {
     private String courseName;
     private Date createTime;
 
+    public Course() {
+        this.createTime = new Date();
+    }
+
+    public Course(String courseId,String courseName) {
+        this.createTime = new Date();
+        this.courseId = courseId;
+        this.courseName = courseName;
+    }
 
     public String getCourseId() {
         return courseId;

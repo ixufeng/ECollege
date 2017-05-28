@@ -53,7 +53,7 @@
     <update id="update" parameterType="com.xf.college.model.laboratory.LabApply">
         UPDATE `laboratory_apply`
           SET `lab_id`=#{labId},`state`=#{state},`des`=#{des},`class_index`=#{classes},`current_day`=#{currentDay}
-             WHERE id={id}
+             WHERE id=#{id}
     </update>
 
     <delete id="delete">

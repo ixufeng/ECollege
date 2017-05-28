@@ -29,7 +29,6 @@ public class LabRoom {
         this.valid = 0;
     }
 
-
     public String getRoomNumber() {
         return roomNumber;
     }
@@ -93,4 +92,5 @@ public class LabRoom {
     public void setUseCount(long useCount) {
         this.useCount = useCount;
     }
+
 }

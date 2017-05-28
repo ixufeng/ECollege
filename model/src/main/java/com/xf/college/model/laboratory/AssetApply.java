@@ -14,6 +14,8 @@ public class AssetApply {
     private String handlerId;
     private String handlerUserName; //for vo
     private String des;
+    private int state;  // 0 审核中 1 审核通过 2 驳回
+    private String result;  //申请回复
 
     public AssetApply () {
         this.createTime = new Date();
@@ -87,5 +89,21 @@ public class AssetApply {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
+
+    public String getResult() {
+        return result;
+    }
+
+    public void setResult(String result) {
+        this.result = result;
     }
 }

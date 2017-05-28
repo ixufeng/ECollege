@@ -9,7 +9,8 @@
 	</resultMap>
 
 	<insert id="add" parameterType="com.xf.college.model.Course">
-		INSERT INTO course  VALUES(#{courseId},#{courseName},#{create_time})
+		INSERT INTO course  SELECT #{courseId},#{courseName},#{createTime} FROM DUAL  WHERE NOT EXISTS
+			(SELECT  `course_id` FROM course WHERE course_id=#{courseId})
 	</insert>
 
 	<select id="select" resultMap="course">

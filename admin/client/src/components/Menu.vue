@@ -5,7 +5,7 @@
       <el-menu default-active="2" class="menu" @open="handleOpen" @close="handleClose" theme="dark">
         <template v-for="item in menu">
           <el-submenu  v-if="item.hasChild" :index="item.index">
-            <template slot="title">{{item.label}}</template>
+            <template slot="title"><i :class="item.icon"></i>{{item.label}}</template>
               <el-menu-item  class="menu-item" v-for="child in item.child" :index="child.index">
                 <router-link class="menu-link" :to="child.link">
                   {{child.label}}
@@ -67,7 +67,7 @@ export default {
             },{
                 index:3,
                 label:'课程管理',
-                icon:'',
+                icon:'iconfont icon-jiaoyuyanjiu2',
                 hasChild:true,
                 child:[{
                     label:'课程总览',
@@ -77,10 +77,6 @@ export default {
                   label:'新增课程',
                   index:'3-1',
                   link:'course_add'
-                },{
-                  label:'课程更改',
-                  index:'3-2',
-                  link:'course_config'
                 }]
             },{
                 index:4,

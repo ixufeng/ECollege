@@ -2,10 +2,10 @@
   <div style="width: 100%;">
     <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
       <el-form-item class="e_input" label="实验室标号" prop="roomNumber">
-        <el-input v-model="ruleForm.id"></el-input>
+        <el-input v-model="ruleForm.roomNumber"></el-input>
       </el-form-item>
       <el-form-item class="e_input" label="实验室类型" prop="roomType">
-        <el-input v-model="ruleForm.type"></el-input>
+        <el-input v-model="ruleForm.roomType"></el-input>
       </el-form-item>
       <el-form-item class="e_input" label="实验室描述" prop="des">
         <el-input v-model="ruleForm.des"></el-input>
@@ -44,7 +44,7 @@
             { required: true, message: '请输入实验室编号', trigger: 'blur' },
             { min: 3, max: 50, message: '长度在 3 到 5 个字符', trigger: 'blur' }
           ],
-          type: [
+          roomType: [
             { required: true, message: '请输入实验室类型', trigger: 'blur' },
             { min: 3, max: 50, message: '长度在 3 到 5 个字符', trigger: 'blur' }
           ],
@@ -61,7 +61,7 @@
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            ajaxUtils.post("/api/asset/add",this.ruleForm,result=> {
+            ajaxUtils.post("/api/lab/add",this.ruleForm,result=> {
               if (result.code == 200) {
                 this.$message.success("添加成功")
               }else {

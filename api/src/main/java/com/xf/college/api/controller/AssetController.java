@@ -162,4 +162,21 @@ public class AssetController extends BaseController{
         }
         return asError("添加失败");
     }
+
+    @RequestMapping("/mark")
+    public APIResult updateAssetState(
+            @RequestParam("id") String id,
+            @RequestParam("state") int state
+    ) {
+            Asset asset = assetDao.select(id);
+            if (asset == null) {
+                return asError("参数错误");
+            }
+            asset.setValid(state);
+            int result = assetDao.update(asset);
+            if (result > 0 ) {
+                return asSuccess(null);
+            }
+            return asError("更新失败,稍后再试");
+    }
 }

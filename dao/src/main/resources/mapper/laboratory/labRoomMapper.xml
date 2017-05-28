@@ -16,8 +16,8 @@
 
     <insert id="add" parameterType="com.xf.college.model.laboratory.LabRoom">
         INSERT INTO `laboratory_room`(`room_number`, `des`, `room_type`, `admin`, `valid`, `begin_time`, `use_count`)
-            VALUES
-                (#{roomNumber},#{des},#{roomType},#{admin},#{valid},#{beginTime},#{use_count})
+            SELECT  #{roomNumber},#{des},#{roomType},#{admin},#{valid},#{beginTime},#{useCount} FROM DUAL WHERE NOT  EXISTS
+            (SELECT  `room_number` FROM `laboratory_room` WHERE room_number=#{roomNumber})
     </insert>
 
     <select id="select" resultMap="laboratoryRoom">
@@ -32,7 +32,7 @@
 
     <update id="update" parameterType="com.xf.college.model.laboratory.LabRoom">
        UPDATE `laboratory_room` SET
-      `des`=#{des},`room_type`=#{roomType},`admin`=#{admin},`valid`=#{valid},`begin_time`=#{beginTime},`use_count`=#{useCount} WHERE room_number=#{room_number}
+      `des`=#{des},`room_type`=#{roomType},`admin`=#{admin},`valid`=#{valid},`begin_time`=#{beginTime},`use_count`=#{useCount} WHERE room_number=#{roomNumber}
     </update>
 
     <delete id="delete">

@@ -36,6 +36,11 @@ export default [{
 },{
   path: '/course_list',
   component: (resolve) => {
-    require(['../view/CourseList.vue'], resolve)
+    require(['../view/course/CourseList.vue'], resolve)
+  }
+},{
+  path: '/course_add',
+  component: (resolve) => {
+    require(['../view/course/CourseAdd.vue'], resolve)
   }
 }]

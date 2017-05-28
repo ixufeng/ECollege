@@ -109,7 +109,42 @@ public class LabController extends BaseController{
         if (result > 0 ) {
             return asSuccess("添加成功");
         }
-        return asError("添加失败");
+        return asError("该实验室已经存在");
+    }
+    @RequestMapping(value = "/mark",method = RequestMethod.POST)
+    public APIResult markAs(
+            @RequestParam("labId") String labId,
+            @RequestParam("state") int state
+    ) {
+        LabRoom labRoom = labRoomDao.select(labId);
+        if (labRoom == null) {
+            return asError("参数错误");
+        }
+        labRoom.setValid(state);
+        int result = labRoomDao.update(labRoom);
+        if (result > 0) {
+            return asSuccess(null);
+        }
+        return asError("更新失败");
+    }
+    @RequestMapping(value = "/modify",method = RequestMethod.POST)
+    public APIResult modifyLab(
+            @RequestParam("roomNumber") String labId,
+            @RequestParam("useCount") long useCount,
+            @RequestParam("roomType") String labType,
+            @RequestParam("des") String des
+    ) {
+            LabRoom labRoom = labRoomDao.select(labId);
+            if (labRoom == null) {
+                return asError("参数错误");
+            }
+            labRoom.setDes(des);
+            labRoom.setUseCount(useCount);
+            labRoom.setRoomType(labType);
+            if (labRoomDao.update(labRoom) > 0) {
+                return asSuccess(null);
+            }
+            return asError("修改失败");
     }
 
 }
