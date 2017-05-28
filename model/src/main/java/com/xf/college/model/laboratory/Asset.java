@@ -10,7 +10,7 @@ public class Asset {
     private String name;
     private String typeId; //分类号
     private Date beginTime;
-    private int valid;    //现状 0 在库中，1 在使用中 ，2 处理中/申请转移中 ，仍在使用者手中
+    private int valid;    //现状 0 在库中，1 在使用中 ，2 处理中/申请转移中 ，仍在使用者手中 -1 损坏
     private int usedCount;  //使用次数
     private String des;  //描述
     private String remark;  //备注
@@ -29,6 +29,23 @@ public class Asset {
     private String handleUserName;// for vo
     private Date incoming;//入库时间
     private Date lastUseTime; //最后一次使用时间
+
+    public Asset () {
+
+    }
+
+    public Asset(String id,String name,String model,String type,String des,String factoryName,Date buyTime,String nation,double price) {
+        this.id = id;
+        this.name = name;
+        this.model = model;
+        this.typeId = type;
+        this.des = des;
+        this.factoryName = factoryName;
+        this.buyTime = buyTime;
+        this.nationality = nation;
+        this.price = price;
+        this.incoming = new Date();
+    }
 
 
 

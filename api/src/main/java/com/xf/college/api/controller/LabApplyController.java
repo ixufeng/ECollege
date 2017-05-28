@@ -3,6 +3,7 @@ package com.xf.college.api.controller;
 import com.xf.college.common.Auth;
 import com.xf.college.dao.laboratory.LabRoomApplyDao;
 import com.xf.college.model.apiwrapper.APIResult;
+import com.xf.college.model.laboratory.LabApply;
 import com.xf.college.service.lab.LabApplyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,7 @@ public class LabApplyController extends BaseController {
 
     @Autowired
     private LabRoomApplyDao labRoomApplyDao;
+
 
     /**
      * 教师申请实验室列表
@@ -47,9 +49,9 @@ public class LabApplyController extends BaseController {
     @RequestMapping("/all")
     public APIResult getAllLabApply () {
         int auth = getAuth();
-        if (auth != Auth.ADMIN) {
+      /*  if (auth != Auth.ADMIN) {
             return asUnAuthError("没有权限");
-        }
+        }*/
         return asSuccess(labApplyService.selectAll());
     }
 
@@ -57,11 +59,24 @@ public class LabApplyController extends BaseController {
      * 管理员接口
      * @return
      */
+    @RequestMapping("/handle")
     public APIResult checkLabApply(
-            @RequestParam("userId") String userId,
-            @RequestParam("labId") String labId,
-            @RequestParam("state") String state  //审核结果
+            @RequestParam("labApplyId") int labApplyId,
+            @RequestParam("state") int state,  //审核结果
+            @RequestParam(value = "result",required = false) String result
     ) {
-        return null;
+        LabApply labApply = labRoomApplyDao.select(labApplyId);
+        if (labApply == null) {
+            return asError("参数错误");
+        }
+        labApply.setState(state);
+        if (state == 3) {
+            labApply.setResult(result);
+        }
+        int f = labRoomApplyDao.update(labApply);
+        if (f  > 0) {
+            return asSuccess(null);
+        }
+        return asError("操作失败");
     }
 }

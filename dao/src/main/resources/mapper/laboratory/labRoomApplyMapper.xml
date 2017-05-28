@@ -7,6 +7,7 @@
         <result column="lab_id" property="labId"></result>
         <result column="id" property="id"></result>
         <result column="user_id" property="userId"></result>
+        <result column="user_name" property="userName"></result>
         <result column="create_time" property="createTime"></result>
         <result column="state" property="state"></result>
         <result column="handler_id" property="handlerId"></result>
@@ -24,42 +25,40 @@
     </insert>
 
     <select id="select" resultMap="labApply">
-        SELECT `lab_id`, `id`, `user_id`,`lab_type`, `create_time`, `state`, `handler_id`, `des` ,`class_index` ,`current_day`
+        SELECT `lab_id`, `id`, `user_id`,(SELECT `T_NAME` from teacher WHERE `T_ID`=`user_id`) AS `user_name`,`lab_type`, `create_time`, `state`, `handler_id`, `des` ,`class_index` ,`current_day`
         FROM `laboratory_apply`
           WHERE id = #{id}
     </select>
 
     <select id="selectByUserId" resultMap="labApply">
-        SELECT `lab_id`, `id`, `user_id`, `lab_type`,`create_time`, `state`, `handler_id`, `des`,`class_index` FROM `laboratory_apply` WHERE user_id = #{userId}
+        SELECT `lab_id`, `id`, `user_id`,(SELECT `T_NAME` from teacher WHERE `T_ID`=`user_id`) AS `user_name`, `lab_type`,`create_time`, `state`, `handler_id`, `des`,`class_index` FROM `laboratory_apply` WHERE user_id = #{userId}
     </select>
 
     <select id="selectAll" resultMap="labApply">
-        SELECT `lab_id`, `id`, `user_id`,`lab_type`, `create_time`, `state`, `handler_id`, `des`,`class_index`,`current_day`
+        SELECT `lab_id`, `id`, `user_id`,(SELECT `T_NAME` from teacher WHERE `T_ID`=`user_id`) AS `user_name`,`lab_type`, `create_time`, `state`, `handler_id`, `des`,`class_index`,`current_day`
          FROM `laboratory_apply` WHERE 1
     </select>
 
 
     <select id="selectByLabId" resultMap="labApply">
-        SELECT `lab_id`, `id`, `user_id`,`lab_type`, `create_time`, `state`, `handler_id`, `des`,`class_index`,`current_day`
+        SELECT `lab_id`, `id`, `user_id`,(SELECT `T_NAME` from teacher WHERE `T_ID`=`user_id`) AS `user_name`,`lab_type`, `create_time`, `state`, `handler_id`, `des`,`class_index`,`current_day`
          FROM `laboratory_apply` WHERE lab_id = #{labId}
     </select>
 
     <select id="selectByLabType" resultMap="labApply">
-        SELECT `lab_id`, `id`, `user_id`,`lab_type`, `create_time`, `state`, `handler_id`, `des` ,`class_index`,`current_day`
+        SELECT `lab_id`, `id`, `user_id`,(SELECT `T_NAME` from teacher WHERE `T_ID`=`user_id`) AS `user_name`,`lab_type`, `create_time`, `state`, `handler_id`, `des` ,`class_index`,`current_day`
          FROM `laboratory_apply` WHERE lab_type = #{labType}
     </select>
 
     <update id="update" parameterType="com.xf.college.model.laboratory.LabApply">
         UPDATE `laboratory_apply`
           SET `lab_id`=#{labId},`state`=#{state},`des`=#{des},`class_index`=#{classes},`current_day`=#{currentDay}
-             WHERE id={id}
+             WHERE id=#{id}
     </update>
 
     <delete id="delete">
         DELETE FROM `laboratory_apply` WHERE id = #{id}
     </delete>
-
-
 
 
 </mapper>

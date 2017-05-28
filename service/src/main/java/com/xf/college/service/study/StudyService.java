@@ -24,5 +24,7 @@ public interface  StudyService {
      */
     int addStudy(TeacherStudy teacherStudy);
 
+    public List<TeacherStudy> getStudentByUser(String userId);
+
 
 }

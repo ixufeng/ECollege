@@ -23,7 +23,7 @@ public class LabApply {
     private final Date createTime;
     private String currentDay; //yyyy-MM-dd
     private String classes;   //申请的课时
-    private int state;   //申请状态  1 等待 2 完成 3 未通过
+    private int state;   //申请状态  1 等待 2 通过完成 3 未通过
     private String des;
     private String result;   //结果的描述信息 如管理员 拒绝，可以给出理由
 

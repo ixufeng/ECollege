@@ -7,6 +7,7 @@ import com.xf.college.model.teacher.TeacherStudy;
 import com.xf.college.service.study.StudyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,7 +32,7 @@ public class StudyController extends BaseController{
     ) {
         int auth = getAuth();
         if (Auth.IS_LOGIN(auth)) {
-
+            return asSuccess(studyService.getStudentByUser(userId));
         }
         return handleNoAuth(auth);
     }
@@ -58,6 +59,22 @@ public class StudyController extends BaseController{
             }
         }
         return asUnLogin("请先登录");
+    }
+
+    @RequestMapping(value = "/delete1",method = RequestMethod.POST)
+    public APIResult delelteStudy(
+            @RequestParam("studyId") int studyId
+    ) {
+        int auth = getAuth();
+        if (Auth.IS_LOGIN(auth)) {
+            int result = teacherStudyDao.delete(studyId);
+            if (result > 0) {
+                return asSuccess("删除成功");
+            }
+            return asError("删除失败");
+        }else {
+            return asUnLogin("请先登录");
+        }
     }
 
     @RequestMapping("/histogram")

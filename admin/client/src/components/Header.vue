@@ -145,9 +145,9 @@ export default {
     }
   },
   computed:{
-     ...mapGetters([
-         'user'
-     ])
+    user() {
+        return{}
+    }
 
   },
   created () {

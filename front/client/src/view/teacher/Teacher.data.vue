@@ -130,7 +130,6 @@
               this.dialogVisible = true
               return
             }
-
             let url = "/api/teacher/update"
             if (flag == 'password') {
                 return
@@ -155,8 +154,6 @@
                 }
                 this.$message.error(result.message);
             })
-
-
           },
           initData () {
                this.teacher = userUtils.isTeacher()

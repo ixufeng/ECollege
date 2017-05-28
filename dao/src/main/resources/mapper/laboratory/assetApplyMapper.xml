@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 4.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xf.college.dao.laboratory.AssetApplyDao">
+    <resultMap id="assetApply" type="com.xf.college.model.laboratory.AssetApply">
+        <id column="id" property="id"></id>
+        <result column="user_id" property="userId"></result>
+        <result column="user_name" property="userName"></result>
+        <result column="asset_name" property="assetName"></result>
+        <result column="create_time" property="createTime"></result>
+        <result column="handler_id" property="handlerId"></result>
+        <result column="handler_user_name" property="handlerUserName"></result>
+        <result column="des" property="des"></result>
+        <result column="state" property="state"></result>
+        <result column="result" property="result"></result>
+    </resultMap>
+
+    <insert id="add" parameterType="com.xf.college.model.laboratory.AssetApply">
+        INSERT INTO `asset_apply` VALUES (NULL ,#{userId},#{assetName},#{createTime},#{handlerId},#{des})
+    </insert>
+
+    <select id="select" resultMap="assetApply">
+         SELECT `id`, `user_id`,(SELECT `T_NAME` from `teacher` WHERE T_ID=user_id) as `user_name`, `asset_name`, `create_time`, `handler_id`, `des` ,`result`,`state` FROM `asset_apply` WHERE id = #{id}
+    </select>
+    <select id="selectAll" resultMap="assetApply">
+        SELECT `id`, `user_id`,(SELECT `T_NAME` from `teacher` WHERE T_ID=user_id) as `user_name`, `asset_name`, `create_time`, `handler_id`, `des`,`result`,`state` FROM `asset_apply` WHERE 1
+    </select>
+
+    <select id="selectByUserId" resultMap="assetApply">
+      SELECT `id`, `user_id`,(SELECT `T_NAME` from `teacher` WHERE T_ID=user_id) as `user_name`, `asset_name`, `create_time`, `handler_id`, `des` ,`result`,`state` FROM `asset_apply` user_id = #{userId}
+    </select>
+
+    <update id="update" parameterType="com.xf.college.model.laboratory.AssetApply">
+        UPDATE `asset_apply` SET asset_name=#{assetName},create_time=#{createTime},handler_id=#{handlerId},des=#{des},state=#{state},result=#{result}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM `asset_apply` WHERE id=#{id}
+    </delete>
+</mapper>

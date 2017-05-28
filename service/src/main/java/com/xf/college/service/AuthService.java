@@ -1,6 +1,8 @@
 package com.xf.college.service;
 
 import com.xf.college.common.utils.StringUtil;
+import com.xf.college.dao.student.StudentDao;
+import com.xf.college.model.student.Student;
 import com.xf.college.model.teacher.Teacher;
 import com.xf.college.service.teacher.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ public class AuthService {
 
     @Autowired
     private TeacherService teacherService;
+
+    @Autowired
+    private StudentDao studentDao;
 
     /**
      * 验证老师或学生的登陆
@@ -67,12 +72,17 @@ public class AuthService {
     }
 
     private AuthResult checkStudent(String key,String password,AuthResult result) {
+        Student student = studentDao.select(key);
+        if (student == null) {
+            result.setMessage("用户名不存在");
+            return result;
+        }
+        if (Objects.equals(student.getPassword(),password)) {
+            result.setLogin(true);
+            result.setMessage("登陆成功");
+            result.setUser(student);
+        }
         return result;
     }
-
-
-
-
-
 
 }

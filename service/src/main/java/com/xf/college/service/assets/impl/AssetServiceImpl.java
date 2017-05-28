@@ -61,6 +61,13 @@ public class AssetServiceImpl implements AssetService{
 
     @Override
     public int add(Asset asset) {
+        if (asset == null || asset.getId() == null || asset.getName() == null) {
+            return 0;
+        }
+        int result = assetDao.add(asset);
+        if (result > 0) {
+            return 1;
+        }
         return 0;
     }
 
